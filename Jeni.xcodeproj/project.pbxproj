@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB749F227A3E0E00CCA655 /* AppDelegate.swift */; };
-		52DB74A2227A3E0E00CCA655 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74A1227A3E0E00CCA655 /* ViewController.swift */; };
-		52DB74A5227A3E0E00CCA655 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A3227A3E0E00CCA655 /* Main.storyboard */; };
 		52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A6227A3E0F00CCA655 /* Assets.xcassets */; };
 		52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */; };
+		52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74B4227A408100CCA655 /* LoginViewController.swift */; };
+		52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74B5227A408100CCA655 /* LoginViewController.xib */; };
+		52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */; };
+		52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BB227A4CC900CCA655 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		52DB749C227A3E0E00CCA655 /* Jeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DB749F227A3E0E00CCA655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		52DB74A1227A3E0E00CCA655 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		52DB74A4227A3E0E00CCA655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52DB74A6227A3E0F00CCA655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52DB74A9227A3E0F00CCA655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52DB74AB227A3E0F00CCA655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52DB74B4227A408100CCA655 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		52DB74B5227A408100CCA655 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		52DB74BB227A4CC900CCA655 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,48 @@
 		52DB749E227A3E0E00CCA655 /* Jeni */ = {
 			isa = PBXGroup;
 			children = (
+				52DB74B8227A444200CCA655 /* Coordinator */,
+				52DB74B1227A404000CCA655 /* App Sections */,
 				52DB749F227A3E0E00CCA655 /* AppDelegate.swift */,
-				52DB74A1227A3E0E00CCA655 /* ViewController.swift */,
-				52DB74A3227A3E0E00CCA655 /* Main.storyboard */,
 				52DB74A6227A3E0F00CCA655 /* Assets.xcassets */,
 				52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */,
 				52DB74AB227A3E0F00CCA655 /* Info.plist */,
 			);
 			path = Jeni;
+			sourceTree = "<group>";
+		};
+		52DB74B1227A404000CCA655 /* App Sections */ = {
+			isa = PBXGroup;
+			children = (
+				52DB74B2227A405700CCA655 /* Login */,
+			);
+			path = "App Sections";
+			sourceTree = "<group>";
+		};
+		52DB74B2227A405700CCA655 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				52DB74B3227A405E00CCA655 /* ViewController */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		52DB74B3227A405E00CCA655 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52DB74B4227A408100CCA655 /* LoginViewController.swift */,
+				52DB74B5227A408100CCA655 /* LoginViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		52DB74B8227A444200CCA655 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */,
+				52DB74BB227A4CC900CCA655 /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,7 +162,7 @@
 			files = (
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
 				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
-				52DB74A5227A3E0E00CCA655 /* Main.storyboard in Resources */,
+				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52DB74A2227A3E0E00CCA655 /* ViewController.swift in Sources */,
+				52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */,
+				52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */,
+				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +183,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		52DB74A3227A3E0E00CCA655 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52DB74A4227A3E0E00CCA655 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X9469P8892;
 				INFOPLIST_FILE = Jeni/Info.plist;
@@ -293,7 +326,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.oliveira.Jeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -301,6 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X9469P8892;
 				INFOPLIST_FILE = Jeni/Info.plist;
@@ -312,7 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.oliveira.Jeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
