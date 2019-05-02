@@ -14,6 +14,8 @@
 		52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74B5227A408100CCA655 /* LoginViewController.xib */; };
 		52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */; };
 		52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BB227A4CC900CCA655 /* Coordinator.swift */; };
+		52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BF227A6B8F00CCA655 /* JeniButton.swift */; };
+		52DB74C2227A767400CCA655 /* JeniTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74C1227A767400CCA655 /* JeniTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		52DB74B5227A408100CCA655 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		52DB74BB227A4CC900CCA655 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		52DB74BF227A6B8F00CCA655 /* JeniButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniButton.swift; sourceTree = "<group>"; };
+		52DB74C1227A767400CCA655 /* JeniTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		52DB749E227A3E0E00CCA655 /* Jeni */ = {
 			isa = PBXGroup;
 			children = (
+				52DB74BD227A6B3B00CCA655 /* Helpers */,
 				52DB74B8227A444200CCA655 /* Coordinator */,
 				52DB74B1227A404000CCA655 /* App Sections */,
 				52DB749F227A3E0E00CCA655 /* AppDelegate.swift */,
@@ -100,6 +105,23 @@
 				52DB74BB227A4CC900CCA655 /* Coordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		52DB74BD227A6B3B00CCA655 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				52DB74BE227A6B5300CCA655 /* JeniComponents */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		52DB74BE227A6B5300CCA655 /* JeniComponents */ = {
+			isa = PBXGroup;
+			children = (
+				52DB74BF227A6B8F00CCA655 /* JeniButton.swift */,
+				52DB74C1227A767400CCA655 /* JeniTextField.swift */,
+			);
+			path = JeniComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */,
+				52DB74C2227A767400CCA655 /* JeniTextField.swift in Sources */,
 				52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */,
 				52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
