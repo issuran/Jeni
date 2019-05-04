@@ -20,7 +20,8 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let loginViewController = LoginViewController()
+        let loginViewModel = LoginViewModel()
+        let loginViewController = LoginViewController(viewModel: loginViewModel)
         navigationController.navigationBar.isHidden = true
         navigationController.setViewControllers([loginViewController], animated: true)
     }

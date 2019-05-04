@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     
     @IBOutlet weak var usernameTextField: JeniTextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,23 +21,19 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signButton: JeniButton!
     @IBOutlet weak var swapButton: UIButton!
     
-    var isHidden: Bool = true
+    var viewModel: LoginViewModel!
     
-    let signInText = "Already a patient? Try "
-    let signUpText = "Are you a new patient? Try "
-    let signInTextButton = "Sign In"
-    let signUpTextButton = "Sign Up"
-    
-    enum SignOption {
-        case signIn
-        case signUp
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init()
     }
     
-    var signOption: SignOption!
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        signOption = SignOption.signIn
     }
     
     @IBAction func signButtonAction(_ sender: Any) {
@@ -51,19 +47,19 @@ class LoginViewController: UIViewController {
                              delay: 0.1,
                              options: .curveEaseIn,
                              animations: {
-                                switch self.signOption {
+                                switch self.viewModel.signOption {
                                 case .signIn?:
-                                    self.swapOptionsLabel.text = self.signInText
-                                    self.swapButton.setTitle(self.signInTextButton, for: .normal)
-                                    self.signButton.setTitle(self.signUpTextButton, for: .normal)
-                                    self.confirmPasswordStackView.isHidden = !self.isHidden
-                                    self.signOption = SignOption.signUp
+                                    self.swapOptionsLabel.text = self.viewModel.signInText
+                                    self.swapButton.setTitle(self.viewModel.signInTextButton, for: .normal)
+                                    self.signButton.setTitle(self.viewModel.signUpTextButton, for: .normal)
+                                    self.confirmPasswordStackView.isHidden = false
+                                    self.viewModel.signOption = .signUp
                                 case .signUp?:
-                                    self.swapOptionsLabel.text = self.signUpText
-                                    self.swapButton.setTitle(self.signUpTextButton, for: .normal)
-                                    self.signButton.setTitle(self.signInTextButton, for: .normal)
-                                    self.confirmPasswordStackView.isHidden = self.isHidden
-                                    self.signOption = SignOption.signIn
+                                    self.swapOptionsLabel.text = self.viewModel.signUpText
+                                    self.swapButton.setTitle(self.viewModel.signUpTextButton, for: .normal)
+                                    self.signButton.setTitle(self.viewModel.signInTextButton, for: .normal)
+                                    self.confirmPasswordStackView.isHidden = true
+                                    self.viewModel.signOption = .signIn
                                 case .none:
                                     fatalError()
                                 }
