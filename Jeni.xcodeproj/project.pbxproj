@@ -23,6 +23,7 @@
 		52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */; };
 		52F02F21227DDE0F00BDEE80 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */; };
 		52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */; };
+		52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F24227E070200BDEE80 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		52F02F24227E070200BDEE80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				52DB749F227A3E0E00CCA655 /* AppDelegate.swift */,
 				52DB74A6227A3E0F00CCA655 /* Assets.xcassets */,
 				52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */,
+				52F02F24227E070200BDEE80 /* GoogleService-Info.plist */,
 				52DB74AB227A3E0F00CCA655 /* Info.plist */,
 			);
 			path = Jeni;
@@ -253,6 +256,7 @@
 			files = (
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
 				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
+				52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
 			);
