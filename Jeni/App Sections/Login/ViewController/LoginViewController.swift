@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: BaseViewController {
     
@@ -39,9 +40,24 @@ class LoginViewController: BaseViewController {
     }
     
     @IBAction func signButtonAction(_ sender: Any) {
-        // TODO : Sign In
+        switch viewModel.signOption {
+        case .signIn?:
+            signInFlow()
+        case .signUp?:
+            signUpFlow()
+        case .none:
+            fatalError()
+        }
+    }
+    
+    func signInFlow() {
+        print("Sign In Flow")
+    }
+    
+    func signUpFlow() {
+        print("Sign Up Flow")
         
-        // TODO : Sign Up
+        
     }
     
     @IBAction func swapSignOptionsAction(_ sender: Any) {
