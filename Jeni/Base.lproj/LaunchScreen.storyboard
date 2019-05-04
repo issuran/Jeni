@@ -25,8 +25,8 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.16411474506214832" green="0.6658657771923987" blue="0.77539704016124211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="0.18823529411764706" green="0.76470588235294112" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QFn-lC-oKz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Hab-u6-sre"/>
                             <constraint firstItem="QFn-lC-oKz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="frh-se-EgM"/>

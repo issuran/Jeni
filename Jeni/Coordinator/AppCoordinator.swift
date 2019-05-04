@@ -21,7 +21,6 @@ class AppCoordinator: Coordinator {
     
     func start() {
         let loginViewController = LoginViewController()
-        loginViewController.view.backgroundColor = UIColor.white
         navigationController.navigationBar.isHidden = true
         navigationController.setViewControllers([loginViewController], animated: true)
     }

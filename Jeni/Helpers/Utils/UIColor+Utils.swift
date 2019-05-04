@@ -32,4 +32,5 @@ extension UIColor {
 struct UIColorUtils {
     static let blueColor = UIColor(hex: "30c3e1")
     static let greenColor = UIColor(hex: "02d3a5")
+    static let backgroundBlueColor = UIColor(hex: "03a9f4")
 }
