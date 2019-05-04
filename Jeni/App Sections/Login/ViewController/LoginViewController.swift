@@ -11,10 +11,12 @@ import UIKit
 class LoginViewController: BaseViewController {
     
     @IBOutlet weak var usernameTextField: JeniTextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var emailTextField: JeniTextField!
+    @IBOutlet weak var passwordTextField: JeniTextField!
+    @IBOutlet weak var confirmPasswordTextField: JeniTextField!
 
     @IBOutlet weak var confirmPasswordStackView: UIStackView!
+    @IBOutlet weak var usernameStackView: UIStackView!
     
     @IBOutlet weak var swapOptionsLabel: UILabel!
     
@@ -53,12 +55,14 @@ class LoginViewController: BaseViewController {
                                     self.swapButton.setTitle(self.viewModel.signInTextButton, for: .normal)
                                     self.signButton.setTitle(self.viewModel.signUpTextButton, for: .normal)
                                     self.confirmPasswordStackView.isHidden = false
+                                    self.usernameStackView.isHidden = false
                                     self.viewModel.signOption = .signUp
                                 case .signUp?:
                                     self.swapOptionsLabel.text = self.viewModel.signUpText
                                     self.swapButton.setTitle(self.viewModel.signUpTextButton, for: .normal)
                                     self.signButton.setTitle(self.viewModel.signInTextButton, for: .normal)
                                     self.confirmPasswordStackView.isHidden = true
+                                    self.usernameStackView.isHidden = true
                                     self.viewModel.signOption = .signIn
                                 case .none:
                                     fatalError()

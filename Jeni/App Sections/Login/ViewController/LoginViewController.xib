@@ -13,11 +13,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
                 <outlet property="confirmPasswordStackView" destination="WFu-qN-BIV" id="o78-2g-p4h"/>
-                <outlet property="confirmPasswordTextField" destination="1SN-oE-xFa" id="dbu-eK-k5K"/>
-                <outlet property="passwordTextField" destination="3o8-4F-aWN" id="zmS-XB-Pue"/>
+                <outlet property="confirmPasswordTextField" destination="1SN-oE-xFa" id="E6u-3m-fQr"/>
+                <outlet property="emailTextField" destination="xB0-MS-Nmb" id="Fcv-Ab-qux"/>
+                <outlet property="passwordTextField" destination="3o8-4F-aWN" id="P8N-g5-O6A"/>
                 <outlet property="signButton" destination="rRg-un-n1j" id="ilk-nV-BPn"/>
                 <outlet property="swapButton" destination="J2f-dm-UwK" id="IAH-a8-hvn"/>
                 <outlet property="swapOptionsLabel" destination="u9V-BE-Vmr" id="mTQ-7p-1gz"/>
+                <outlet property="usernameStackView" destination="fBp-6C-PpO" id="pJr-Fq-f6X"/>
                 <outlet property="usernameTextField" destination="yay-5W-QUU" id="2zz-fY-ZCh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -46,8 +48,8 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DhB-K7-Epc">
                                     <rect key="frame" x="16" y="188" width="343" height="128"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="fBp-6C-PpO">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="fBp-6C-PpO">
+                                            <rect key="frame" x="0.0" y="-60" width="343" height="60"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAn-AJ-f8F">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
@@ -74,6 +76,34 @@
                                                 </textField>
                                             </subviews>
                                         </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7jK-s6-kuX">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxH-2x-LNk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="sqT-Qp-pqd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xB0-MS-Nmb" customClass="JeniTextField" customModule="Jeni" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="20" width="343" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="0ug-fC-DzP"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </textField>
+                                            </subviews>
+                                        </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yEQ-1r-7XP">
                                             <rect key="frame" x="0.0" y="68" width="343" height="60"/>
                                             <subviews>
@@ -86,7 +116,7 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3o8-4F-aWN">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3o8-4F-aWN" customClass="JeniTextField" customModule="Jeni" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="20" width="343" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="gAU-mN-Aem"/>
@@ -94,6 +124,11 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </textField>
                                             </subviews>
                                         </stackView>
@@ -109,7 +144,7 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1SN-oE-xFa">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1SN-oE-xFa" customClass="JeniTextField" customModule="Jeni" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="20" width="343" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Pvt-1e-mWe"/>
@@ -117,13 +152,18 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </textField>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you a new patient? Try " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9V-BE-Vmr">
-                                    <rect key="frame" x="111" y="376" width="153.5" height="15"/>
+                                    <rect key="frame" x="91" y="376" width="153.5" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="7IX-Lv-yNh"/>
                                     </constraints>
@@ -131,6 +171,17 @@
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2f-dm-UwK">
+                                    <rect key="frame" x="244.5" y="370" width="42" height="27"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="tintColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="sign up">
+                                        <color key="titleColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="swapSignOptionsAction:" destination="-1" eventType="touchUpInside" id="8YL-N9-8He"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRg-un-n1j" customClass="JeniButton" customModule="Jeni" customModuleProvider="target">
                                     <rect key="frame" x="32" y="399" width="311" height="46"/>
                                     <color key="backgroundColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -155,22 +206,11 @@
                                         <action selector="signButtonAction:" destination="-1" eventType="touchUpInside" id="dcB-70-Qf6"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2f-dm-UwK">
-                                    <rect key="frame" x="264.5" y="370" width="110.5" height="27"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="tintColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="sign up">
-                                        <color key="titleColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="swapSignOptionsAction:" destination="-1" eventType="touchUpInside" id="8YL-N9-8He"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="rRg-un-n1j" secondAttribute="bottom" constant="16" id="3vt-bq-YY3"/>
-                                <constraint firstItem="u9V-BE-Vmr" firstAttribute="centerX" secondItem="3j9-Om-CCm" secondAttribute="centerX" id="7Qz-Kc-1fD"/>
+                                <constraint firstItem="u9V-BE-Vmr" firstAttribute="centerX" secondItem="3j9-Om-CCm" secondAttribute="centerX" constant="-20" id="7Qz-Kc-1fD"/>
                                 <constraint firstItem="J2f-dm-UwK" firstAttribute="leading" secondItem="u9V-BE-Vmr" secondAttribute="trailing" id="8Xw-1h-6a4"/>
                                 <constraint firstItem="rRg-un-n1j" firstAttribute="leading" secondItem="3j9-Om-CCm" secondAttribute="leading" constant="32" id="A92-kK-uG3"/>
                                 <constraint firstItem="rRg-un-n1j" firstAttribute="top" secondItem="u9V-BE-Vmr" secondAttribute="bottom" constant="8" symbolic="YES" id="F7H-OM-VXp"/>
@@ -186,7 +226,6 @@
                                 <constraint firstItem="DDv-wp-0rB" firstAttribute="bottom" secondItem="Dsh-vV-QHW" secondAttribute="centerY" id="ssF-aP-IjH"/>
                                 <constraint firstItem="DDv-wp-0rB" firstAttribute="top" secondItem="3j9-Om-CCm" secondAttribute="top" id="v2E-iU-Ttt"/>
                                 <constraint firstItem="DDv-wp-0rB" firstAttribute="leading" secondItem="3j9-Om-CCm" secondAttribute="leading" id="wbs-FK-PFw"/>
-                                <constraint firstAttribute="trailing" secondItem="J2f-dm-UwK" secondAttribute="trailing" id="yPq-Zm-jrf"/>
                                 <constraint firstItem="Dsh-vV-QHW" firstAttribute="leading" secondItem="3j9-Om-CCm" secondAttribute="leading" id="yQl-jK-CLu"/>
                             </constraints>
                         </view>

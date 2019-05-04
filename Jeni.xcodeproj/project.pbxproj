@@ -24,9 +24,11 @@
 		52F02F21227DDE0F00BDEE80 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */; };
 		52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */; };
 		52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F24227E070200BDEE80 /* GoogleService-Info.plist */; };
+		B30511F06556ABA4A8B1C7D3 /* Pods_Jeni.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jeni.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		52DB749C227A3E0E00CCA655 /* Jeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DB749F227A3E0E00CCA655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +48,8 @@
 		52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		52F02F24227E070200BDEE80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		76ECD705B06D54BE51790E47 /* Pods-Jeni.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jeni.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jeni/Pods-Jeni.debug.xcconfig"; sourceTree = "<group>"; };
+		B1075ACCD9897A9CDE67D9BA /* Pods-Jeni.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jeni.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jeni/Pods-Jeni.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30511F06556ABA4A8B1C7D3 /* Pods_Jeni.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +77,8 @@
 			children = (
 				52DB749E227A3E0E00CCA655 /* Jeni */,
 				52DB749D227A3E0E00CCA655 /* Products */,
+				CDA293EC7635A1F4A96F8EF0 /* Pods */,
+				5E68198140F3A5136A73CFE6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,6 +203,23 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		5E68198140F3A5136A73CFE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDA293EC7635A1F4A96F8EF0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				76ECD705B06D54BE51790E47 /* Pods-Jeni.debug.xcconfig */,
+				B1075ACCD9897A9CDE67D9BA /* Pods-Jeni.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -203,9 +227,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52DB74AE227A3E0F00CCA655 /* Build configuration list for PBXNativeTarget "Jeni" */;
 			buildPhases = (
+				BA94B87AFED319BFB8C3C980 /* [CP] Check Pods Manifest.lock */,
 				52DB7498227A3E0E00CCA655 /* Sources */,
 				52DB7499227A3E0E00CCA655 /* Frameworks */,
 				52DB749A227A3E0E00CCA655 /* Resources */,
+				82E5EA8DA847AFE957D46B62 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,6 +289,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82E5EA8DA847AFE957D46B62 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Jeni/Pods-Jeni-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Jeni/Pods-Jeni-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA94B87AFED319BFB8C3C980 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Jeni-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52DB7498227A3E0E00CCA655 /* Sources */ = {
@@ -416,6 +483,7 @@
 		};
 		52DB74AF227A3E0F00CCA655 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76ECD705B06D54BE51790E47 /* Pods-Jeni.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -436,6 +504,7 @@
 		};
 		52DB74B0227A3E0F00CCA655 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1075ACCD9897A9CDE67D9BA /* Pods-Jeni.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
