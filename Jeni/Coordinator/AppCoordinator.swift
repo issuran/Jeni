@@ -12,6 +12,9 @@ class AppCoordinator: Coordinator {
     var window: UIWindow
     var navigationController: UINavigationController
     
+    // Login
+    var loginCoordinator: LoginCoordinator!
+    
     required init(window: UIWindow) {
         self.window = window
         self.navigationController = UINavigationController()
@@ -20,10 +23,8 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let loginViewModel = LoginViewModel()
-        let loginViewController = LoginViewController(viewModel: loginViewModel)
-        navigationController.navigationBar.isHidden = true
-        navigationController.setViewControllers([loginViewController], animated: true)
+        loginCoordinator = LoginCoordinator(navigationController: navigationController)
+        loginCoordinator.start()
     }
     
 }

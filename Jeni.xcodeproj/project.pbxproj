@@ -19,6 +19,10 @@
 		52DB74C2227A767400CCA655 /* JeniTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74C1227A767400CCA655 /* JeniTextField.swift */; };
 		52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
 		52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F18227DD7B500BDEE80 /* BaseViewController.swift */; };
+		52F02F1E227DDDE000BDEE80 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */; };
+		52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */; };
+		52F02F21227DDE0F00BDEE80 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */; };
+		52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		52DB74C1227A767400CCA655 /* JeniTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniTextField.swift; sourceTree = "<group>"; };
 		52F02F15227DD78500BDEE80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		52F02F18227DD7B500BDEE80 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,7 @@
 		52DB74B1227A404000CCA655 /* App Sections */ = {
 			isa = PBXGroup;
 			children = (
+				52F02F1A227DDDC200BDEE80 /* Home */,
 				52DB74B2227A405700CCA655 /* Login */,
 			);
 			path = "App Sections";
@@ -117,8 +126,9 @@
 		52DB74B8227A444200CCA655 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */,
 				52DB74BB227A4CC900CCA655 /* Coordinator.swift */,
+				52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */,
+				52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -153,6 +163,7 @@
 		52F02F14227DD6A200BDEE80 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -163,6 +174,23 @@
 				52F02F18227DD7B500BDEE80 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		52F02F1A227DDDC200BDEE80 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				52F02F1B227DDDCD00BDEE80 /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		52F02F1B227DDDCD00BDEE80 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */,
+				52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +254,7 @@
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
 				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
+				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +269,10 @@
 				52DB74C2227A767400CCA655 /* JeniTextField.swift in Sources */,
 				52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */,
 				52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */,
+				52F02F21227DDE0F00BDEE80 /* LoginCoordinator.swift in Sources */,
 				52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */,
+				52F02F1E227DDDE000BDEE80 /* HomeViewController.swift in Sources */,
+				52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */,
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
