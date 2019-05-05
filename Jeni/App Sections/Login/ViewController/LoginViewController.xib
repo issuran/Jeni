@@ -201,6 +201,7 @@
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                             <color key="value" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shouldBounce" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="signButtonAction:" destination="-1" eventType="touchUpInside" id="dcB-70-Qf6"/>

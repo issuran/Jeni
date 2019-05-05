@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class LoginViewController: BaseViewController {
     
+    typealias Handler = (Bool) -> Void
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -64,33 +66,41 @@ class LoginViewController: BaseViewController {
     }
     
     func signInFlow() {
-        print("Sign In Flow")
-        
         Auth.auth().signIn(withEmail: emailTextField!.text ?? "", password: passwordTextField!.text ?? "") { (user, error) in
             if error == nil && user != nil {
                 self.viewModel.callHome()
             } else {
-                print("Erro: \(String(describing: error?.localizedDescription))")
+                self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
             }
         }
     }
     
-    func signUpFlow() {
-        print("Sign Up Flow")
-        
+    fileprivate func firebaseSignUp() {
         Auth.auth().createUser(withEmail: emailTextField!.text ?? "", password: passwordTextField!.text ?? "") { (user, error) in
             if error == nil && user != nil {
                 let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                 changeRequest?.displayName = self.usernameTextField!.text ?? ""
                 changeRequest?.commitChanges(completion: { (error) in
                     if error == nil {
-                        print("User display name changed!")
                         self.viewModel.callHome()
+                    } else {
+                        self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
                     }
                 })
-                print("User created!")
             } else {
-                print("Erro: \(String(describing: error?.localizedDescription))")
+                self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
+    
+    func signUpFlow() {
+        
+        confirmFieldsFulfilled { (result) in
+            switch result {
+            case true:
+                firebaseSignUp()
+            case false:
+                print("Error")
             }
         }
     }
@@ -122,36 +132,27 @@ class LoginViewController: BaseViewController {
     }
 }
 
-extension LoginViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField)
-    {
-        self.animateTextField(up: true)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField)
-    {
-        self.animateTextField(up: false)
-    }
-    
-    func animateTextField(up: Bool)
-    {
-        let movementDistance:CGFloat = -130
-        let movementDuration: Double = 0.3
+// Verifications
+extension LoginViewController {
+    func confirmFieldsFulfilled(completion: Handler) {
+        if usernameTextField.text?.isEmpty ?? true
+            || emailTextField.text?.isEmpty ?? true
+            || passwordTextField.text?.isEmpty ?? true
+            || confirmPasswordTextField.text?.isEmpty ?? true {
+            self.alert(message: "Preencha todos os campos!")
+            completion(false)
+        }
         
-        var movement:CGFloat = 0
-        if up
-        {
-            movement = movementDistance
+        if passwordTextField.text!.count < 6
+            || confirmPasswordTextField.text!.count < 6 {
+            self.alert(message: "Sua senha deve ter mais que 6 caracteres!")
+            completion(false)
         }
-        else
-        {
-            movement = -movementDistance
+        
+        if passwordTextField.text! == confirmPasswordTextField.text! {
+            completion(true)
+        } else {
+            self.alert(message: "Confira se os valores digitados nos campos de senha conferem!")
         }
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
     }
-    
 }
