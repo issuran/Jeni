@@ -12,11 +12,11 @@ import FirebaseAuth
 
 class LoginViewController: BaseViewController {
     
-    @IBOutlet weak var usernameTextField: JeniTextField!
-    @IBOutlet weak var emailTextField: JeniTextField!
-    @IBOutlet weak var passwordTextField: JeniTextField!
-    @IBOutlet weak var confirmPasswordTextField: JeniTextField!
-
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
     @IBOutlet weak var confirmPasswordStackView: UIStackView!
     @IBOutlet weak var usernameStackView: UIStackView!
     
@@ -38,6 +38,10 @@ class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,4 +120,38 @@ class LoginViewController: BaseViewController {
                                 }
         }, completion: nil)]
     }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        self.animateTextField(up: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        self.animateTextField(up: false)
+    }
+    
+    func animateTextField(up: Bool)
+    {
+        let movementDistance:CGFloat = -130
+        let movementDuration: Double = 0.3
+        
+        var movement:CGFloat = 0
+        if up
+        {
+            movement = movementDistance
+        }
+        else
+        {
+            movement = -movementDistance
+        }
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
 }
