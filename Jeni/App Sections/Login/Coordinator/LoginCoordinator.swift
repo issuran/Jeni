@@ -15,6 +15,7 @@ protocol LoginCoordinatorDelegate: AnyObject {
 
 class LoginCoordinator: BaseCoordinator {
     var navigationController: UINavigationController
+    var delegate: LoginCoordinatorDelegate!
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -22,9 +23,9 @@ class LoginCoordinator: BaseCoordinator {
     
     func start() {
         let loginViewModel = LoginViewModel()
+        loginViewModel.delegate = self.delegate
         let loginViewController = LoginViewController(viewModel: loginViewModel)
         navigationController.navigationBar.isHidden = true
         navigationController.setViewControllers([loginViewController], animated: true)
     }
-    
 }

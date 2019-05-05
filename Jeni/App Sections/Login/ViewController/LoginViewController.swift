@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class LoginViewController: BaseViewController {
     
@@ -39,6 +40,14 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Auth.auth().currentUser != nil {
+            self.viewModel.callHome()
+        }
+    }
+    
     @IBAction func signButtonAction(_ sender: Any) {
         switch viewModel.signOption {
         case .signIn?:
@@ -52,12 +61,34 @@ class LoginViewController: BaseViewController {
     
     func signInFlow() {
         print("Sign In Flow")
+        
+        Auth.auth().signIn(withEmail: emailTextField!.text ?? "", password: passwordTextField!.text ?? "") { (user, error) in
+            if error == nil && user != nil {
+                self.viewModel.callHome()
+            } else {
+                print("Erro: \(String(describing: error?.localizedDescription))")
+            }
+        }
     }
     
     func signUpFlow() {
         print("Sign Up Flow")
         
-        
+        Auth.auth().createUser(withEmail: emailTextField!.text ?? "", password: passwordTextField!.text ?? "") { (user, error) in
+            if error == nil && user != nil {
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = self.usernameTextField!.text ?? ""
+                changeRequest?.commitChanges(completion: { (error) in
+                    if error == nil {
+                        print("User display name changed!")
+                        self.viewModel.callHome()
+                    }
+                })
+                print("User created!")
+            } else {
+                print("Erro: \(String(describing: error?.localizedDescription))")
+            }
+        }
     }
     
     @IBAction func swapSignOptionsAction(_ sender: Any) {

@@ -15,6 +15,8 @@ enum SignOption {
 
 class LoginViewModel {
     
+    weak var delegate: LoginCoordinatorDelegate!
+    
     var signOption: SignOption!
     
     let signInText = "Already a patient? Try "
@@ -24,5 +26,9 @@ class LoginViewModel {
     
     init() {
         signOption = .signIn
+    }
+    
+    func callHome() {
+        delegate.callHome(self)
     }
 }

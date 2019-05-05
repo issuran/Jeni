@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791B9227E6A8000107AE6 /* HomeCoordinator.swift */; };
+		525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
 		52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB749F227A3E0E00CCA655 /* AppDelegate.swift */; };
 		52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A6227A3E0F00CCA655 /* Assets.xcassets */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jeni.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		525791B9227E6A8000107AE6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		525791BC227E6AC400107AE6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		52DB749C227A3E0E00CCA655 /* Jeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DB749F227A3E0E00CCA655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		525791B8227E6A7600107AE6 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				525791B9227E6A8000107AE6 /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		525791BB227E6ABC00107AE6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				525791BC227E6AC400107AE6 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		52B228EF227BCB3A006EC2B5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +209,8 @@
 		52F02F1A227DDDC200BDEE80 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				525791BB227E6ABC00107AE6 /* ViewModel */,
+				525791B8227E6A7600107AE6 /* Coordinator */,
 				52F02F1B227DDDCD00BDEE80 /* ViewController */,
 			);
 			path = Home;
@@ -298,11 +320,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Jeni/Pods-Jeni-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -344,6 +368,8 @@
 				52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */,
 				52F02F1E227DDDE000BDEE80 /* HomeViewController.swift in Sources */,
 				52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */,
+				525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */,
+				525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */,
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,

@@ -15,6 +15,9 @@ class AppCoordinator: Coordinator {
     // Login
     var loginCoordinator: LoginCoordinator!
     
+    // Home
+    var homeCoordinator: HomeCoordinator!
+    
     required init(window: UIWindow) {
         self.window = window
         self.navigationController = UINavigationController()
@@ -24,7 +27,24 @@ class AppCoordinator: Coordinator {
     
     func start() {
         loginCoordinator = LoginCoordinator(navigationController: navigationController)
+        loginCoordinator.delegate = self
         loginCoordinator.start()
     }
     
+}
+
+extension AppCoordinator: LoginCoordinatorDelegate {
+    func callHome(_ viewModel: LoginViewModel) {
+        homeCoordinator = HomeCoordinator(navigationController: navigationController)
+        homeCoordinator.delegate = self
+        loginCoordinator = nil
+        homeCoordinator.start()
+    }
+}
+
+extension AppCoordinator: HomeCoordinatorDelegate {
+    func callLogin(_ viewModel: HomeViewModel) {
+        homeCoordinator = nil
+        start()
+    }
 }
