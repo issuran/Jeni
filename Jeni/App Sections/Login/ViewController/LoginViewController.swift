@@ -24,6 +24,9 @@ class LoginViewController: BaseViewController {
     
     @IBOutlet weak var swapOptionsLabel: UILabel!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
     @IBOutlet weak var signButton: JeniButton!
     @IBOutlet weak var swapButton: UIButton!
     
@@ -95,13 +98,13 @@ class LoginViewController: BaseViewController {
     
     func signUpFlow() {
         
-        confirmFieldsFulfilled { (result) in
-            switch result {
-            case true:
-                firebaseSignUp()
-            case false:
-                print("Error")
-            }
+        let result = confirmFieldsFulfilled()
+        
+        switch result {
+        case true:
+            firebaseSignUp()
+        case false:
+            print("Error")
         }
     }
     
@@ -134,25 +137,31 @@ class LoginViewController: BaseViewController {
 
 // Verifications
 extension LoginViewController {
-    func confirmFieldsFulfilled(completion: Handler) {
+    func confirmFieldsFulfilled() -> Bool {
         if usernameTextField.text?.isEmpty ?? true
             || emailTextField.text?.isEmpty ?? true
             || passwordTextField.text?.isEmpty ?? true
             || confirmPasswordTextField.text?.isEmpty ?? true {
-            self.alert(message: "Preencha todos os campos!")
-            completion(false)
+            self.alert(message: "Fill up all the fields!")
+            return false
+        }
+        
+        if usernameTextField.text!.count > 20 {
+            self.alert(message: "Name has a 20 characteres limit!")
+            return false
         }
         
         if passwordTextField.text!.count < 6
             || confirmPasswordTextField.text!.count < 6 {
-            self.alert(message: "Sua senha deve ter mais que 6 caracteres!")
-            completion(false)
+            self.alert(message: "You password must have at least 6 characteres!")
+            return false
         }
         
         if passwordTextField.text! == confirmPasswordTextField.text! {
-            completion(true)
+            return true
         } else {
-            self.alert(message: "Confira se os valores digitados nos campos de senha conferem!")
+            self.alert(message: "Your password must be the same at confirm password field!")
+            return false
         }
     }
 }

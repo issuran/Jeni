@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class HomeViewController: BaseViewController {
     
+    @IBOutlet weak var usernameLabel: UILabel!
+    
     var viewModel: HomeViewModel!
     
     init(viewModel: HomeViewModel) {
@@ -25,6 +27,9 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Auth.auth().currentUser != nil {
+            usernameLabel.text = Auth.auth().currentUser?.displayName
+        }
     }
     
     @IBAction func logoutAction(_ sender: Any) {

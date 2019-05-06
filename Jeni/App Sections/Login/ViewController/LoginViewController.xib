@@ -14,8 +14,10 @@
             <connections>
                 <outlet property="confirmPasswordStackView" destination="WFu-qN-BIV" id="o78-2g-p4h"/>
                 <outlet property="confirmPasswordTextField" destination="1SN-oE-xFa" id="8fv-Jo-sFG"/>
+                <outlet property="contentView" destination="3j9-Om-CCm" id="ulh-oF-PCT"/>
                 <outlet property="emailTextField" destination="xB0-MS-Nmb" id="zvy-qR-IWO"/>
                 <outlet property="passwordTextField" destination="3o8-4F-aWN" id="yLW-kH-1YS"/>
+                <outlet property="scrollView" destination="KlS-oa-Uv7" id="Nr2-TP-atu"/>
                 <outlet property="signButton" destination="rRg-un-n1j" id="ilk-nV-BPn"/>
                 <outlet property="swapButton" destination="J2f-dm-UwK" id="IAH-a8-hvn"/>
                 <outlet property="swapOptionsLabel" destination="u9V-BE-Vmr" id="mTQ-7p-1gz"/>
@@ -51,7 +53,7 @@
                                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="fBp-6C-PpO">
                                             <rect key="frame" x="0.0" y="-60" width="343" height="60"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAn-AJ-f8F">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAn-AJ-f8F">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="8yQ-C8-KTP"/>
