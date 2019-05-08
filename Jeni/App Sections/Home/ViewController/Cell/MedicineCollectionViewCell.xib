@@ -90,6 +90,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="185" height="160"/>
             <connections>
+                <outlet property="backgroudView" destination="JgZ-pq-lTU" id="HpF-KZ-5J4"/>
                 <outlet property="medicineImageView" destination="2Ja-kZ-tgj" id="Bat-SF-fhz"/>
                 <outlet property="medicineNameLabel" destination="Agv-BB-b4K" id="j5a-m6-48Y"/>
                 <outlet property="medicineQtdPerDayLabel" destination="IhD-uH-9ZZ" id="2cJ-Px-fY4"/>

@@ -58,6 +58,10 @@ class HomeViewController: BaseViewController {
         flowLayout.minimumLineSpacing = spacing
     }
     
+    @IBAction func addReminderAction(_ sender: Any) {
+        //  TODO: Call add reminder
+    }
+    
     @IBAction func logoutAction(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -78,5 +82,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedicineCollectionViewCell
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: Call edit reminder
     }
 }

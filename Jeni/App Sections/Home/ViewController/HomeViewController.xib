@@ -63,6 +63,9 @@
                                 <constraint firstAttribute="width" constant="25" id="Zn2-M4-9iM"/>
                             </constraints>
                             <state key="normal" title="Button" image="PlusSign"/>
+                            <connections>
+                                <action selector="addReminderAction:" destination="-1" eventType="touchUpInside" id="hBY-GV-5Sz"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
