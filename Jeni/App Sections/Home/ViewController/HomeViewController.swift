@@ -45,18 +45,17 @@ class HomeViewController: BaseViewController {
     
     // MARK: Private functions
     fileprivate func setUpFlowLayout() {
-        let space: CGFloat
-        let dimension: CGFloat
+        let spacing: CGFloat = 5
+        let itemsPerRow: CGFloat = 2
+        let screenRect = UIScreen.main.bounds
+        let oneMore: CGFloat = itemsPerRow + 1
+        let width: CGFloat = screenRect.size.width - spacing * oneMore
+        let height: CGFloat = width / itemsPerRow
         
-        if UIDeviceOrientation.portrait.isPortrait {
-            space = 16.0
-            dimension = (view.frame.size.width - (2 * space)) / 2
-        } else {
-            space = 1.0
-            dimension = (view.frame.size.width - (1 * space)) / 3
-        }
-        
-        flowLayout.itemSize = CGSize(width: dimension + 30, height: dimension)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
+        flowLayout.itemSize = CGSize(width: floor(height), height: height)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
     }
     
     @IBAction func logoutAction(_ sender: Any) {
@@ -80,5 +79,4 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
-    
 }
