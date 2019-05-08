@@ -11,6 +11,9 @@
 		525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
 		525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
+		52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
+		52B4260E2282650300218D18 /* MedicineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */; };
+		52B42610228275D800218D18 /* JeniMedicineViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */; };
 		52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB749F227A3E0E00CCA655 /* AppDelegate.swift */; };
 		52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A6227A3E0F00CCA655 /* Assets.xcassets */; };
 		52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */; };
@@ -35,6 +38,9 @@
 		525791BC227E6AC400107AE6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCollectionViewCell.swift; sourceTree = "<group>"; };
+		52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicineCollectionViewCell.xib; sourceTree = "<group>"; };
+		52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniMedicineViewButton.swift; sourceTree = "<group>"; };
 		52DB749C227A3E0E00CCA655 /* Jeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DB749F227A3E0E00CCA655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52DB74A6227A3E0F00CCA655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +96,15 @@
 				52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		52B4260A228264F300218D18 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */,
+				52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		52DB7493227A3E0E00CCA655 = {
@@ -178,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				52DB74BF227A6B8F00CCA655 /* JeniButton.swift */,
+				52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */,
 			);
 			path = JeniComponents;
 			sourceTree = "<group>";
@@ -219,6 +235,7 @@
 		52F02F1B227DDDCD00BDEE80 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				52B4260A228264F300218D18 /* Cell */,
 				52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */,
 				52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */,
 			);
@@ -307,6 +324,7 @@
 				52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
+				52B4260E2282650300218D18 /* MedicineCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +380,7 @@
 			files = (
 				52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */,
 				52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */,
+				52B42610228275D800218D18 /* JeniMedicineViewButton.swift in Sources */,
 				52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */,
 				52F02F21227DDE0F00BDEE80 /* LoginCoordinator.swift in Sources */,
 				52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */,
@@ -369,6 +388,7 @@
 				52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */,
 				525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */,
 				525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */,
+				52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */,
 				525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */,
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,

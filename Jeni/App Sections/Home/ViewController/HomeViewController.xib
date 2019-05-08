@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="hwZ-8g-mec" id="wEu-8k-m7u"/>
+                <outlet property="flowLayout" destination="wqP-ZL-7gH" id="tYB-jU-Tnf"/>
                 <outlet property="usernameLabel" destination="LsF-ca-p47" id="CiO-O8-i0p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -84,12 +86,16 @@
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-8g-mec">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yDe-Ed-R7p">
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wqP-ZL-7gH">
                                 <size key="itemSize" width="50" height="50"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="VOW-8A-XVb"/>
+                                <outlet property="delegate" destination="-1" id="QdO-fH-sG9"/>
+                            </connections>
                         </collectionView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
