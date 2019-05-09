@@ -22,6 +22,8 @@
 		52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */; };
 		52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BB227A4CC900CCA655 /* Coordinator.swift */; };
 		52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BF227A6B8F00CCA655 /* JeniButton.swift */; };
+		52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED0D402283974500D7316A /* ReminderViewController.swift */; };
+		52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52ED0D412283974500D7316A /* ReminderViewController.xib */; };
 		52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
 		52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F18227DD7B500BDEE80 /* BaseViewController.swift */; };
 		52F02F1E227DDDE000BDEE80 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */; };
@@ -51,6 +53,8 @@
 		52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		52DB74BB227A4CC900CCA655 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		52DB74BF227A6B8F00CCA655 /* JeniButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniButton.swift; sourceTree = "<group>"; };
+		52ED0D402283974500D7316A /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
+		52ED0D412283974500D7316A /* ReminderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewController.xib; sourceTree = "<group>"; };
 		52F02F15227DD78500BDEE80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		52F02F18227DD7B500BDEE80 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 		52DB74B1227A404000CCA655 /* App Sections */ = {
 			isa = PBXGroup;
 			children = (
+				52ED0D3E2283971000D7316A /* Reminder */,
 				52F02F1A227DDDC200BDEE80 /* Home */,
 				52DB74B2227A405700CCA655 /* Login */,
 			);
@@ -196,6 +201,23 @@
 				52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */,
 			);
 			path = JeniComponents;
+			sourceTree = "<group>";
+		};
+		52ED0D3E2283971000D7316A /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				52ED0D3F2283971A00D7316A /* ViewController */,
+			);
+			path = Reminder;
+			sourceTree = "<group>";
+		};
+		52ED0D3F2283971A00D7316A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52ED0D402283974500D7316A /* ReminderViewController.swift */,
+				52ED0D412283974500D7316A /* ReminderViewController.xib */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		52F02F13227DD68D00BDEE80 /* ViewModel */ = {
@@ -321,6 +343,7 @@
 			files = (
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
 				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
+				52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */,
 				52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
@@ -389,6 +412,7 @@
 				525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */,
 				525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */,
 				52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */,
+				52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */,
 				525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */,
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,

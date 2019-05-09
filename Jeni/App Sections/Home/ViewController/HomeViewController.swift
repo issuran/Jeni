@@ -19,6 +19,7 @@ class HomeViewController: BaseViewController {
     var viewModel: HomeViewModel!
     let reuseIdentifier: String = "medicineCell"
     private let itemsPerRow: CGFloat = 3
+    let reminder = ReminderViewController()
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -59,7 +60,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addReminderAction(_ sender: Any) {
-        //  TODO: Call add reminder
+        navigationController?.pushViewController(reminder, animated: true)
     }
     
     @IBAction func logoutAction(_ sender: Any) {
@@ -85,6 +86,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Call edit reminder
+        navigationController?.pushViewController(reminder, animated: true)
     }
 }
