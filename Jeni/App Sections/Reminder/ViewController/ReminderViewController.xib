@@ -38,10 +38,10 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOt-R7-gJx">
-                            <rect key="frame" x="16" y="8" width="30" height="30"/>
+                            <rect key="frame" x="16" y="8" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="j0g-I3-6GU"/>
-                                <constraint firstAttribute="height" constant="30" id="nmx-NJ-vXA"/>
+                                <constraint firstAttribute="width" constant="25" id="j0g-I3-6GU"/>
+                                <constraint firstAttribute="height" constant="25" id="nmx-NJ-vXA"/>
                             </constraints>
                             <state key="normal" title="Button" image="BackArrow"/>
                             <connections>
@@ -49,7 +49,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="sbq-D9-cu4" secondAttribute="trailing" constant="8" id="2RL-4k-KLJ"/>
                         <constraint firstItem="Bgp-ur-ybl" firstAttribute="leading" secondItem="YQR-q7-Bia" secondAttribute="leading" constant="16" id="KC6-mc-ykN"/>
@@ -66,7 +66,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medicine's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeB-pH-q5w">
                             <rect key="frame" x="20" y="20" width="108" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                            <color key="textColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iZI-LR-wer">
@@ -92,7 +92,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgc-s2-pid">
                                             <rect key="frame" x="0.0" y="0.0" width="157.5" height="16"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                            <color key="textColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qrk-bA-36U">
@@ -117,7 +117,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How Long?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QO-JV-iRz">
                                             <rect key="frame" x="0.0" y="0.0" width="157.5" height="16"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                            <color key="textColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-X7-sc4">
@@ -140,7 +140,7 @@
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMm-AD-3Lv" customClass="JeniButton" customModule="Jeni" customModuleProvider="target">
                             <rect key="frame" x="20" y="200" width="335" height="48"/>
-                            <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="FyI-jC-3mG"/>
                             </constraints>
@@ -156,7 +156,7 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="value" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="shouldBounce" value="YES"/>
                             </userDefinedRuntimeAttributes>
@@ -178,7 +178,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="3nK-2v-vmZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EVQ-gF-Epz"/>
                 <constraint firstItem="YQR-q7-Bia" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="GfY-H5-cav"/>
@@ -193,7 +193,7 @@
         </view>
     </objects>
     <resources>
-        <image name="BackArrow" width="155.67567443847656" height="155.67567443847656"/>
+        <image name="BackArrow" width="153.19148254394531" height="153.19148254394531"/>
         <image name="Logo" width="595" height="595"/>
     </resources>
 </document>

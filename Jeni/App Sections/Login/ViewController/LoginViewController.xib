@@ -39,7 +39,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDv-wp-0rB">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
-                                    <color key="backgroundColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Dsh-vV-QHW">
                                     <rect key="frame" x="0.0" y="30" width="375" height="128"/>
@@ -59,7 +59,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="8yQ-C8-KTP"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yay-5W-QUU">
@@ -67,7 +67,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="HUC-eY-mn8"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <userDefinedRuntimeAttributes>
@@ -87,7 +87,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="sqT-Qp-pqd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xB0-MS-Nmb">
@@ -95,7 +95,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="0ug-fC-DzP"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <userDefinedRuntimeAttributes>
@@ -115,7 +115,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="dQH-CS-ag5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3o8-4F-aWN">
@@ -123,7 +123,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="gAU-mN-Aem"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <userDefinedRuntimeAttributes>
@@ -143,7 +143,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="ZLp-Cu-6AQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1SN-oE-xFa">
@@ -151,7 +151,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Pvt-1e-mWe"/>
                                                     </constraints>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <userDefinedRuntimeAttributes>
@@ -170,7 +170,7 @@
                                         <constraint firstAttribute="height" constant="15" id="7IX-Lv-yNh"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2f-dm-UwK">
@@ -186,12 +186,12 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRg-un-n1j" customClass="JeniButton" customModule="Jeni" customModuleProvider="target">
                                     <rect key="frame" x="32" y="399" width="311" height="46"/>
-                                    <color key="backgroundColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="46" id="N51-9I-cjh"/>
                                     </constraints>
                                     <state key="normal" title="Sign in">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -201,7 +201,7 @@
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldBounce" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -210,7 +210,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="rRg-un-n1j" secondAttribute="bottom" constant="16" id="3vt-bq-YY3"/>
                                 <constraint firstItem="u9V-BE-Vmr" firstAttribute="centerX" secondItem="3j9-Om-CCm" secondAttribute="centerX" constant="-20" id="7Qz-Kc-1fD"/>
@@ -233,7 +233,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="3j9-Om-CCm" firstAttribute="centerX" secondItem="KlS-oa-Uv7" secondAttribute="centerX" id="Ft0-Lh-ZY6"/>
                         <constraint firstAttribute="trailing" secondItem="3j9-Om-CCm" secondAttribute="trailing" id="Py7-2W-QXU"/>
@@ -242,20 +242,12 @@
                         <constraint firstItem="3j9-Om-CCm" firstAttribute="leading" secondItem="KlS-oa-Uv7" secondAttribute="leading" id="u3A-lH-GbI"/>
                     </constraints>
                 </scrollView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQj-a4-1Tj">
-                    <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
             </subviews>
-            <color key="backgroundColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="KlS-oa-Uv7" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="BC4-HB-NVc"/>
-                <constraint firstAttribute="bottom" secondItem="OQj-a4-1Tj" secondAttribute="bottom" id="NzV-CM-KPF"/>
-                <constraint firstItem="OQj-a4-1Tj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ecq-tR-Inn"/>
                 <constraint firstItem="KlS-oa-Uv7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="f22-ah-P7h"/>
-                <constraint firstItem="OQj-a4-1Tj" firstAttribute="top" secondItem="KlS-oa-Uv7" secondAttribute="bottom" id="iTa-kW-Lbv"/>
                 <constraint firstItem="KlS-oa-Uv7" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="pzX-yw-QoF"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OQj-a4-1Tj" secondAttribute="trailing" id="tGw-IT-2mZ"/>
                 <constraint firstItem="KlS-oa-Uv7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="xWP-Fd-igd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

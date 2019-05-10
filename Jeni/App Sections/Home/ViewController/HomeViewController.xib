@@ -46,10 +46,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ja6-nw-iWd">
-                            <rect key="frame" x="282" y="8" width="30" height="30"/>
+                            <rect key="frame" x="281" y="8" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="G3g-iK-vMo"/>
-                                <constraint firstAttribute="width" constant="30" id="u7C-3Z-Obg"/>
+                                <constraint firstAttribute="height" constant="25" id="G3g-iK-vMo"/>
+                                <constraint firstAttribute="width" constant="25" id="u7C-3Z-Obg"/>
                             </constraints>
                             <state key="normal" title="Button" image="LogoutSign"/>
                             <connections>
@@ -57,10 +57,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OoW-QU-mGd">
-                            <rect key="frame" x="240" y="8" width="30" height="30"/>
+                            <rect key="frame" x="244" y="8" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="229-jp-svi"/>
-                                <constraint firstAttribute="width" constant="30" id="Zn2-M4-9iM"/>
+                                <constraint firstAttribute="height" constant="25" id="229-jp-svi"/>
+                                <constraint firstAttribute="width" constant="25" id="Zn2-M4-9iM"/>
                             </constraints>
                             <state key="normal" title="Button" image="PlusSign"/>
                             <connections>
@@ -68,7 +68,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="8zA-ol-lWP" firstAttribute="top" secondItem="QWA-fW-4oU" secondAttribute="top" constant="8" id="1Dc-X7-T61"/>
                         <constraint firstItem="LsF-ca-p47" firstAttribute="leading" secondItem="QWA-fW-4oU" secondAttribute="leading" constant="16" id="CCS-c0-rba"/>
@@ -78,7 +78,7 @@
                         <constraint firstItem="Ja6-nw-iWd" firstAttribute="top" secondItem="QWA-fW-4oU" secondAttribute="top" constant="8" id="Uvo-as-L9q"/>
                         <constraint firstAttribute="trailing" secondItem="Vkt-fo-7r6" secondAttribute="trailing" constant="8" id="f0I-tH-dp7"/>
                         <constraint firstItem="OoW-QU-mGd" firstAttribute="top" secondItem="QWA-fW-4oU" secondAttribute="top" constant="8" id="h6j-GT-1qg"/>
-                        <constraint firstAttribute="trailing" secondItem="Ja6-nw-iWd" secondAttribute="trailing" constant="8" id="mcL-an-t4d"/>
+                        <constraint firstAttribute="trailing" secondItem="Ja6-nw-iWd" secondAttribute="trailing" constant="14" id="mcL-an-t4d"/>
                         <constraint firstItem="LsF-ca-p47" firstAttribute="top" secondItem="8zA-ol-lWP" secondAttribute="bottom" constant="8" id="pET-XK-rhF"/>
                         <constraint firstAttribute="height" constant="128" id="uls-Fm-CmW"/>
                     </constraints>
@@ -110,7 +110,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="GJJ-pz-hmG" secondAttribute="bottom" id="IlF-Ky-OFa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QWA-fW-4oU" secondAttribute="trailing" id="Og4-BP-6UG"/>
@@ -126,7 +126,7 @@
     </objects>
     <resources>
         <image name="Logo" width="595" height="595"/>
-        <image name="LogoutSign" width="155.67567443847656" height="155.67567443847656"/>
-        <image name="PlusSign" width="155.67567443847656" height="155.67567443847656"/>
+        <image name="LogoutSign" width="153.19148254394531" height="153.19148254394531"/>
+        <image name="PlusSign" width="156" height="156"/>
     </resources>
 </document>
