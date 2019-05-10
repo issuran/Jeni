@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReminderViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
+                <outlet property="reminderLabel" destination="Bgp-ur-ybl" id="P8A-n2-mgT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,7 +25,7 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="128"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgp-ur-ybl">
-                            <rect key="frame" x="8" y="47.5" width="122" height="33.5"/>
+                            <rect key="frame" x="16" y="47.5" width="122" height="33.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -36,27 +37,27 @@
                                 <constraint firstAttribute="width" constant="35" id="xzA-2J-xKN"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oa5-y5-yBl">
-                            <rect key="frame" x="8" y="8" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOt-R7-gJx">
+                            <rect key="frame" x="16" y="8" width="30" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="Dhr-Rm-9Ve"/>
-                                <constraint firstAttribute="height" constant="30" id="s0m-9j-qtx"/>
+                                <constraint firstAttribute="width" constant="30" id="j0g-I3-6GU"/>
+                                <constraint firstAttribute="height" constant="30" id="nmx-NJ-vXA"/>
                             </constraints>
                             <state key="normal" title="Button" image="BackArrow"/>
                             <connections>
-                                <action selector="backButton:" destination="-1" eventType="touchUpInside" id="NKB-U8-4e7"/>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="M4a-C2-KJF"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="sbq-D9-cu4" secondAttribute="trailing" constant="8" id="2RL-4k-KLJ"/>
-                        <constraint firstItem="Oa5-y5-yBl" firstAttribute="leading" secondItem="YQR-q7-Bia" secondAttribute="leading" constant="8" id="Gfs-X2-4pu"/>
-                        <constraint firstItem="Bgp-ur-ybl" firstAttribute="leading" secondItem="YQR-q7-Bia" secondAttribute="leading" constant="8" id="KC6-mc-ykN"/>
+                        <constraint firstItem="Bgp-ur-ybl" firstAttribute="leading" secondItem="YQR-q7-Bia" secondAttribute="leading" constant="16" id="KC6-mc-ykN"/>
+                        <constraint firstItem="GOt-R7-gJx" firstAttribute="top" secondItem="YQR-q7-Bia" secondAttribute="top" constant="8" id="RvG-rT-amD"/>
                         <constraint firstItem="Bgp-ur-ybl" firstAttribute="centerY" secondItem="YQR-q7-Bia" secondAttribute="centerY" id="VuC-a4-rUA"/>
                         <constraint firstAttribute="height" constant="128" id="aeh-CM-Xgc"/>
-                        <constraint firstItem="Oa5-y5-yBl" firstAttribute="top" secondItem="YQR-q7-Bia" secondAttribute="top" constant="8" id="eWQ-BO-4k8"/>
                         <constraint firstAttribute="bottom" secondItem="sbq-D9-cu4" secondAttribute="bottom" constant="8" id="ien-RY-Hx6"/>
+                        <constraint firstItem="GOt-R7-gJx" firstAttribute="leading" secondItem="YQR-q7-Bia" secondAttribute="leading" constant="16" id="po0-aE-d5r"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nK-2v-vmZ" userLabel="Bottom View">
