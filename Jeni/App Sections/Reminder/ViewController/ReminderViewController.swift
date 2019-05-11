@@ -49,7 +49,7 @@ class ReminderViewController: BaseViewController {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.tintColor = UIColorUtils.backgroundBlueColor
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneButtonTapped))
         toolBar.setItems([doneButton], animated: false)
