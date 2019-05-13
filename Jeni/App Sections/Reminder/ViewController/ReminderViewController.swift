@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum ActionCaller {
+    case add
+    case edit
+}
+
 class ReminderViewController: BaseViewController {
     
     @IBOutlet weak var reminderLabel: UILabel!
@@ -18,7 +23,9 @@ class ReminderViewController: BaseViewController {
     
     @IBOutlet weak var medicineTimeTextField: UITextField!
     
-    var actionCaller: String = ""
+    @IBOutlet weak var trashButton: UIButton!
+    
+    var actionCaller: ActionCaller = .add
     let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]];
     let datePicker = UIPickerView()
     
@@ -38,11 +45,24 @@ class ReminderViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reminderLabel.text = "\(actionCaller) Reminder"
+        switch actionCaller {
+        case .add:
+            reminderLabel.text = "Add Reminder"
+            trashButton.isHidden = true
+        case .edit:
+            reminderLabel.text = "Edit Reminder"
+            trashButton.isHidden = false
+        }
+        
     }
     
     @IBAction func backAction(_ sender: Any) {
         _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func deleteReminderAction(_ sender: Any) {
+        // TODO: Delete reminder
+        print("Delete reminder!")
     }
     
     func createToolBar() {

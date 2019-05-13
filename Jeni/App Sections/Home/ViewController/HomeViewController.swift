@@ -60,7 +60,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addReminderAction(_ sender: Any) {
-        reminder.actionCaller = "Add"
+        reminder.actionCaller = .add
         navigationController?.pushViewController(reminder, animated: true)
     }
     
@@ -87,7 +87,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        reminder.actionCaller = "Edit"
+        reminder.actionCaller = .edit
         navigationController?.pushViewController(reminder, animated: true)
     }
 }
