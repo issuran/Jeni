@@ -13,6 +13,11 @@ enum ActionCaller {
     case edit
 }
 
+enum DatePickerChosen {
+    case time
+    case period
+}
+
 class ReminderViewController: BaseViewController {
     
     @IBOutlet weak var reminderLabel: UILabel!
@@ -26,7 +31,9 @@ class ReminderViewController: BaseViewController {
     @IBOutlet weak var trashButton: UIButton!
     
     var actionCaller: ActionCaller = .add
+    var pickerSelected: DatePickerChosen = .period
     let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]];
+    
     let datePicker = UIPickerView()
     
     override func viewDidLoad() {
@@ -77,7 +84,7 @@ class ReminderViewController: BaseViewController {
     }
     
     @objc
-    func doneButtonTapped(){
+    func doneButtonTapped() {
         self.medicineDurationTextField.resignFirstResponder()
     }
 }
@@ -109,5 +116,13 @@ extension ReminderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 extension ReminderViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == medicineTimeTextField {
+            pickerSelected = .time
+        } else {
+            pickerSelected = .period
+        }
     }
 }
