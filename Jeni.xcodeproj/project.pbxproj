@@ -22,6 +22,8 @@
 		52DB74BA227A4CAE00CCA655 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */; };
 		52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BB227A4CC900CCA655 /* Coordinator.swift */; };
 		52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BF227A6B8F00CCA655 /* JeniButton.swift */; };
+		52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */; };
+		52E0395422909979005BF73F /* TimeReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */; };
 		52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED0D402283974500D7316A /* ReminderViewController.swift */; };
 		52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52ED0D412283974500D7316A /* ReminderViewController.xib */; };
 		52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
@@ -53,6 +55,8 @@
 		52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		52DB74BB227A4CC900CCA655 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		52DB74BF227A6B8F00CCA655 /* JeniButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniButton.swift; sourceTree = "<group>"; };
+		52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeReminderTableViewCell.swift; sourceTree = "<group>"; };
+		52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeReminderTableViewCell.xib; sourceTree = "<group>"; };
 		52ED0D402283974500D7316A /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		52ED0D412283974500D7316A /* ReminderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewController.xib; sourceTree = "<group>"; };
 		52F02F15227DD78500BDEE80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +207,15 @@
 			path = JeniComponents;
 			sourceTree = "<group>";
 		};
+		52E0395022909956005BF73F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */,
+				52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		52ED0D3E2283971000D7316A /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 		52ED0D3F2283971A00D7316A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				52E0395022909956005BF73F /* Cells */,
 				52ED0D402283974500D7316A /* ReminderViewController.swift */,
 				52ED0D412283974500D7316A /* ReminderViewController.xib */,
 			);
@@ -347,6 +361,7 @@
 				52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
+				52E0395422909979005BF73F /* TimeReminderTableViewCell.xib in Resources */,
 				52B4260E2282650300218D18 /* MedicineCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +432,7 @@
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
+				52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */,
 				52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

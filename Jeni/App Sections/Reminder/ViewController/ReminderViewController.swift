@@ -20,6 +20,8 @@ enum DatePickerChosen {
 
 class ReminderViewController: BaseViewController {
     
+    @IBOutlet weak var timeReminderTableView: UITableView!
+    
     @IBOutlet weak var reminderLabel: UILabel!
     
     @IBOutlet weak var medicineNameTextField: UITextField!
@@ -29,10 +31,15 @@ class ReminderViewController: BaseViewController {
     @IBOutlet weak var medicineTimeTextField: UITextField!
     
     @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var addTimeReminderButton: JeniButton!
     
     var actionCaller: ActionCaller = .add
     var pickerSelected: DatePickerChosen = .period
-    let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]];
+    
+    let tableReuseIdentifier = "timeReminderCell"
+    
+    let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]]
+    var timesReminder = [String]()
     
     let datePicker = UIPickerView()
     let timePicker = UIDatePicker()
@@ -46,6 +53,10 @@ class ReminderViewController: BaseViewController {
         datePicker.delegate = self
         datePicker.dataSource = self
         timePicker.datePickerMode = .time
+        
+        timeReminderTableView.delegate = self
+        timeReminderTableView.dataSource = self
+        timeReminderTableView.register(UINib(nibName: "TimeReminderTableViewCell", bundle: nil), forCellReuseIdentifier: tableReuseIdentifier)
         
         medicineDurationTextField.inputView = self.datePicker
         medicineTimeTextField.inputView = self.timePicker
@@ -74,6 +85,15 @@ class ReminderViewController: BaseViewController {
     @IBAction func deleteReminderAction(_ sender: Any) {
         // TODO: Delete reminder
         print("Delete reminder!")
+    }
+    
+    @IBAction func addTimeReminderAction(_ sender: Any) {
+        guard let time = medicineTimeTextField.text, !time.isEmpty else {
+            self.alert(message: "Pick a time to remind before add!")
+            return
+        }
+        timesReminder.append(time)
+        timeReminderTableView.reloadData()
     }
     
     func createDateToolBar() {
@@ -108,8 +128,9 @@ class ReminderViewController: BaseViewController {
         self.medicineTimeTextField.resignFirstResponder()
         let date = timePicker.date
         let components = Calendar.current.dateComponents([.hour, .minute], from: date)
-        let hour = components.hour!
-        let minute = components.minute!
+        
+        let minute = components.minute! < 10 ? "0\(components.minute!)" : "\(components.minute!)"
+        let hour = components.hour! < 10 ? "0\(components.hour!)" : "\(components.hour!)"
         medicineTimeTextField.text = "\(hour):\(minute)"
     }
 }
@@ -149,5 +170,17 @@ extension ReminderViewController: UITextFieldDelegate {
         } else {
             pickerSelected = .period
         }
+    }
+}
+
+extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return timesReminder.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableReuseIdentifier) as! TimeReminderTableViewCell
+        cell.timeLabel.text = timesReminder[indexPath.row]
+        return cell
     }
 }

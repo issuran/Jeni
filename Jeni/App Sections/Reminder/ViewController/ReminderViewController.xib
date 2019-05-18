@@ -12,11 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReminderViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
+                <outlet property="addTimeReminderButton" destination="B5f-5K-Yhn" id="Bbc-ZK-YID"/>
                 <outlet property="medicineAmountTextField" destination="qrk-bA-36U" id="HWa-XR-eka"/>
                 <outlet property="medicineDurationTextField" destination="G4u-X7-sc4" id="gfT-aq-ylE"/>
                 <outlet property="medicineNameTextField" destination="iZI-LR-wer" id="wJX-RH-7c1"/>
                 <outlet property="medicineTimeTextField" destination="Mzh-dD-tQY" id="aAo-fn-FP8"/>
                 <outlet property="reminderLabel" destination="Bgp-ur-ybl" id="P8A-n2-mgT"/>
+                <outlet property="timeReminderTableView" destination="4Mb-JM-khL" id="Dkn-G4-3qA"/>
                 <outlet property="trashButton" destination="Jok-lg-fPr" id="CGp-UM-DR6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -172,7 +174,11 @@
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="8"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shouldBounce" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="addTimeReminderAction:" destination="-1" eventType="touchUpInside" id="Dw9-xx-I0K"/>
+                                    </connections>
                                 </button>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Mb-JM-khL">
                                     <rect key="frame" x="20" y="422" width="335" height="80"/>
@@ -180,6 +186,10 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="hMc-hK-ELL"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="OqN-kp-cO1"/>
+                                        <outlet property="delegate" destination="-1" id="11h-lH-L2q"/>
+                                    </connections>
                                 </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMm-AD-3Lv" customClass="JeniButton" customModule="Jeni" customModuleProvider="target">
                                     <rect key="frame" x="20" y="517" width="335" height="48"/>
