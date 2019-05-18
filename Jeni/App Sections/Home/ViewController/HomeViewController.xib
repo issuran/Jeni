@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="hwZ-8g-mec" id="wEu-8k-m7u"/>
+                <outlet property="emptyState" destination="czE-2Z-nhG" id="SX5-F4-ZDE"/>
                 <outlet property="flowLayout" destination="wqP-ZL-7gH" id="tYB-jU-Tnf"/>
                 <outlet property="usernameLabel" destination="LsF-ca-p47" id="CiO-O8-i0p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

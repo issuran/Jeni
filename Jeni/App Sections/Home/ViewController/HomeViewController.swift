@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var blankImageState: UIImageView!
+    @IBOutlet weak var emptyState: UIView!
     
     var viewModel: HomeViewModel!
     let reuseIdentifier: String = "medicineCell"
@@ -45,6 +45,11 @@ class HomeViewController: BaseViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     // MARK: Private functions
     fileprivate func setUpFlowLayout() {
         let spacing: CGFloat = 5
@@ -61,6 +66,8 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addReminderAction(_ sender: Any) {
+        let medicine = MedicineModel(name: "Paracetamol", image: "PillBlue", medicineDetail: nil)
+        viewModel.medicineItemArray.append(medicine)
         reminder.actionCaller = .add
         navigationController?.pushViewController(reminder, animated: true)
     }
@@ -78,13 +85,28 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.medicineItemArray?.count ?? 0
+        let count = viewModel.medicineItemArray.count
+        
+        if count == 0 {
+            emptyState.isHidden = false
+            return 0
+        }
+        
+        emptyState.isHidden = true
+        return count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        blankImageState.isHidden = true
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedicineCollectionViewCell
-    
+        
+        let item = self.viewModel.medicineItemArray[indexPath.row]
+        let timesToTakeMedicine = item.medicineDetail?.reminderTime.count ?? 0
+        
+        cell.medicineImageView.image = UIImage(named: item.image)
+        cell.medicineNameLabel.text = item.name
+        cell.medicineQtdPerDayLabel.text = timesToTakeMedicine > 1
+            ? "\(timesToTakeMedicine) times today" : "\(timesToTakeMedicine) time today"
+        
         return cell
     }
     

@@ -11,7 +11,7 @@ import Foundation
 struct MedicineModel {
     let name: String
     let image: String
-    let medicineDetail: MedicineDetail
+    let medicineDetail: MedicineDetail?
 }
 
 struct MedicineDetail {

@@ -27,6 +27,7 @@
 		52E0395722909F12005BF73F /* PillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395522909F12005BF73F /* PillCollectionViewCell.swift */; };
 		52E0395822909F12005BF73F /* PillCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395622909F12005BF73F /* PillCollectionViewCell.xib */; };
 		52E0395B2290B1AF005BF73F /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395A2290B1AF005BF73F /* MedicineModel.swift */; };
+		52E039622290C804005BF73F /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E039612290C804005BF73F /* ReminderViewModel.swift */; };
 		52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED0D402283974500D7316A /* ReminderViewController.swift */; };
 		52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52ED0D412283974500D7316A /* ReminderViewController.xib */; };
 		52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
@@ -63,6 +64,7 @@
 		52E0395522909F12005BF73F /* PillCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillCollectionViewCell.swift; sourceTree = "<group>"; };
 		52E0395622909F12005BF73F /* PillCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PillCollectionViewCell.xib; sourceTree = "<group>"; };
 		52E0395A2290B1AF005BF73F /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
+		52E039612290C804005BF73F /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModel.swift; sourceTree = "<group>"; };
 		52ED0D402283974500D7316A /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		52ED0D412283974500D7316A /* ReminderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewController.xib; sourceTree = "<group>"; };
 		52F02F15227DD78500BDEE80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -233,9 +235,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		52E039602290C7F2005BF73F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				52E039612290C804005BF73F /* ReminderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		52ED0D3E2283971000D7316A /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
+				52E039602290C7F2005BF73F /* ViewModel */,
 				52ED0D3F2283971A00D7316A /* ViewController */,
 			);
 			path = Reminder;
@@ -443,6 +454,7 @@
 				52F02F1E227DDDE000BDEE80 /* HomeViewController.swift in Sources */,
 				52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */,
 				525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */,
+				52E039622290C804005BF73F /* ReminderViewModel.swift in Sources */,
 				525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */,
 				52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */,
 				52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */,
