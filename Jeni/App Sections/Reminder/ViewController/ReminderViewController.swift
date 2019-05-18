@@ -35,18 +35,23 @@ class ReminderViewController: BaseViewController {
     let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]];
     
     let datePicker = UIPickerView()
+    let timePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         medicineDurationTextField.delegate = self
+        medicineTimeTextField.delegate = self
         
         datePicker.delegate = self
         datePicker.dataSource = self
+        timePicker.datePickerMode = .time
         
         medicineDurationTextField.inputView = self.datePicker
+        medicineTimeTextField.inputView = self.timePicker
         
-        createToolBar()
+        createDateToolBar()
+        createTimeToolBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +65,6 @@ class ReminderViewController: BaseViewController {
             reminderLabel.text = "Edit Reminder"
             trashButton.isHidden = false
         }
-        
     }
     
     @IBAction func backAction(_ sender: Any) {
@@ -72,20 +76,41 @@ class ReminderViewController: BaseViewController {
         print("Delete reminder!")
     }
     
-    func createToolBar() {
+    func createDateToolBar() {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColorUtils.backgroundBlueColor
         toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneButtonTapped))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneDateButtonTapped))
         toolBar.setItems([doneButton], animated: false)
         self.medicineDurationTextField.inputAccessoryView = toolBar
     }
     
+    func createTimeToolBar() {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColorUtils.backgroundBlueColor
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneTimeButtonTapped))
+        toolBar.setItems([doneButton], animated: false)
+        self.medicineTimeTextField.inputAccessoryView = toolBar
+    }
+    
     @objc
-    func doneButtonTapped() {
+    func doneDateButtonTapped() {
         self.medicineDurationTextField.resignFirstResponder()
+    }
+    
+    @objc
+    func doneTimeButtonTapped() {
+        self.medicineTimeTextField.resignFirstResponder()
+        let date = timePicker.date
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let hour = components.hour!
+        let minute = components.minute!
+        medicineTimeTextField.text = "\(hour):\(minute)"
     }
 }
 
