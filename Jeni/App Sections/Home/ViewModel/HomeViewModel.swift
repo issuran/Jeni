@@ -12,6 +12,8 @@ class HomeViewModel {
     
     weak var delegate: HomeCoordinatorDelegate!
     
+    var medicineItemArray: [MedicineModel]?
+    
     func logout() {
         delegate.callLogin(self)
     }

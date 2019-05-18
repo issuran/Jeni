@@ -26,6 +26,7 @@
 		52E0395422909979005BF73F /* TimeReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */; };
 		52E0395722909F12005BF73F /* PillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395522909F12005BF73F /* PillCollectionViewCell.swift */; };
 		52E0395822909F12005BF73F /* PillCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395622909F12005BF73F /* PillCollectionViewCell.xib */; };
+		52E0395B2290B1AF005BF73F /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395A2290B1AF005BF73F /* MedicineModel.swift */; };
 		52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED0D402283974500D7316A /* ReminderViewController.swift */; };
 		52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52ED0D412283974500D7316A /* ReminderViewController.xib */; };
 		52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
@@ -61,6 +62,7 @@
 		52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeReminderTableViewCell.xib; sourceTree = "<group>"; };
 		52E0395522909F12005BF73F /* PillCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillCollectionViewCell.swift; sourceTree = "<group>"; };
 		52E0395622909F12005BF73F /* PillCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PillCollectionViewCell.xib; sourceTree = "<group>"; };
+		52E0395A2290B1AF005BF73F /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
 		52ED0D402283974500D7316A /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		52ED0D412283974500D7316A /* ReminderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewController.xib; sourceTree = "<group>"; };
 		52F02F15227DD78500BDEE80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		52DB74B1227A404000CCA655 /* App Sections */ = {
 			isa = PBXGroup;
 			children = (
+				52E039592290B197005BF73F /* Model */,
 				52ED0D3E2283971000D7316A /* Reminder */,
 				52F02F1A227DDDC200BDEE80 /* Home */,
 				52DB74B2227A405700CCA655 /* Login */,
@@ -220,6 +223,14 @@
 				52E0395622909F12005BF73F /* PillCollectionViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		52E039592290B197005BF73F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52E0395A2290B1AF005BF73F /* MedicineModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		52ED0D3E2283971000D7316A /* Reminder */ = {
@@ -440,6 +451,7 @@
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
 				52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */,
+				52E0395B2290B1AF005BF73F /* MedicineModel.swift in Sources */,
 				52E0395722909F12005BF73F /* PillCollectionViewCell.swift in Sources */,
 				52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */,
 			);
