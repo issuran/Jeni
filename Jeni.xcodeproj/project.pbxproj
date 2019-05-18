@@ -24,6 +24,8 @@
 		52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74BF227A6B8F00CCA655 /* JeniButton.swift */; };
 		52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */; };
 		52E0395422909979005BF73F /* TimeReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */; };
+		52E0395722909F12005BF73F /* PillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0395522909F12005BF73F /* PillCollectionViewCell.swift */; };
+		52E0395822909F12005BF73F /* PillCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395622909F12005BF73F /* PillCollectionViewCell.xib */; };
 		52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED0D402283974500D7316A /* ReminderViewController.swift */; };
 		52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52ED0D412283974500D7316A /* ReminderViewController.xib */; };
 		52F02F16227DD78500BDEE80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
@@ -57,6 +59,8 @@
 		52DB74BF227A6B8F00CCA655 /* JeniButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniButton.swift; sourceTree = "<group>"; };
 		52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeReminderTableViewCell.swift; sourceTree = "<group>"; };
 		52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeReminderTableViewCell.xib; sourceTree = "<group>"; };
+		52E0395522909F12005BF73F /* PillCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E0395622909F12005BF73F /* PillCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PillCollectionViewCell.xib; sourceTree = "<group>"; };
 		52ED0D402283974500D7316A /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		52ED0D412283974500D7316A /* ReminderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderViewController.xib; sourceTree = "<group>"; };
 		52F02F15227DD78500BDEE80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 			children = (
 				52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */,
 				52E0395222909979005BF73F /* TimeReminderTableViewCell.xib */,
+				52E0395522909F12005BF73F /* PillCollectionViewCell.swift */,
+				52E0395622909F12005BF73F /* PillCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
+				52E0395822909F12005BF73F /* PillCollectionViewCell.xib in Resources */,
 				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
 				52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */,
 				52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */,
@@ -433,6 +440,7 @@
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
 				52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */,
+				52E0395722909F12005BF73F /* PillCollectionViewCell.swift in Sources */,
 				52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

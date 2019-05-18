@@ -17,6 +17,7 @@
                 <outlet property="medicineDurationTextField" destination="G4u-X7-sc4" id="gfT-aq-ylE"/>
                 <outlet property="medicineNameTextField" destination="iZI-LR-wer" id="wJX-RH-7c1"/>
                 <outlet property="medicineTimeTextField" destination="Mzh-dD-tQY" id="aAo-fn-FP8"/>
+                <outlet property="pillCollectionView" destination="QAn-Wk-Fw2" id="4Pd-dW-nYc"/>
                 <outlet property="reminderLabel" destination="Bgp-ur-ybl" id="P8A-n2-mgT"/>
                 <outlet property="timeReminderTableView" destination="4Mb-JM-khL" id="Dkn-G4-3qA"/>
                 <outlet property="trashButton" destination="Jok-lg-fPr" id="CGp-UM-DR6"/>

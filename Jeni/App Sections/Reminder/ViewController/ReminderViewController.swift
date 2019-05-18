@@ -21,6 +21,7 @@ enum DatePickerChosen {
 class ReminderViewController: BaseViewController {
     
     @IBOutlet weak var timeReminderTableView: UITableView!
+    @IBOutlet weak var pillCollectionView: UICollectionView!
     
     @IBOutlet weak var reminderLabel: UILabel!
     
@@ -37,9 +38,12 @@ class ReminderViewController: BaseViewController {
     var pickerSelected: DatePickerChosen = .period
     
     let tableReuseIdentifier = "timeReminderCell"
+    let collectionReuseIdentifier = "medicineImage"
     
     let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]]
     var timesReminder = [String]()
+    var medicineTypes = [0, 1, 2, 3, 4, 5]
+    var selectedType: Int?
     
     let datePicker = UIPickerView()
     let timePicker = UIDatePicker()
@@ -57,6 +61,11 @@ class ReminderViewController: BaseViewController {
         timeReminderTableView.delegate = self
         timeReminderTableView.dataSource = self
         timeReminderTableView.register(UINib(nibName: "TimeReminderTableViewCell", bundle: nil), forCellReuseIdentifier: tableReuseIdentifier)
+        
+        pillCollectionView.delegate = self
+        pillCollectionView.dataSource = self
+        pillCollectionView.allowsMultipleSelection = false
+        pillCollectionView.register(UINib(nibName: "PillCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionReuseIdentifier)
         
         medicineDurationTextField.inputView = self.datePicker
         medicineTimeTextField.inputView = self.timePicker
@@ -182,5 +191,21 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableReuseIdentifier) as! TimeReminderTableViewCell
         cell.timeLabel.text = timesReminder[indexPath.row]
         return cell
+    }
+}
+
+extension ReminderViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! PillCollectionViewCell
+        cell.titleLabel.text = "Pilula"
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedType = indexPath.row
     }
 }
