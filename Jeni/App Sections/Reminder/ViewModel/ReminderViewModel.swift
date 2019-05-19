@@ -29,12 +29,24 @@ struct TimeReminder {
     }
 }
 
+struct PeriodReminder {
+    let days: String
+    let type: String
+    
+    func formattedPeriodReminder() -> String {
+        return "\(days)/\(type)"
+    }
+}
+
 class ReminderViewModel {
     let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]]
     
     var timesReminderArray = [TimeReminder]()
+    var periodReminder = PeriodReminder(days: "0", type: "Day")
     var selectedType: Int?
     var medicineTypeArray = ["Pill", "Dose", "Injection", "Solution", "Alternative"]
+    
+    // MARK: Add
     
     func addTimeReminder(_ time: String) -> Void {
         let timeArray = time.components(separatedBy: ":")
@@ -53,6 +65,15 @@ class ReminderViewModel {
         }
     }
     
+    func getMedicineTypeName(_ medicineType: String, _ action: UserInteraction) -> String {
+        switch action {
+        case .create, .deselect:
+            return "\(medicineType)Blue"
+        case .select:
+            return "\(medicineType)White"
+        }
+    }
+    
     func getMedicineType(_ index: Int) -> String {
         return medicineTypeArray[index]
     }
@@ -64,7 +85,6 @@ class ReminderViewModel {
         let hour = components.hour! < 10 ? "0\(components.hour!)" : "\(components.hour!)"
         
         let timeReminder = TimeReminder(hour: hour, minute: minute)
-        
         return timeReminder.formattedTimeReminder()
     }
     
@@ -72,12 +92,9 @@ class ReminderViewModel {
         let days = pickerSourceDaysPeriod[0][selectedRowFirst]
         let period = pickerSourceDaysPeriod[1][selectedRowLast]
         
-        return formattedMedicineDurationText(days, period)
+        periodReminder = PeriodReminder(days: days, type: period)
+        
+        return periodReminder.formattedPeriodReminder()
     }
     
-    func formattedMedicineDurationText(_ days: String, _ period: String) -> String {
-        return Int(days) ?? 1 > 1
-            ? "\(days)/\(period)s"
-            : "\(days)/\(period)"
-    }
 }

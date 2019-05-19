@@ -20,7 +20,7 @@ class HomeViewController: BaseViewController {
     var viewModel: HomeViewModel!
     let reuseIdentifier: String = "medicineCell"
     private let itemsPerRow: CGFloat = 3
-    var reminder = ReminderViewController()
+    var reminder: ReminderViewController!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -66,8 +66,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addReminderAction(_ sender: Any) {
-        let medicine = MedicineModel(name: "Paracetamol", image: "PillBlue", medicineDetail: nil)
-        viewModel.medicineItemArray.append(medicine)
+        reminder = ReminderViewController()
         reminder.actionCaller = .add
         navigationController?.pushViewController(reminder, animated: true)
     }
@@ -85,7 +84,7 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = viewModel.medicineItemArray.count
+        let count = BaseViewController.medicineItemArray.count
         
         if count == 0 {
             emptyState.isHidden = false
@@ -99,7 +98,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedicineCollectionViewCell
         
-        let item = self.viewModel.medicineItemArray[indexPath.row]
+        let item = BaseViewController.medicineItemArray[indexPath.row]
         let timesToTakeMedicine = item.medicineDetail?.reminderTime.count ?? 0
         
         cell.medicineImageView.image = UIImage(named: item.image)
@@ -111,6 +110,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        reminder = ReminderViewController()
         reminder.actionCaller = .edit
         navigationController?.pushViewController(reminder, animated: true)
     }

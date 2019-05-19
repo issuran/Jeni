@@ -97,34 +97,49 @@ class ReminderViewController: BaseViewController {
         var message = "Sorry, unfortunatelly you missed:\n"
         var filledSuccessfully = true
         
-        if medicineNameTextField.text == nil || medicineNameTextField.text?.isEmpty ?? false {
-            medicineNameTextField.backgroundColor = .red
-            message.append("- The medicine's name\n")
+        let medicineName = medicineNameTextField.text
+        let medicineAmount = medicineAmountTextField.text
+        let medicineDuration = medicineDurationTextField.text
+        
+        if medicineName?.isEmpty ?? false {
+            message.append("✧ The medicine's name\n")
             filledSuccessfully = false
         }
         
-        if medicineAmountTextField.text == nil || medicineAmountTextField.text?.isEmpty ?? false {
-            message.append("- The medicine's daily amount\n")
+        if medicineAmount?.isEmpty ?? false {
+            message.append("✧ The medicine's daily amount\n")
             filledSuccessfully = false
         }
         
-        if medicineDurationTextField.text == nil || medicineDurationTextField.text?.isEmpty ?? false {
-            message.append("- The medicine's period you should take\n")
+        if medicineDuration?.isEmpty ?? false {
+            message.append("✧ The medicine's period you should take\n")
             filledSuccessfully = false
         }
         
         if viewModel.selectedType == nil {
-            message.append("- The medicine's type\n")
+            message.append("✧ The medicine's type\n")
             filledSuccessfully = false
         }
         
         if viewModel.timesReminderArray.count == 0 {
-            message.append("- The medicine's time schedule\n")
+            message.append("✧ The medicine's time schedule\n")
             filledSuccessfully = false
         }
         
         if filledSuccessfully {
-            alert(message: "SUCCESSFULLY DONE")
+            let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
+            
+            let medicineDetails = MedicineDetail(amount: medicineAmount!,
+                                                 period: viewModel.periodReminder.days,
+                                                 periodType: viewModel.periodReminder.type,
+                                                 typeName: medicineType,
+                                                 reminderTime: viewModel.timesReminderArray)
+            let medicine = MedicineModel(name: medicineName!,
+                                         image: viewModel.getMedicineTypeName(medicineType, .create),
+                                         medicineDetail: medicineDetails)
+            
+            BaseViewController.medicineItemArray.append(medicine)
+            _ = navigationController?.popToRootViewController(animated: true)
         } else {
             alert(message: message)
         }

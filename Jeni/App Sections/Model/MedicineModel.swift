@@ -15,10 +15,9 @@ struct MedicineModel {
 }
 
 struct MedicineDetail {
-    var amount: Int
-    var period: Int
+    var amount: String
+    var period: String
     var periodType: String
-    var typeImage: String
     var typeName: String
-    var reminderTime: [String]
+    var reminderTime: [TimeReminder]
 }

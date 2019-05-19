@@ -10,6 +10,8 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    static var medicineItemArray : [MedicineModel] = []
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }

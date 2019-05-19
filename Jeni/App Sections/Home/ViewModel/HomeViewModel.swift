@@ -10,9 +10,7 @@ import Foundation
 
 class HomeViewModel {
     
-    weak var delegate: HomeCoordinatorDelegate!
-    
-    var medicineItemArray = [MedicineModel]()    
+    weak var delegate: HomeCoordinatorDelegate! 
     
     func logout() {
         delegate.callLogin(self)
