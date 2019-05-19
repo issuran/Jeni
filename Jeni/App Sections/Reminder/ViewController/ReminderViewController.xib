@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReminderViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
                 <outlet property="addTimeReminderButton" destination="B5f-5K-Yhn" id="Bbc-ZK-YID"/>
+                <outlet property="doneButton" destination="dMm-AD-3Lv" id="6iJ-z4-JFg"/>
                 <outlet property="medicineAmountTextField" destination="qrk-bA-36U" id="HWa-XR-eka"/>
                 <outlet property="medicineDurationTextField" destination="G4u-X7-sc4" id="gfT-aq-ylE"/>
                 <outlet property="medicineNameTextField" destination="iZI-LR-wer" id="wJX-RH-7c1"/>
@@ -214,6 +215,9 @@
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldBounce" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="doneReminderAction:" destination="-1" eventType="touchUpInside" id="qXN-gK-5rE"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -23,6 +23,7 @@ class ReminderViewController: BaseViewController {
     
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var addTimeReminderButton: JeniButton!
+    @IBOutlet weak var doneButton: JeniButton!
     
     var actionCaller: ActionCaller = .add
     
@@ -87,8 +88,46 @@ class ReminderViewController: BaseViewController {
             self.alert(message: "Pick a time to remind before add!")
             return
         }
-        viewModel.timesReminder.append(time)
+        
+        viewModel.addTimeReminder(time)
         timeReminderTableView.reloadData()
+    }
+    
+    @IBAction func doneReminderAction(_ sender: Any) {
+        var message = "Sorry, unfortunatelly you missed:\n"
+        var filledSuccessfully = true
+        
+        if medicineNameTextField.text == nil || medicineNameTextField.text?.isEmpty ?? false {
+            medicineNameTextField.backgroundColor = .red
+            message.append("- The medicine's name\n")
+            filledSuccessfully = false
+        }
+        
+        if medicineAmountTextField.text == nil || medicineAmountTextField.text?.isEmpty ?? false {
+            message.append("- The medicine's daily amount\n")
+            filledSuccessfully = false
+        }
+        
+        if medicineDurationTextField.text == nil || medicineDurationTextField.text?.isEmpty ?? false {
+            message.append("- The medicine's period you should take\n")
+            filledSuccessfully = false
+        }
+        
+        if viewModel.selectedType == nil {
+            message.append("- The medicine's type\n")
+            filledSuccessfully = false
+        }
+        
+        if viewModel.timesReminderArray.count == 0 {
+            message.append("- The medicine's time schedule\n")
+            filledSuccessfully = false
+        }
+        
+        if filledSuccessfully {
+            alert(message: "SUCCESSFULLY DONE")
+        } else {
+            alert(message: message)
+        }
     }
     
     func createDateToolBar() {
@@ -125,6 +164,8 @@ class ReminderViewController: BaseViewController {
     }
 }
 
+// MARK: Picker View - How long picker
+
 extension ReminderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return viewModel.pickerSourceDaysPeriod.count
@@ -139,9 +180,11 @@ extension ReminderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let days = viewModel.pickerSourceDaysPeriod[0][pickerView.selectedRow(inComponent: 0)]
-        let period = viewModel.pickerSourceDaysPeriod[1][pickerView.selectedRow(inComponent: 1)]
-        medicineDurationTextField.text = viewModel.setMedicineDurationText(days, period)
+        let duration = viewModel.getMedicineDuration(
+            selectedRowFirst: pickerView.selectedRow(inComponent: 0),
+            selectedRowLast: pickerView.selectedRow(inComponent: 1))
+        
+        medicineDurationTextField.text = duration
     }
 }
 
@@ -151,17 +194,21 @@ extension ReminderViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: Table View - Time schedule to remind
+
 extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.timesReminder.count
+        return viewModel.timesReminderArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableReuseIdentifier) as! TimeReminderTableViewCell
-        cell.timeLabel.text = viewModel.timesReminder[indexPath.row]
+        cell.timeLabel.text = viewModel.timesReminderArray[indexPath.row].formattedTimeReminder()
         return cell
     }
 }
+
+// MARK: Collection View - Medicine type
 
 extension ReminderViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -172,7 +219,7 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! PillCollectionViewCell
         let medicineType = viewModel.getMedicineType(indexPath.row)
         cell.titleLabel.text = medicineType
-        cell.imageView.image = UIImage(named: "\(medicineType)Blue")
+        cell.imageView.image = viewModel.getMedicineTypeImage(medicineType, .create)
         return cell
     }
     
@@ -180,12 +227,12 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
         viewModel.selectedType = indexPath.row
         let cell = pillCollectionView.cellForItem(at: indexPath) as! PillCollectionViewCell
         let medicineType = viewModel.getMedicineType(indexPath.row)
-        cell.imageView.image = UIImage(named: "\(medicineType)White")
+        cell.imageView.image = viewModel.getMedicineTypeImage(medicineType, .select)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = pillCollectionView.cellForItem(at: indexPath) as! PillCollectionViewCell
         let medicineType = viewModel.getMedicineType(indexPath.row)
-        cell.imageView.image = UIImage(named: "\(medicineType)Blue")
+        cell.imageView.image = viewModel.getMedicineTypeImage(medicineType, .deselect)
     }
 }
