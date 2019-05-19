@@ -33,7 +33,7 @@
                     <rect key="frame" x="0.0" y="148" width="375" height="519"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nK-2v-vmZ" userLabel="Bottom View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medicine's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeB-pH-q5w">
                                     <rect key="frame" x="20" y="20" width="108" height="16"/>
@@ -129,10 +129,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QAn-Wk-Fw2">
-                                    <rect key="frame" x="20" y="244" width="335" height="60"/>
+                                    <rect key="frame" x="20" y="244" width="335" height="70"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="qmd-bz-LHz"/>
+                                        <constraint firstAttribute="height" constant="70" id="qmd-bz-LHz"/>
                                     </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="toj-FB-HnI">
                                         <size key="itemSize" width="50" height="50"/>
@@ -142,19 +142,19 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rW1-6l-OmI">
-                                    <rect key="frame" x="20" y="324" width="31.5" height="16"/>
+                                    <rect key="frame" x="20" y="334" width="31.5" height="16"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you need to take the medicine?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFL-ut-bys">
-                                    <rect key="frame" x="20" y="348" width="181.5" height="12"/>
+                                    <rect key="frame" x="20" y="358" width="181.5" height="12"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mzh-dD-tQY">
-                                    <rect key="frame" x="20" y="368" width="275" height="46"/>
+                                    <rect key="frame" x="20" y="378" width="275" height="46"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="46" id="AuB-yv-EtQ"/>
                                     </constraints>
@@ -163,7 +163,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5f-5K-Yhn" customClass="JeniButton" customModule="Jeni" customModuleProvider="target">
-                                    <rect key="frame" x="309" y="368" width="46" height="46"/>
+                                    <rect key="frame" x="309" y="378" width="46" height="46"/>
                                     <color key="backgroundColor" red="0.25490196078431371" green="0.39215686274509803" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="46" id="H8C-M1-rIq"/>
@@ -182,7 +182,7 @@
                                     </connections>
                                 </button>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Mb-JM-khL">
-                                    <rect key="frame" x="20" y="422" width="335" height="80"/>
+                                    <rect key="frame" x="20" y="432" width="335" height="80"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="hMc-hK-ELL"/>
@@ -193,7 +193,7 @@
                                     </connections>
                                 </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMm-AD-3Lv" customClass="JeniButton" customModule="Jeni" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="517" width="335" height="48"/>
+                                    <rect key="frame" x="20" y="527" width="335" height="48"/>
                                     <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="FyI-jC-3mG"/>

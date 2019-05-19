@@ -23,17 +23,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="am5-Qg-cKE" customClass="JeniMedicineViewButton" customModule="Jeni" customModuleProvider="target">
-                                <rect key="frame" x="2" y="2" width="56" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PillBlue" translatesAutoresizingMaskIntoConstraints="NO" id="S4f-xy-Ul9">
-                                        <rect key="frame" x="18" y="8" width="20" height="20"/>
+                                        <rect key="frame" x="20" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="FyN-8h-80T"/>
                                             <constraint firstAttribute="height" constant="20" id="com-M6-3Sm"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pill" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Czq-mi-2RJ">
-                                        <rect key="frame" x="2" y="32" width="52" height="10"/>
+                                        <rect key="frame" x="0.0" y="32" width="60" height="10"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="8"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -41,9 +41,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Czq-mi-2RJ" secondAttribute="trailing" constant="2" id="HGB-wj-p5u"/>
+                                    <constraint firstAttribute="trailing" secondItem="Czq-mi-2RJ" secondAttribute="trailing" id="HGB-wj-p5u"/>
                                     <constraint firstItem="S4f-xy-Ul9" firstAttribute="centerX" secondItem="Czq-mi-2RJ" secondAttribute="centerX" id="Q5H-p1-RO0"/>
-                                    <constraint firstItem="Czq-mi-2RJ" firstAttribute="leading" secondItem="am5-Qg-cKE" secondAttribute="leading" constant="2" id="bMS-IT-ukD"/>
+                                    <constraint firstItem="Czq-mi-2RJ" firstAttribute="leading" secondItem="am5-Qg-cKE" secondAttribute="leading" id="bMS-IT-ukD"/>
                                     <constraint firstItem="S4f-xy-Ul9" firstAttribute="top" secondItem="am5-Qg-cKE" secondAttribute="top" constant="8" id="ggH-sY-ej1"/>
                                     <constraint firstItem="Czq-mi-2RJ" firstAttribute="top" secondItem="S4f-xy-Ul9" secondAttribute="bottom" constant="4" id="jlC-Fj-jm6"/>
                                 </constraints>
@@ -62,12 +62,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="am5-Qg-cKE" firstAttribute="top" secondItem="smx-8w-7c4" secondAttribute="top" constant="2" id="IPp-Kx-IQm"/>
-                            <constraint firstAttribute="bottom" secondItem="am5-Qg-cKE" secondAttribute="bottom" constant="2" id="Laa-uB-fey"/>
+                            <constraint firstItem="am5-Qg-cKE" firstAttribute="top" secondItem="smx-8w-7c4" secondAttribute="top" id="IPp-Kx-IQm"/>
+                            <constraint firstAttribute="bottom" secondItem="am5-Qg-cKE" secondAttribute="bottom" id="Laa-uB-fey"/>
                             <constraint firstAttribute="height" constant="60" id="Mya-O4-6GQ"/>
-                            <constraint firstAttribute="trailing" secondItem="am5-Qg-cKE" secondAttribute="trailing" constant="2" id="aFC-6N-4Cv"/>
+                            <constraint firstAttribute="trailing" secondItem="am5-Qg-cKE" secondAttribute="trailing" id="aFC-6N-4Cv"/>
                             <constraint firstAttribute="width" constant="60" id="rIF-Lh-c3G"/>
-                            <constraint firstItem="am5-Qg-cKE" firstAttribute="leading" secondItem="smx-8w-7c4" secondAttribute="leading" constant="2" id="z0c-NN-HUd"/>
+                            <constraint firstItem="am5-Qg-cKE" firstAttribute="leading" secondItem="smx-8w-7c4" secondAttribute="leading" id="z0c-NN-HUd"/>
                         </constraints>
                     </view>
                 </subviews>

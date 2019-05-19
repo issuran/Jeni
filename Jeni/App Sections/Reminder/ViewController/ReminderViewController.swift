@@ -121,12 +121,7 @@ class ReminderViewController: BaseViewController {
     @objc
     func doneTimeButtonTapped() {
         self.medicineTimeTextField.resignFirstResponder()
-        let date = timePicker.date
-        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
-        
-        let minute = components.minute! < 10 ? "0\(components.minute!)" : "\(components.minute!)"
-        let hour = components.hour! < 10 ? "0\(components.hour!)" : "\(components.hour!)"
-        medicineTimeTextField.text = "\(hour):\(minute)"
+        medicineTimeTextField.text = viewModel.getMedicineTime(timePicker.date)
     }
 }
 
@@ -146,11 +141,7 @@ extension ReminderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let days = viewModel.pickerSourceDaysPeriod[0][pickerView.selectedRow(inComponent: 0)]
         let period = viewModel.pickerSourceDaysPeriod[1][pickerView.selectedRow(inComponent: 1)]
-        if Int(days) ?? 1 > 1 {
-            medicineDurationTextField.text = "\(days)/\(period)s"
-        } else {
-            medicineDurationTextField.text = "\(days)/\(period)"
-        }
+        medicineDurationTextField.text = viewModel.setMedicineDurationText(days, period)
     }
 }
 
@@ -174,12 +165,14 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ReminderViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return viewModel.medicineTypeArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! PillCollectionViewCell
-        cell.titleLabel.text = "Pill"
+        let medicineType = viewModel.getMedicineType(indexPath.row)
+        cell.titleLabel.text = medicineType
+        cell.imageView.image = UIImage(named: "\(medicineType)Blue")
         return cell
     }
     
