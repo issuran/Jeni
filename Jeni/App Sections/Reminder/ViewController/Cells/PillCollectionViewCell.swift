@@ -21,7 +21,6 @@ class PillCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             medicineBackgroundView.backgroundColor = isSelected ? UIColorUtils.backgroundBlueColor : .clear
-            imageView.image = isSelected ? #imageLiteral(resourceName: "PillWhite") : #imageLiteral(resourceName: "PillBlue")
             titleLabel.textColor = isSelected ? .white : .darkGray
         }
     }

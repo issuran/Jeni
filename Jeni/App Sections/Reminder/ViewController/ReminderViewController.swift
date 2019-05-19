@@ -178,5 +178,14 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.selectedType = indexPath.row
+        let cell = pillCollectionView.cellForItem(at: indexPath) as! PillCollectionViewCell
+        let medicineType = viewModel.getMedicineType(indexPath.row)
+        cell.imageView.image = UIImage(named: "\(medicineType)White")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = pillCollectionView.cellForItem(at: indexPath) as! PillCollectionViewCell
+        let medicineType = viewModel.getMedicineType(indexPath.row)
+        cell.imageView.image = UIImage(named: "\(medicineType)Blue")
     }
 }
