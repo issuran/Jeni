@@ -17,7 +17,7 @@ class MedicineCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.backgroudView.backgroundColor = isSelected ? UIColorUtils.backgroundBlueColor : UIColor.clear
+            self.backgroudView.backgroundColor = isSelected ? UIColorUtils.defaultBlueColor : UIColor.clear
         }
     }
     

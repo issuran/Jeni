@@ -112,6 +112,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         reminder = ReminderViewController()
         reminder.actionCaller = .edit
+        let medicineModel = BaseViewController.medicineItemArray[indexPath.row]
+        reminder.medicineModel = medicineModel
+        reminder.indexSelected = indexPath.row
         navigationController?.pushViewController(reminder, animated: true)
     }
 }

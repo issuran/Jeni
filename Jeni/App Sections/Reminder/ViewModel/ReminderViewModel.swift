@@ -34,7 +34,7 @@ struct PeriodReminder {
     let type: String
     
     func formattedPeriodReminder() -> String {
-        return "\(days)/\(type)"
+        return Int(days)! > 1 ? "\(days)/\(type)s" : "\(days)/\(type)"
     }
 }
 

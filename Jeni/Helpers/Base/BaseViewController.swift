@@ -10,6 +10,7 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    typealias Handler = () -> Void
     static var medicineItemArray : [MedicineModel] = []
     
     init() {
@@ -38,6 +39,17 @@ class BaseViewController: UIViewController {
     func alert(message: String, title: String = "") {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alert.addAction(OKAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func alert(message: String, title: String = "", completion: @escaping Handler) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            completion()
+        }
         
         alert.addAction(OKAction)
         

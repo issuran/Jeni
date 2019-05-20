@@ -18,7 +18,6 @@ class ReminderViewController: BaseViewController {
     @IBOutlet weak var medicineNameTextField: UITextField!
     @IBOutlet weak var medicineAmountTextField: UITextField!
     @IBOutlet weak var medicineDurationTextField: UITextField!
-    
     @IBOutlet weak var medicineTimeTextField: UITextField!
     
     @IBOutlet weak var trashButton: UIButton!
@@ -26,6 +25,8 @@ class ReminderViewController: BaseViewController {
     @IBOutlet weak var doneButton: JeniButton!
     
     var actionCaller: ActionCaller = .add
+    var medicineModel: MedicineModel?
+    var indexSelected: Int?
     
     let tableReuseIdentifier = "timeReminderCell"
     let collectionReuseIdentifier = "medicineImage"
@@ -71,16 +72,21 @@ class ReminderViewController: BaseViewController {
         case .edit:
             reminderLabel.text = "Edit Reminder"
             trashButton.isHidden = false
+            fillFields(medicineModel ?? MedicineModel(name: "Teste", image: "", medicineDetail: nil))
         }
     }
     
     @IBAction func backAction(_ sender: Any) {
+        medicineModel = nil
         _ = navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func deleteReminderAction(_ sender: Any) {
-        // TODO: Delete reminder
-        print("Delete reminder!")
+        
+        self.alert(message: "Medicine Reminder removed from your list!", title: "Delete") {
+            BaseViewController.medicineItemArray.remove(at: self.indexSelected!)
+            _ = self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     @IBAction func addTimeReminderAction(_ sender: Any) {
@@ -90,6 +96,7 @@ class ReminderViewController: BaseViewController {
         }
         
         viewModel.addTimeReminder(time)
+        medicineTimeTextField.text?.removeAll()
         timeReminderTableView.reloadData()
     }
     
@@ -126,23 +133,40 @@ class ReminderViewController: BaseViewController {
             filledSuccessfully = false
         }
         
-        if filledSuccessfully {
-            let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
-            
-            let medicineDetails = MedicineDetail(amount: medicineAmount!,
-                                                 period: viewModel.periodReminder.days,
-                                                 periodType: viewModel.periodReminder.type,
-                                                 typeName: medicineType,
-                                                 reminderTime: viewModel.timesReminderArray)
-            let medicine = MedicineModel(name: medicineName!,
-                                         image: viewModel.getMedicineTypeName(medicineType, .create),
-                                         medicineDetail: medicineDetails)
-            
-            BaseViewController.medicineItemArray.append(medicine)
-            _ = navigationController?.popToRootViewController(animated: true)
-        } else {
-            alert(message: message)
+        switch actionCaller {
+        case .add:
+            if filledSuccessfully {
+                let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
+                
+                let medicineDetails = MedicineDetail(amount: medicineAmount!,
+                                                     period: viewModel.periodReminder.days,
+                                                     periodType: viewModel.periodReminder.type,
+                                                     typeName: medicineType,
+                                                     reminderTime: viewModel.timesReminderArray)
+                let medicine = MedicineModel(name: medicineName!,
+                                             image: viewModel.getMedicineTypeName(medicineType, .create),
+                                             medicineDetail: medicineDetails)
+                
+                BaseViewController.medicineItemArray.append(medicine)
+            } else {
+                alert(message: message)
+            }
+        case .edit:
+            // TODO: Update medicineModel no array
+            medicineModel = nil
         }
+        
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func fillFields(_ medicineModel: MedicineModel) {
+        medicineNameTextField.text = medicineModel.name
+        medicineAmountTextField.text = medicineModel.medicineDetail?.amount
+        let period = PeriodReminder(days: medicineModel.medicineDetail?.period ?? "0", type: medicineModel.medicineDetail?.periodType ?? "Day")
+        medicineDurationTextField.text = period.formattedPeriodReminder()
+        viewModel.timesReminderArray = medicineModel.medicineDetail?.reminderTime ?? [TimeReminder]()
+        viewModel.selectedType = viewModel.medicineTypeArray.firstIndex(of: medicineModel.medicineDetail?.typeName ?? "Pill")
+        pillCollectionView.selectItem(at: IndexPath(item: viewModel.selectedType ?? 0, section: 0), animated: true, scrollPosition: .right)
     }
     
     func createDateToolBar() {
@@ -220,6 +244,13 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableReuseIdentifier) as! TimeReminderTableViewCell
         cell.timeLabel.text = viewModel.timesReminderArray[indexPath.row].formattedTimeReminder()
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            viewModel.timesReminderArray.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
     }
 }
 
