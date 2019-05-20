@@ -10,6 +10,7 @@
 		525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791B9227E6A8000107AE6 /* HomeCoordinator.swift */; };
 		525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
 		525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
+		529A3E5A229362C400E084C2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529A3E59229362C400E084C2 /* Observable.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
 		52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
 		52B4260E2282650300218D18 /* MedicineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */; };
@@ -45,6 +46,7 @@
 		525791B9227E6A8000107AE6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		525791BC227E6AC400107AE6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
+		529A3E59229362C400E084C2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicineCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */,
+				529A3E59229362C400E084C2 /* Observable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				529A3E5A229362C400E084C2 /* Observable.swift in Sources */,
 				52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */,
 				52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */,
 				52B42610228275D800218D18 /* JeniMedicineViewButton.swift in Sources */,
