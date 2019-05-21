@@ -170,7 +170,7 @@ class ReminderViewController: BaseViewController {
             medicineModel?.image = viewModel.getMedicineTypeName(medicineType, .create)
             medicineModel?.medicineDetail = medicineDetails
             
-            BaseViewController.medicineItemArray[viewModel.selectedType!] = medicineModel!
+            BaseViewController.medicineItemArray[indexSelected!] = medicineModel!
         }
         
         _ = navigationController?.popToRootViewController(animated: true)
