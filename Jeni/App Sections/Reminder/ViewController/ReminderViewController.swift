@@ -72,7 +72,7 @@ class ReminderViewController: BaseViewController {
         case .edit:
             reminderLabel.text = "Edit Reminder"
             trashButton.isHidden = false
-            fillFields(medicineModel ?? MedicineModel(name: "Teste", image: "", medicineDetail: nil))
+            fillFields(medicineModel ?? MedicineModel(id: "id", name: "Teste", image: "", medicineDetail: nil))
         }
     }
     
@@ -136,14 +136,17 @@ class ReminderViewController: BaseViewController {
         switch actionCaller {
         case .add:
             if filledSuccessfully {
+                let uuid = UUID().uuidString
                 let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
                 
                 let medicineDetails = MedicineDetail(amount: medicineAmount!,
                                                      period: viewModel.periodReminder.days,
                                                      periodType: viewModel.periodReminder.type,
+                                                     endDate: viewModel.getDateDuration(),
                                                      typeName: medicineType,
                                                      reminderTime: viewModel.timesReminderArray)
-                let medicine = MedicineModel(name: medicineName!,
+                let medicine = MedicineModel(id: uuid,
+                                             name: medicineName!,
                                              image: viewModel.getMedicineTypeName(medicineType, .create),
                                              medicineDetail: medicineDetails)
                 
@@ -152,8 +155,22 @@ class ReminderViewController: BaseViewController {
                 alert(message: message)
             }
         case .edit:
-            // TODO: Update medicineModel no array
-            medicineModel = nil
+            
+            medicineModel = BaseViewController.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
+            
+            let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
+            
+            let medicineDetails = MedicineDetail(amount: medicineAmount!,
+                                                 period: viewModel.periodReminder.days,
+                                                 periodType: viewModel.periodReminder.type,
+                                                 endDate: viewModel.getDateDuration(),
+                                                 typeName: medicineType,
+                                                 reminderTime: viewModel.timesReminderArray)
+            medicineModel?.name = medicineName!
+            medicineModel?.image = viewModel.getMedicineTypeName(medicineType, .create)
+            medicineModel?.medicineDetail = medicineDetails
+            
+            BaseViewController.medicineItemArray[viewModel.selectedType!] = medicineModel!
         }
         
         _ = navigationController?.popToRootViewController(animated: true)
@@ -162,8 +179,10 @@ class ReminderViewController: BaseViewController {
     func fillFields(_ medicineModel: MedicineModel) {
         medicineNameTextField.text = medicineModel.name
         medicineAmountTextField.text = medicineModel.medicineDetail?.amount
-        let period = PeriodReminder(days: medicineModel.medicineDetail?.period ?? "0", type: medicineModel.medicineDetail?.periodType ?? "Day")
-        medicineDurationTextField.text = period.formattedPeriodReminder()
+        guard let periodType = medicineModel.medicineDetail?.periodType else { return }
+        viewModel.periodReminder = PeriodReminder(days: medicineModel.medicineDetail?.period ?? "0",
+                                    type: periodType)
+        medicineDurationTextField.text = viewModel.periodReminder.formattedPeriodReminder()
         viewModel.timesReminderArray = medicineModel.medicineDetail?.reminderTime ?? [TimeReminder]()
         viewModel.selectedType = viewModel.medicineTypeArray.firstIndex(of: medicineModel.medicineDetail?.typeName ?? "Pill")
         pillCollectionView.selectItem(at: IndexPath(item: viewModel.selectedType ?? 0, section: 0), animated: true, scrollPosition: .right)

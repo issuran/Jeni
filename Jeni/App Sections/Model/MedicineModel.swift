@@ -9,15 +9,17 @@
 import Foundation
 
 struct MedicineModel {
-    let name: String
-    let image: String
-    let medicineDetail: MedicineDetail?
+    var id: String
+    var name: String
+    var image: String
+    var medicineDetail: MedicineDetail?
 }
 
 struct MedicineDetail {
     var amount: String
     var period: String
-    var periodType: String
+    var periodType: PeriodType
+    var endDate: String
     var typeName: String
     var reminderTime: [TimeReminder]
 }

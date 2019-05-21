@@ -31,10 +31,43 @@ struct TimeReminder {
 
 struct PeriodReminder {
     let days: String
-    let type: String
+    let type: PeriodType
     
     func formattedPeriodReminder() -> String {
-        return Int(days)! > 1 ? "\(days)/\(type)s" : "\(days)/\(type)"
+        return Int(days)! > 1 ? "\(days)/\(type.periodTypeIdentifier())s" : "\(days)/\(type.periodTypeIdentifier())"
+    }
+}
+
+enum PeriodType {
+    case day
+    case week
+    case month
+    case year
+    
+    func periodTypeIdentifier() -> String {
+        switch self {
+        case .day:
+            return "Day"
+        case .week:
+            return "Week"
+        case .month:
+            return "Month"
+        case .year:
+            return "Year"
+        }
+    }
+    
+    func periodTypeTimes() -> Int {
+        switch self {
+        case .day:
+            return 1
+        case .week:
+            return 7
+        case .month:
+            return 30
+        case .year:
+            return 365
+        }
     }
 }
 
@@ -42,9 +75,10 @@ class ReminderViewModel {
     let pickerSourceDaysPeriod = [["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["Day", "Week", "Month", "Year"]]
     
     var timesReminderArray = [TimeReminder]()
-    var periodReminder = PeriodReminder(days: "0", type: "Day")
+    var periodReminder = PeriodReminder(days: "0", type: PeriodType.day)
     var selectedType: Int?
     var medicineTypeArray = ["Pill", "Dose", "Injection", "Solution", "Alternative"]
+    var endDate = "01/01/2000"
     
     // MARK: Add
     
@@ -92,9 +126,41 @@ class ReminderViewModel {
         let days = pickerSourceDaysPeriod[0][selectedRowFirst]
         let period = pickerSourceDaysPeriod[1][selectedRowLast]
         
-        periodReminder = PeriodReminder(days: days, type: period)
+        periodReminder = PeriodReminder(days: days, type: periodTypeIdentifier(period))
         
         return periodReminder.formattedPeriodReminder()
+    }
+    
+    func getDateDuration() -> String {
+        let today = Date()
+        let times = Int(periodReminder.days)! * periodReminder.type.periodTypeTimes()
+        let nextDate = Calendar.current.date(byAdding: .day, value: times, to: today)
+        return nextDate?.toString(dateFormat: "dd/MM/yyyy") ?? "01/01/2000"
+    }
+    
+    func periodTypeIdentifier(_ period: String) -> PeriodType {
+        switch period {
+        case "Day":
+            return .day
+        case "Week":
+            return .week
+        case "Month":
+            return .month
+        case "Year":
+            return .year
+        default:
+            return .day
+        }
+    }
+}
+
+extension Date
+{
+    func toString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
     
 }
