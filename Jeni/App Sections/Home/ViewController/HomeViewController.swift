@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import EventKit
 
 class HomeViewController: BaseViewController {
     
@@ -16,11 +17,15 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emptyState: UIView!
+    @IBOutlet weak var addButton: UIButton!
     
     var viewModel: HomeViewModel!
     let reuseIdentifier: String = "medicineCell"
     private let itemsPerRow: CGFloat = 3
     var reminder: ReminderViewController!
+    
+    var eventStore: EKEventStore!
+    var reminders: [EKReminder]!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -33,6 +38,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addButton.isEnabled = false
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -47,7 +53,24 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
+        
+        eventStore = EKEventStore()
+        reminders = [EKReminder]()
+        eventStore.requestAccess(to: .reminder) { (granted, error) in
+            if granted {
+                let predicate = self.eventStore.predicateForReminders(in: nil)
+                self.eventStore.fetchReminders(matching: predicate, completion: { (reminders) in
+                    self.reminders = reminders
+                    DispatchQueue.main.async {
+                        self.addButton.isEnabled = true
+                        self.collectionView.reloadData()
+                    }
+                })
+            } else {
+                guard let error = error else { return }
+                self.alert(message: "Error!", title: "Sorry, please check the following error:\n\(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: Private functions

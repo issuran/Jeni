@@ -142,14 +142,15 @@ class ReminderViewController: BaseViewController {
                     let medicineDetails = MedicineDetail(amount: medicineAmount!,
                                                          period: viewModel.periodReminder.days,
                                                          periodType: viewModel.periodReminder.type,
-                                                         endDate: viewModel.getDateDuration(),
+                                                         beginDate: viewModel.getBeginDateDuration(),
+                                                         endDate: viewModel.getEndDateDuration(),
                                                          typeName: medicineType,
                                                          reminderTime: viewModel.timesReminderArray)
                     let medicine = MedicineModel(id: uuid,
                                                  name: medicineName!,
                                                  image: viewModel.getMedicineTypeName(medicineType, .create),
                                                  medicineDetail: medicineDetails)
-                    
+            
                     BaseViewController.medicineItemArray.append(medicine)
                 
             case .edit:
@@ -161,7 +162,8 @@ class ReminderViewController: BaseViewController {
                 let medicineDetails = MedicineDetail(amount: medicineAmount!,
                                                      period: viewModel.periodReminder.days,
                                                      periodType: viewModel.periodReminder.type,
-                                                     endDate: viewModel.getDateDuration(),
+                                                     beginDate: viewModel.getBeginDateDuration(),
+                                                     endDate: viewModel.getEndDateDuration(),
                                                      typeName: medicineType,
                                                      reminderTime: viewModel.timesReminderArray)
                 medicineModel?.name = medicineName!

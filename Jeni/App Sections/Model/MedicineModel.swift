@@ -19,6 +19,7 @@ struct MedicineDetail {
     var amount: String
     var period: String
     var periodType: PeriodType
+    var beginDate: String
     var endDate: String
     var typeName: String
     var reminderTime: [TimeReminder]

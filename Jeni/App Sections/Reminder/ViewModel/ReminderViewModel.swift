@@ -78,7 +78,8 @@ class ReminderViewModel {
     var periodReminder = PeriodReminder(days: "0", type: PeriodType.day)
     var selectedType: Int?
     var medicineTypeArray = ["Pill", "Dose", "Injection", "Solution", "Alternative"]
-    var endDate = "01/01/2000"
+    var beginDate = "01/01/2000"
+    var endDate = "02/01/2000"
     
     // MARK: Add
     
@@ -131,7 +132,12 @@ class ReminderViewModel {
         return periodReminder.formattedPeriodReminder()
     }
     
-    func getDateDuration() -> String {
+    func getBeginDateDuration() -> String {
+        let today = Date()
+        return today.toString(dateFormat: "dd/MM/yyyy")
+    }
+    
+    func getEndDateDuration() -> String {
         let today = Date()
         let times = Int(periodReminder.days)! * periodReminder.type.periodTypeTimes()
         let nextDate = Calendar.current.date(byAdding: .day, value: times, to: today)

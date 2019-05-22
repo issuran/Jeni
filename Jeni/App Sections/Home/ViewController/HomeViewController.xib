@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Jeni" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="OoW-QU-mGd" id="c64-x0-3OI"/>
                 <outlet property="collectionView" destination="hwZ-8g-mec" id="wEu-8k-m7u"/>
                 <outlet property="emptyState" destination="czE-2Z-nhG" id="SX5-F4-ZDE"/>
                 <outlet property="flowLayout" destination="wqP-ZL-7gH" id="tYB-jU-Tnf"/>
@@ -50,7 +51,7 @@
                                 <action selector="logoutAction:" destination="-1" eventType="touchUpInside" id="KnS-1A-v5b"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OoW-QU-mGd">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OoW-QU-mGd">
                             <rect key="frame" x="244" y="8" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="229-jp-svi"/>
