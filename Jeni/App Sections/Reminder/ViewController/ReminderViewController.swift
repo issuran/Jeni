@@ -133,10 +133,29 @@ class ReminderViewController: BaseViewController {
             filledSuccessfully = false
         }
         
-        switch actionCaller {
-        case .add:
-            if filledSuccessfully {
-                let uuid = UUID().uuidString
+        if filledSuccessfully {
+            switch actionCaller {
+            case .add:
+                    let uuid = UUID().uuidString
+                    let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
+                    
+                    let medicineDetails = MedicineDetail(amount: medicineAmount!,
+                                                         period: viewModel.periodReminder.days,
+                                                         periodType: viewModel.periodReminder.type,
+                                                         endDate: viewModel.getDateDuration(),
+                                                         typeName: medicineType,
+                                                         reminderTime: viewModel.timesReminderArray)
+                    let medicine = MedicineModel(id: uuid,
+                                                 name: medicineName!,
+                                                 image: viewModel.getMedicineTypeName(medicineType, .create),
+                                                 medicineDetail: medicineDetails)
+                    
+                    BaseViewController.medicineItemArray.append(medicine)
+                
+            case .edit:
+                
+                medicineModel = BaseViewController.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
+                
                 let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
                 
                 let medicineDetails = MedicineDetail(amount: medicineAmount!,
@@ -145,32 +164,14 @@ class ReminderViewController: BaseViewController {
                                                      endDate: viewModel.getDateDuration(),
                                                      typeName: medicineType,
                                                      reminderTime: viewModel.timesReminderArray)
-                let medicine = MedicineModel(id: uuid,
-                                             name: medicineName!,
-                                             image: viewModel.getMedicineTypeName(medicineType, .create),
-                                             medicineDetail: medicineDetails)
+                medicineModel?.name = medicineName!
+                medicineModel?.image = viewModel.getMedicineTypeName(medicineType, .create)
+                medicineModel?.medicineDetail = medicineDetails
                 
-                BaseViewController.medicineItemArray.append(medicine)
-            } else {
-                alert(message: message)
+                BaseViewController.medicineItemArray[indexSelected!] = medicineModel!
             }
-        case .edit:
-            
-            medicineModel = BaseViewController.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
-            
-            let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
-            
-            let medicineDetails = MedicineDetail(amount: medicineAmount!,
-                                                 period: viewModel.periodReminder.days,
-                                                 periodType: viewModel.periodReminder.type,
-                                                 endDate: viewModel.getDateDuration(),
-                                                 typeName: medicineType,
-                                                 reminderTime: viewModel.timesReminderArray)
-            medicineModel?.name = medicineName!
-            medicineModel?.image = viewModel.getMedicineTypeName(medicineType, .create)
-            medicineModel?.medicineDetail = medicineDetails
-            
-            BaseViewController.medicineItemArray[indexSelected!] = medicineModel!
+        } else {
+            alert(message: message)
         }
         
         _ = navigationController?.popToRootViewController(animated: true)
