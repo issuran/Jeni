@@ -77,6 +77,7 @@ class ReminderViewModel {
     var timesReminderArray = [TimeReminder]()
     var periodReminder = PeriodReminder(days: "0", type: PeriodType.day)
     var selectedType: Int?
+    var dateSelected: Date?
     var medicineTypeArray = ["Pill", "Dose", "Injection", "Solution", "Alternative"]
     var beginDate = "01/01/2000"
     var endDate = "02/01/2000"
@@ -114,6 +115,8 @@ class ReminderViewModel {
     }
     
     func getMedicineTime(_ date: Date) -> String {
+        dateSelected = date
+        
         let components = Calendar.current.dateComponents([.hour, .minute], from: date)
         
         let minute = components.minute! < 10 ? "0\(components.minute!)" : "\(components.minute!)"

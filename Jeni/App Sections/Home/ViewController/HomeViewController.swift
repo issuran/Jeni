@@ -91,6 +91,7 @@ class HomeViewController: BaseViewController {
     @IBAction func addReminderAction(_ sender: Any) {
         reminder = ReminderViewController()
         reminder.actionCaller = .add
+        reminder.eventStore = eventStore
         navigationController?.pushViewController(reminder, animated: true)
     }
     
@@ -138,6 +139,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let medicineModel = BaseViewController.medicineItemArray[indexPath.row]
         reminder.medicineModel = medicineModel
         reminder.indexSelected = indexPath.row
+        reminder.eventStore = eventStore
         navigationController?.pushViewController(reminder, animated: true)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 
 class ReminderViewController: BaseViewController {
     
@@ -33,6 +34,8 @@ class ReminderViewController: BaseViewController {
     
     let datePicker = UIPickerView()
     let timePicker = UIDatePicker()
+    
+    var eventStore: EKEventStore!
     
     var viewModel = ReminderViewModel()
     
@@ -150,6 +153,18 @@ class ReminderViewController: BaseViewController {
                                                  name: medicineName!,
                                                  image: viewModel.getMedicineTypeName(medicineType, .create),
                                                  medicineDetail: medicineDetails)
+                    
+                    let reminder = EKReminder(eventStore: self.eventStore)
+                    reminder.title = medicine.name
+                    let dueDateComponents = dateComponentFromNSDate()
+                    reminder.dueDateComponents = dueDateComponents
+                    reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
+                    
+                    do {
+                        try self.eventStore.save(reminder, commit: true)
+                    } catch{
+                        print("Error creating and saving new reminder : \(error)")
+                    }
             
                     BaseViewController.medicineItemArray.append(medicine)
                 
@@ -177,6 +192,23 @@ class ReminderViewController: BaseViewController {
         }
         
         _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func dateComponentFromNSDate() -> DateComponents{
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour])
+        let anchorComponents = calendar.dateComponents(unitFlags,
+                                                       from: returnDateFromString(viewModel.getBeginDateDuration()),
+                                                       to: returnDateFromString(viewModel.getEndDateDuration()))
+        
+        return anchorComponents
+    }
+    
+    func returnDateFromString(_ date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let date = dateFormatter.date(from: date)
+        return date!
     }
     
     func fillFields(_ medicineModel: MedicineModel) {
