@@ -8,6 +8,7 @@
 
 import UIKit
 import EventKit
+import UserNotifications
 
 class ReminderViewController: BaseViewController {
     
@@ -165,6 +166,8 @@ class ReminderViewController: BaseViewController {
                     } catch{
                         print("Error creating and saving new reminder : \(error)")
                     }
+                    
+                    notificationRequest()
             
                     BaseViewController.medicineItemArray.append(medicine)
                 
@@ -185,6 +188,8 @@ class ReminderViewController: BaseViewController {
                 medicineModel?.image = viewModel.getMedicineTypeName(medicineType, .create)
                 medicineModel?.medicineDetail = medicineDetails
                 
+                notificationRequest()
+                
                 BaseViewController.medicineItemArray[indexSelected!] = medicineModel!
             }
         } else {
@@ -202,6 +207,36 @@ class ReminderViewController: BaseViewController {
                                                        to: returnDateFromString(viewModel.getEndDateDuration()))
         
         return anchorComponents
+    }
+    
+    // Trigger the notification
+    func scheduleNotification() -> UNCalendarNotificationTrigger {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = dateComponentFromNSDate()
+        let newComponents = DateComponents(calendar: calendar, timeZone: .current, year: components.year, month: components.month, day: components.day, hour: components.hour, minute: components.minute)
+        return UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: true)
+    }
+    
+    // Notification content
+    func buildNotification() -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = "It's drug's time!"
+        content.body = "You should take Paracetamol"
+        content.sound = .default
+        return content
+    }
+    
+    func notificationRequest() {
+        let trigger = scheduleNotification()
+        let content = buildNotification()
+        let request = UNNotificationRequest(identifier: "textNotification\(Calendar.current.description)", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if error != nil {
+                self.alert(message: "There is an error!")
+            }
+        }
     }
     
     func returnDateFromString(_ date: String) -> Date {
