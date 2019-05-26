@@ -64,6 +64,14 @@ class ReminderViewController: BaseViewController {
         
         createDateToolBar()
         createTimeToolBar()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if !granted {
+                self.alert(message: "You need to grant permission to use Notification before you set a reminder!", title: "No permission granted!", completion: {
+                    _ = self.navigationController?.popToRootViewController(animated: true)
+                })
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,6 +162,48 @@ class ReminderViewController: BaseViewController {
                                                  name: medicineName!,
                                                  image: viewModel.getMedicineTypeName(medicineType, .create),
                                                  medicineDetail: medicineDetails)
+                    
+                    let content = UNMutableNotificationContent()
+                    content.title = "It is drug time!"
+                    content.body = "You should take your \(viewModel.medicineTypeArray[viewModel.selectedType!]) medicine \(medicineName!)!"
+                    content.badge = 1
+                    content.categoryIdentifier = "alarm"
+                    content.sound = .default
+                    
+                    for time in viewModel.timesReminderArray {
+                        let notification = UNUserNotificationCenter.current()
+                        
+//                        let calendar = Calendar.current
+//                        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute])
+                        
+                        var beginDate = DateComponents()
+                        beginDate.day = Int(viewModel.beginDay)
+                        beginDate.month = Int(viewModel.beginMonth)
+                        beginDate.year = Int(viewModel.beginYear)
+                        beginDate.hour = Int(time.hour)
+                        beginDate.minute = Int(time.minute)
+                        
+//                        var endDate = DateComponents()
+//                        endDate.day = Int(viewModel.endDay)
+//                        endDate.month = Int(viewModel.endMonth)
+//                        endDate.year = Int(viewModel.endYear)
+//                        endDate.hour = Int(time.hour)
+//                        endDate.minute = Int(time.minute)
+//
+                        let uuidIdentifier = UUID().uuidString
+                        
+//                        let anchorComponents = calendar.dateComponents(unitFlags, from: beginDate, to: endDate)
+                        
+//                        let trigger = UNCalendarNotificationTrigger(dateMatching: anchorComponents, repeats: true)
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: beginDate, repeats: true)
+                        
+                        let request = UNNotificationRequest(identifier: uuidIdentifier, content: content, trigger: trigger)
+                        
+                        notification.add(request, withCompletionHandler: nil)
+                        
+//                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nEndDate: \(endDate)\nUUID: \(uuidIdentifier)\n")
+                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nUUID: \(uuidIdentifier)\n")
+                    }
                     
                     BaseViewController.medicineItemArray.append(medicine)
                 

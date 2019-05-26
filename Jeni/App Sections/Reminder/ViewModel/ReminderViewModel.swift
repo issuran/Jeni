@@ -82,6 +82,13 @@ class ReminderViewModel {
     var beginDate = "01/01/2000"
     var endDate = "02/01/2000"
     
+    var beginDay = String()
+    var beginMonth = String()
+    var beginYear = String()
+    var endDay = String()
+    var endMonth = String()
+    var endYear = String()
+    
     // MARK: Add
     
     func addTimeReminder(_ time: String) -> Void {
@@ -137,6 +144,9 @@ class ReminderViewModel {
     
     func getBeginDateDuration() -> String {
         let today = Date()
+        beginDay = today.toString(dateFormat: "dd")
+        beginMonth = today.toString(dateFormat: "MM")
+        beginYear = today.toString(dateFormat: "yyyy")
         return today.toString(dateFormat: "dd/MM/yyyy")
     }
     
@@ -144,7 +154,13 @@ class ReminderViewModel {
         let today = Date()
         let times = Int(periodReminder.days)! * periodReminder.type.periodTypeTimes()
         let nextDate = Calendar.current.date(byAdding: .day, value: times, to: today)
-        return nextDate?.toString(dateFormat: "dd/MM/yyyy") ?? "01/01/2000"
+        
+        endDay = nextDate!.toString(dateFormat: "dd")
+        endMonth = nextDate!.toString(dateFormat: "MM")
+        endYear = nextDate!.toString(dateFormat: "yyyy")
+        
+        let endDate = nextDate!.toString(dateFormat: "dd/MM/yyyy")
+        return endDate
     }
     
     func periodTypeIdentifier(_ period: String) -> PeriodType {

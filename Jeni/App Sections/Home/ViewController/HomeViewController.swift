@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import EventKit
+import UserNotifications
 
 class HomeViewController: BaseViewController {
     
@@ -71,6 +72,10 @@ class HomeViewController: BaseViewController {
                 self.alert(message: "Error!", title: "Sorry, please check the following error:\n\(error.localizedDescription)")
             }
         }
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (notifications) in
+            print("num of pending notifications \(notifications.count)")
+        })
     }
     
     // MARK: Private functions
