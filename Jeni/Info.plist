@@ -4,6 +4,8 @@
 <dict>
 	<key>NSRemindersUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs your agreement to access reminders</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs your agreement to access calendars</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

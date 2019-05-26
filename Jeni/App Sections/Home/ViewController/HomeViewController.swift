@@ -62,11 +62,21 @@ class HomeViewController: BaseViewController {
                 let predicate = self.eventStore.predicateForReminders(in: nil)
                 self.eventStore.fetchReminders(matching: predicate, completion: { (reminders) in
                     self.reminders = reminders
+                    print("\n====REMINDERS====\n\(reminders!)\n")
                     DispatchQueue.main.async {
                         self.addButton.isEnabled = true
                         self.collectionView.reloadData()
                     }
                 })
+            } else {
+                guard let error = error else { return }
+                self.alert(message: "Error!", title: "Sorry, please check the following error:\n\(error.localizedDescription)")
+            }
+        }
+        
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if granted {
+                print("\n====CALENDAR GRANTED====\n")
             } else {
                 guard let error = error else { return }
                 self.alert(message: "Error!", title: "Sorry, please check the following error:\n\(error.localizedDescription)")

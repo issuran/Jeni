@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5212C9A1229AEE04006AEC33 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212C9A0229AEE04006AEC33 /* HUD.swift */; };
 		525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791B9227E6A8000107AE6 /* HomeCoordinator.swift */; };
 		525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
 		525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jeni.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5212C9A0229AEE04006AEC33 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		525791B9227E6A8000107AE6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		525791BC227E6AC400107AE6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				52F02F18227DD7B500BDEE80 /* BaseViewController.swift */,
+				5212C9A0229AEE04006AEC33 /* HUD.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */,
 				52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */,
 				52ED0D422283974500D7316A /* ReminderViewController.swift in Sources */,
+				5212C9A1229AEE04006AEC33 /* HUD.swift in Sources */,
 				525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */,
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,

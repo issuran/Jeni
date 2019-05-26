@@ -37,6 +37,7 @@ class ReminderViewController: BaseViewController {
     let timePicker = UIDatePicker()
     
     var eventStore: EKEventStore!
+    var reminder: EKReminder!
     
     var viewModel = ReminderViewModel()
     
@@ -72,6 +73,8 @@ class ReminderViewController: BaseViewController {
                 })
             }
         }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,23 +168,25 @@ class ReminderViewController: BaseViewController {
                     
                     let content = UNMutableNotificationContent()
                     content.title = "It is drug time!"
-                    content.body = "You should take your \(viewModel.medicineTypeArray[viewModel.selectedType!]) medicine \(medicineName!)!"
+                    content.body = "You should take your \(viewModel.medicineTypeArray[viewModel.selectedType!].lowercased()) of \(medicineName!)!"
                     content.badge = 1
                     content.categoryIdentifier = "alarm"
-                    content.sound = .default
+                    content.sound = UNNotificationSound.default
                     
                     for time in viewModel.timesReminderArray {
                         let notification = UNUserNotificationCenter.current()
-                        
-//                        let calendar = Calendar.current
+//
+                        let calendar = Calendar.current
 //                        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute])
-                        
-                        var beginDate = DateComponents()
-                        beginDate.day = Int(viewModel.beginDay)
-                        beginDate.month = Int(viewModel.beginMonth)
-                        beginDate.year = Int(viewModel.beginYear)
-                        beginDate.hour = Int(time.hour)
-                        beginDate.minute = Int(time.minute)
+//
+//                        var beginDate = DateComponents()
+//                        beginDate.day = Int(viewModel.beginDay)
+//                        beginDate.month = Int(viewModel.beginMonth)
+//                        beginDate.year = Int(viewModel.beginYear)
+//                        beginDate.hour = Int(time.hour)
+//                        beginDate.minute = Int(time.minute)
+
+                        let beginDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(viewModel.beginYear), month: Int(viewModel.beginMonth), day: Int(viewModel.beginDay), hour: Int(time.hour), minute: Int(time.minute))
                         
 //                        var endDate = DateComponents()
 //                        endDate.day = Int(viewModel.endDay)
@@ -189,6 +194,7 @@ class ReminderViewController: BaseViewController {
 //                        endDate.year = Int(viewModel.endYear)
 //                        endDate.hour = Int(time.hour)
 //                        endDate.minute = Int(time.minute)
+                        let endDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(viewModel.endYear), month: Int(viewModel.endMonth), day: Int(viewModel.endDay), hour: Int(time.hour), minute: Int(time.minute))
 //
                         let uuidIdentifier = UUID().uuidString
                         
@@ -201,8 +207,28 @@ class ReminderViewController: BaseViewController {
                         
                         notification.add(request, withCompletionHandler: nil)
                         
-//                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nEndDate: \(endDate)\nUUID: \(uuidIdentifier)\n")
-                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nUUID: \(uuidIdentifier)\n")
+                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nEndDate: \(endDate)\nUUID: \(uuidIdentifier)\n")
+                        
+                        // REMINDER
+                        reminder = EKReminder(eventStore: eventStore)
+                        reminder.title = medicineName!
+                        reminder.priority = 5
+                        reminder.startDateComponents = beginDate
+                        reminder.dueDateComponents = endDate
+                        
+                        let alarm = EKAlarm(absoluteDate: beginDate.date!)
+                        reminder.addAlarm(alarm)
+                        
+                        reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
+                        
+                        do {
+                            try eventStore.save(reminder, commit: true)
+                        } catch {
+                            print("Damn it!")
+                        }
+                        print("Save it!")
+                        
+                        print("\n=====TEST REMINDER \(reminder.title)=======\nreminder.startDateComponents: \(reminder.startDateComponents)\nreminder.dueDateComponents: \(reminder.dueDateComponents)\nalarm: \(alarm)\n")
                     }
                     
                     BaseViewController.medicineItemArray.append(medicine)
@@ -231,6 +257,28 @@ class ReminderViewController: BaseViewController {
         }
         
         _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func scheduleNotification(at date: Date) {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents(in: .current, from: date)
+        let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Tutorial Reminder"
+        content.body = "Just a reminder to read your tutorial over at appcoda.com!"
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().add(request) {(error) in
+            if let error = error {
+                print("Uh oh! We had an error: \(error)")
+            }
+        }
     }
     
     func returnDateFromString(_ date: String) -> Date {

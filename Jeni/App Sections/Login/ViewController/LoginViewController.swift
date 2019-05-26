@@ -31,6 +31,7 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var swapButton: UIButton!
     
     var viewModel: LoginViewModel!
+    var hud = HUD()
     
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -47,6 +48,8 @@ class LoginViewController: BaseViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
+        self.hud.center = self.view.center
+        self.view.addSubview(hud)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,6 +61,7 @@ class LoginViewController: BaseViewController {
     }
     
     @IBAction func signButtonAction(_ sender: Any) {
+        self.hud.loadingView(true)
         switch viewModel.signOption {
         case .signIn?:
             signInFlow()
@@ -71,8 +75,10 @@ class LoginViewController: BaseViewController {
     func signInFlow() {
         Auth.auth().signIn(withEmail: emailTextField!.text ?? "", password: passwordTextField!.text ?? "") { (user, error) in
             if error == nil && user != nil {
+                self.hud.loadingView(false)
                 self.viewModel.callHome()
             } else {
+                self.hud.loadingView(false)
                 self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
             }
         }
