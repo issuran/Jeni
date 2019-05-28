@@ -28,6 +28,8 @@ class HomeViewController: BaseViewController {
     var eventStore: EKEventStore!
     var reminders: [EKReminder]!
     
+    var hud = HUD()
+    
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -39,6 +41,8 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hud.center = self.view.center
+        self.view.addSubview(hud)
         addButton.isEnabled = false
         collectionView.delegate = self
         collectionView.dataSource = self

@@ -40,9 +40,13 @@ class ReminderViewController: BaseViewController {
     var reminder: EKReminder!
     
     var viewModel = ReminderViewModel()
+    var hud = HUD()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hud.center = self.view.center
+        self.view.addSubview(hud)
         
         medicineDurationTextField.delegate = self
         medicineTimeTextField.delegate = self
