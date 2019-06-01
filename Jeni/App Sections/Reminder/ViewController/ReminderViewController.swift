@@ -168,70 +168,106 @@ class ReminderViewController: BaseViewController {
                                                  image: viewModel.getMedicineTypeName(medicineType, .create),
                                                  medicineDetail: medicineDetails)
                     
-                    let content = UNMutableNotificationContent()
-                    content.title = "It is drug time!"
-                    content.body = "You should take your \(viewModel.medicineTypeArray[viewModel.selectedType!].lowercased()) of \(medicineName!)!"
-                    content.badge = 1
-                    content.categoryIdentifier = "alarm"
-                    content.sound = UNNotificationSound.default
-                    
+                    ////////// BEGIN TESTE ////////////
                     for time in viewModel.timesReminderArray {
                         let notification = UNUserNotificationCenter.current()
-//
-                        let calendar = Calendar.current
-//                        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute])
-//
-//                        var beginDate = DateComponents()
-//                        beginDate.day = Int(viewModel.beginDay)
-//                        beginDate.month = Int(viewModel.beginMonth)
-//                        beginDate.year = Int(viewModel.beginYear)
-//                        beginDate.hour = Int(time.hour)
-//                        beginDate.minute = Int(time.minute)
-
-                        let beginDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(viewModel.beginYear), month: Int(viewModel.beginMonth), day: Int(viewModel.beginDay), hour: Int(time.hour), minute: Int(time.minute))
-                        
-//                        var endDate = DateComponents()
-//                        endDate.day = Int(viewModel.endDay)
-//                        endDate.month = Int(viewModel.endMonth)
-//                        endDate.year = Int(viewModel.endYear)
-//                        endDate.hour = Int(time.hour)
-//                        endDate.minute = Int(time.minute)
-                        let endDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(viewModel.endYear), month: Int(viewModel.endMonth), day: Int(viewModel.endDay), hour: Int(time.hour), minute: Int(time.minute))
-//
-                        let uuidIdentifier = UUID().uuidString
-                        
-//                        let anchorComponents = calendar.dateComponents(unitFlags, from: beginDate, to: endDate)
-                        
-//                        let trigger = UNCalendarNotificationTrigger(dateMatching: anchorComponents, repeats: true)
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: beginDate, repeats: true)
-                        
-                        let request = UNNotificationRequest(identifier: uuidIdentifier, content: content, trigger: trigger)
-                        
-                        notification.add(request, withCompletionHandler: nil)
-                        
-                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nEndDate: \(endDate)\nUUID: \(uuidIdentifier)\n")
-                        
-                        // REMINDER
-                        reminder = EKReminder(eventStore: eventStore)
-                        reminder.title = medicineName!
-                        reminder.priority = 5
-                        reminder.startDateComponents = beginDate
-                        reminder.dueDateComponents = endDate
-                        
-                        let alarm = EKAlarm(absoluteDate: beginDate.date!)
-                        reminder.addAlarm(alarm)
-                        
-                        reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
-                        
-                        do {
-                            try eventStore.save(reminder, commit: true)
-                        } catch {
-                            print("Damn it!")
+                        notification.getNotificationSettings { (settings) in
+                            if settings.authorizationStatus == .authorized {
+                                let content = UNMutableNotificationContent()
+                                content.title = "It is drug time!"
+                                content.body = "You should take your \(self.viewModel.medicineTypeArray[self.viewModel.selectedType!].lowercased()) of \(medicineName!)!"
+                                content.badge = 1
+                                content.categoryIdentifier = "alarm"
+                                content.sound = UNNotificationSound.default
+                                
+                                let calendar = Calendar.current
+                                
+                                let beginDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(self.viewModel.beginYear), month: Int(self.viewModel.beginMonth), day: Int(self.viewModel.beginDay), hour: Int(time.hour), minute: Int(time.minute))
+                                
+//                                let endDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(self.viewModel.endYear), month: Int(self.viewModel.endMonth), day: Int(self.viewModel.endDay), hour: Int(time.hour), minute: Int(time.minute))
+                                
+//                                let triggerDaily = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from:beginDate.date!, to: endDate.date!)
+                                
+                                let triggerDaily = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from: beginDate.date!)
+                                
+                                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+                                
+                                let identifier = UUID().uuidString
+                                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+                                
+                                notification.add(request, withCompletionHandler: { (error) in
+                                    print("Deu ruim!")
+                                })
+                            }
                         }
-                        print("Save it!")
-                        
-                        print("\n=====TEST REMINDER \(reminder.title)=======\nreminder.startDateComponents: \(reminder.startDateComponents)\nreminder.dueDateComponents: \(reminder.dueDateComponents)\nalarm: \(alarm)\n")
                     }
+                    ////////// END TESTE ////////////
+                    
+                    
+//                    let content = UNMutableNotificationContent()
+//                    content.title = "It is drug time!"
+//                    content.body = "You should take your \(viewModel.medicineTypeArray[viewModel.selectedType!].lowercased()) of \(medicineName!)!"
+//                    content.badge = 1
+//                    content.categoryIdentifier = "alarm"
+//                    content.sound = UNNotificationSound.default
+//
+//                    for time in viewModel.timesReminderArray {
+//                        let notification = UNUserNotificationCenter.current()
+////
+//                        let calendar = Calendar.current
+////                        let unitFlags = Set<Calendar.Component>([.day, .month, .year, .hour, .minute])
+////
+////                        var beginDate = DateComponents()
+////                        beginDate.day = Int(viewModel.beginDay)
+////                        beginDate.month = Int(viewModel.beginMonth)
+////                        beginDate.year = Int(viewModel.beginYear)
+////                        beginDate.hour = Int(time.hour)
+////                        beginDate.minute = Int(time.minute)
+//
+//                        let beginDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(viewModel.beginYear), month: Int(viewModel.beginMonth), day: Int(viewModel.beginDay), hour: Int(time.hour), minute: Int(time.minute))
+//
+////                        var endDate = DateComponents()
+////                        endDate.day = Int(viewModel.endDay)
+////                        endDate.month = Int(viewModel.endMonth)
+////                        endDate.year = Int(viewModel.endYear)
+////                        endDate.hour = Int(time.hour)
+////                        endDate.minute = Int(time.minute)
+//                        let endDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(viewModel.endYear), month: Int(viewModel.endMonth), day: Int(viewModel.endDay), hour: Int(time.hour), minute: Int(time.minute))
+////
+//                        let uuidIdentifier = UUID().uuidString
+//
+////                        let anchorComponents = calendar.dateComponents(unitFlags, from: beginDate, to: endDate)
+//
+////                        let trigger = UNCalendarNotificationTrigger(dateMatching: anchorComponents, repeats: true)
+//                        let trigger = UNCalendarNotificationTrigger(dateMatching: beginDate, repeats: true)
+//
+//                        let request = UNNotificationRequest(identifier: uuidIdentifier, content: content, trigger: trigger)
+//
+//                        notification.add(request, withCompletionHandler: nil)
+//
+//                        print("\n=====TEST TIME \(time.formattedTimeReminder())=======\nBegin Date: \(beginDate)\nEndDate: \(endDate)\nUUID: \(uuidIdentifier)\n")
+//
+//                        // REMINDER
+//                        reminder = EKReminder(eventStore: eventStore)
+//                        reminder.title = medicineName!
+//                        reminder.priority = 5
+//                        reminder.startDateComponents = beginDate
+//                        reminder.dueDateComponents = endDate
+//
+//                        let alarm = EKAlarm(absoluteDate: beginDate.date!)
+//                        reminder.addAlarm(alarm)
+//
+//                        reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
+//
+//                        do {
+//                            try eventStore.save(reminder, commit: true)
+//                        } catch {
+//                            print("Damn it!")
+//                        }
+//                        print("Save it!")
+//
+//                        print("\n=====TEST REMINDER \(reminder.title)=======\nreminder.startDateComponents: \(reminder.startDateComponents)\nreminder.dueDateComponents: \(reminder.dueDateComponents)\nalarm: \(alarm)\n")
+//                    }
                     
                     BaseViewController.medicineItemArray.append(medicine)
                 
