@@ -81,6 +81,8 @@ class ReminderViewModel {
     var medicineTypeArray = ["Pill", "Dose", "Injection", "Solution", "Alternative"]
     var beginDate = "01/01/2000"
     var endDate = "02/01/2000"
+    var medicineName = String()    
+    var reminderIdentifiers = [String]()
     
     var beginDay = String()
     var beginMonth = String()

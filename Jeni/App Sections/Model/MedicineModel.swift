@@ -23,4 +23,5 @@ struct MedicineDetail {
     var endDate: String
     var typeName: String
     var reminderTime: [TimeReminder]
+    var reminderIdentifiers: [String]
 }
