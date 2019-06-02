@@ -9,6 +9,8 @@
 import UIKit
 import EventKit
 import UserNotifications
+import Firebase
+import FirebaseFirestore
 
 class ReminderViewController: BaseViewController {
     
@@ -39,6 +41,7 @@ class ReminderViewController: BaseViewController {
     var eventStore: EKEventStore!
     var reminder: EKReminder!
     
+    var docRef: DocumentReference!
     var viewModel = ReminderViewModel()
     var hud = HUD()
     
@@ -172,6 +175,8 @@ class ReminderViewController: BaseViewController {
                                                      image: self.viewModel.getMedicineTypeName(medicineType, .create),
                                                      medicineDetail: medicineDetails)
                         
+                        
+                        
                         BaseViewController.medicineItemArray.append(medicine)
                     }
                 
@@ -240,9 +245,9 @@ class ReminderViewController: BaseViewController {
                     
                     //                                let triggerDaily = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from:beginDate.date!, to: endDate.date!)
                     
-                    let triggerDaily = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from: beginDate.date!)
+                    let triggerDaily = calendar.dateComponents([.hour, .minute, .second], from: beginDate.date!)
                     
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: false)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
                     
                     let identifier = UUID().uuidString
                     self.viewModel.reminderIdentifiers.append(identifier)
