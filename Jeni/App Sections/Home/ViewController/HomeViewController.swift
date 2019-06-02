@@ -87,8 +87,8 @@ class HomeViewController: BaseViewController {
             }
         }
         
-//        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (notifications) in
             print("num of pending notifications \(notifications.count)")
         })
