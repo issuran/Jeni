@@ -61,12 +61,14 @@ class ReminderViewController: BaseViewController {
         
         timeReminderTableView.delegate = self
         timeReminderTableView.dataSource = self
-        timeReminderTableView.register(UINib(nibName: "TimeReminderTableViewCell", bundle: nil), forCellReuseIdentifier: tableReuseIdentifier)
+        timeReminderTableView.register(UINib(nibName: "TimeReminderTableViewCell", bundle: nil),
+                                       forCellReuseIdentifier: tableReuseIdentifier)
         
         pillCollectionView.delegate = self
         pillCollectionView.dataSource = self
         pillCollectionView.allowsMultipleSelection = false
-        pillCollectionView.register(UINib(nibName: "PillCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionReuseIdentifier)
+        pillCollectionView.register(UINib(nibName: "PillCollectionViewCell", bundle: nil),
+                                    forCellWithReuseIdentifier: collectionReuseIdentifier)
         
         medicineDurationTextField.inputView = self.datePicker
         medicineTimeTextField.inputView = self.timePicker
@@ -76,7 +78,8 @@ class ReminderViewController: BaseViewController {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             if !granted {
-                self.alert(message: "You need to grant permission to use Notification before you set a reminder!", title: "No permission granted!", completion: {
+                self.alert(message: "You need to grant permission to use Notification before you set a reminder!",
+                           title: "No permission granted!", completion: {
                     _ = self.navigationController?.popToRootViewController(animated: true)
                 })
             }
