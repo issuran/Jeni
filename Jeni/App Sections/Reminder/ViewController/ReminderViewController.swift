@@ -242,7 +242,7 @@ class ReminderViewController: BaseViewController {
         
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         
-        docRef = db.document("users/\(currentUserId)/\(medicineModel.id)/\(medicineModel.name)")
+        docRef = db.document("users/\(currentUserId)/medicines/\(medicineModel.id)")
         
         docRef.setData(dataToSave) { (error) in
             if let error = error {

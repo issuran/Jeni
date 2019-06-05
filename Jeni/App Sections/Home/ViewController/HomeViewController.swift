@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import EventKit
 import UserNotifications
+import FirebaseFirestore
 
 class HomeViewController: BaseViewController {
     
@@ -58,6 +59,22 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        db.collection("users/\(currentUserId)/medicines").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
         
         eventStore = EKEventStore()
         reminders = [EKReminder]()
