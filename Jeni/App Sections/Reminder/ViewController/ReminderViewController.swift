@@ -227,13 +227,13 @@ class ReminderViewController: BaseViewController {
             "amount": "\(medicineModel.medicineDetail?.amount ?? "")",
             "period": "\(medicineModel.medicineDetail?.period ?? "")",
             "periodTypeIdentifier": "\(medicineModel.medicineDetail?.periodType.periodTypeIdentifier() ?? "")",
-            "periodTypeTimes": "\(medicineModel.medicineDetail?.periodType.periodTypeTimes() ?? 1)",
+            "periodTypeTimes": medicineModel.medicineDetail?.periodType.periodTypeTimes() ?? 1,
             "beginDate": "\(medicineModel.medicineDetail?.beginDate ?? "")",
             "endDate": "\(medicineModel.medicineDetail?.endDate ?? "")",
             "typeName": "\(medicineModel.medicineDetail?.typeName ?? "")",
-            "reminderTimeHour": "\(reminderTimeHourArray)",
-            "reminderTimeMinute": "\(reminderTimeMinuteArray)",
-            "reminderIdentifiers": "\(medicineModel.medicineDetail?.reminderIdentifiers ?? [String]())"
+            "reminderTimeHour": reminderTimeHourArray,
+            "reminderTimeMinute": reminderTimeMinuteArray,
+            "reminderIdentifiers": medicineModel.medicineDetail?.reminderIdentifiers ?? [String]()
         ]
         let db = Firestore.firestore()
         let settings = db.settings

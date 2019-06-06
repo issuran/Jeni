@@ -70,9 +70,8 @@ class HomeViewController: BaseViewController {
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
+                let medicines: [MedicineFirebaseModel] = try! querySnapshot!.decoded()
+                medicines.forEach({ print($0) })
             }
         }
         
