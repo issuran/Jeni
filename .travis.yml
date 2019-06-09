@@ -1,16 +1,12 @@
-os: osx
+language: objective-c
 osx_image: xcode10
-language: swift
 xcode_scheme: Jeni
 xcode_project: Jeni.xcworkspace
+xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
 
 branches:
  only:
  - master
 
 before_install:
- - brew update
- - brew install xctool
- - rvm use system
- - sudo gem install cocoapods
  - pod install
