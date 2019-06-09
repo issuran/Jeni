@@ -1,4 +1,10 @@
 language: swift
-osx_image: xcode10
+
+branches:
+ only:
+ - master
+
 xcode_project: Jeni.xcworkspace
 xcode_scheme: Jeni
+osx_image: xcode10
+xcode_sdk: macosx10.14
