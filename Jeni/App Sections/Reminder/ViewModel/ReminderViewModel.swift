@@ -207,6 +207,7 @@ class ReminderViewModel {
             reminderTimeHourArray.append(time.hour)
             reminderTimeMinuteArray.append(time.minute)
         }
+        
         let dataToSave: [String: Any] = [
             "id": "\(medicineModel.id!)",
             "name": "\(medicineModel.name!)",
