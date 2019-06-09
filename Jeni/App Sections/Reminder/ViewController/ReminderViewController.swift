@@ -184,7 +184,7 @@ class ReminderViewController: BaseViewController {
                                                      image: self.viewModel.getMedicineTypeName(medicineType, .create),
                                                      medicineDetail: medicineDetails)
                         
-                        self.saveReminderToFirestore(medicine)
+                        self.viewModel.saveReminderToFirestore(medicine)
                         
                         self.viewModel.medicineItemArray.append(medicine)
                     }
@@ -208,7 +208,7 @@ class ReminderViewController: BaseViewController {
                     self.medicineModel?.image = self.viewModel.getMedicineTypeName(medicineType, .create)
                     self.medicineModel?.medicineDetail = medicineDetails
                     
-                    self.saveReminderToFirestore(self.medicineModel!)
+                    self.viewModel.saveReminderToFirestore(self.medicineModel!)
                     
                     self.viewModel.medicineItemArray[self.indexSelected!] = self.medicineModel!
                 }
@@ -218,47 +218,6 @@ class ReminderViewController: BaseViewController {
         }
         
         _ = navigationController?.popToRootViewController(animated: true)
-    }
-    
-    func saveReminderToFirestore(_ medicineModel: MedicineModel) {
-        
-        var reminderTimeHourArray = [String]()
-        var reminderTimeMinuteArray = [String]()
-        for time in medicineModel.medicineDetail?.reminderTime ?? [TimeReminder]() {
-            reminderTimeHourArray.append(time.hour)
-            reminderTimeMinuteArray.append(time.minute)
-        }
-        let dataToSave: [String: Any] = [
-            "id": "\(medicineModel.id!)",
-            "name": "\(medicineModel.name!)",
-            "image": "\(medicineModel.image!)",
-            "amount": "\(medicineModel.medicineDetail?.amount ?? "")",
-            "period": "\(medicineModel.medicineDetail?.period ?? "")",
-            "periodTypeIdentifier": "\(medicineModel.medicineDetail?.periodType?.periodTypeIdentifier() ?? "")",
-            "periodTypeTimes": medicineModel.medicineDetail?.periodType?.periodTypeTimes() ?? 1,
-            "beginDate": "\(medicineModel.medicineDetail?.beginDate ?? "")",
-            "endDate": "\(medicineModel.medicineDetail?.endDate ?? "")",
-            "typeName": "\(medicineModel.medicineDetail?.typeName ?? "")",
-            "reminderTimeHour": reminderTimeHourArray,
-            "reminderTimeMinute": reminderTimeMinuteArray,
-            "reminderIdentifiers": medicineModel.medicineDetail?.reminderIdentifiers ?? [String]()
-        ]
-        let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
-        
-        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        
-        docRef = db.document("users/\(currentUserId)/medicines/\(medicineModel.id!)")
-        
-        docRef.setData(dataToSave) { (error) in
-            if let error = error {
-                print("Got an error! \(error.localizedDescription)")
-            } else {
-                print("Data has been saved!")
-            }
-        }
     }
     
     func scheduleNotification(_ medicineModel: MedicineModel?, completion: @escaping Handler) {

@@ -199,6 +199,41 @@ class ReminderViewModel {
         }
     }
     
+    func saveReminderToFirestore(_ medicineModel: MedicineModel) {
+        
+        var reminderTimeHourArray = [String]()
+        var reminderTimeMinuteArray = [String]()
+        for time in medicineModel.medicineDetail?.reminderTime ?? [TimeReminder]() {
+            reminderTimeHourArray.append(time.hour)
+            reminderTimeMinuteArray.append(time.minute)
+        }
+        let dataToSave: [String: Any] = [
+            "id": "\(medicineModel.id!)",
+            "name": "\(medicineModel.name!)",
+            "image": "\(medicineModel.image!)",
+            "amount": "\(medicineModel.medicineDetail?.amount ?? "")",
+            "period": "\(medicineModel.medicineDetail?.period ?? "")",
+            "periodTypeIdentifier": "\(medicineModel.medicineDetail?.periodType?.periodTypeIdentifier() ?? "")",
+            "periodTypeTimes": medicineModel.medicineDetail?.periodType?.periodTypeTimes() ?? 1,
+            "beginDate": "\(medicineModel.medicineDetail?.beginDate ?? "")",
+            "endDate": "\(medicineModel.medicineDetail?.endDate ?? "")",
+            "typeName": "\(medicineModel.medicineDetail?.typeName ?? "")",
+            "reminderTimeHour": reminderTimeHourArray,
+            "reminderTimeMinute": reminderTimeMinuteArray,
+            "reminderIdentifiers": medicineModel.medicineDetail?.reminderIdentifiers ?? [String]()
+        ]
+        
+        docRef = db.document("users/\(currentUserId!)/medicines/\(medicineModel.id!)")
+        
+        docRef.setData(dataToSave) { (error) in
+            if let error = error {
+                print("Got an error! \(error.localizedDescription)")
+            } else {
+                print("Data has been saved!")
+            }
+        }
+    }
+    
     func deleteReminder(_ completion: @escaping (() -> Void)) {
         deleteFromFirestore()
         removeFromArray()
