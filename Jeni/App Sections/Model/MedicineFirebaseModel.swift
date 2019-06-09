@@ -40,7 +40,8 @@ struct MedicineFirebaseModel: Codable {
     
     func convertReminderTime() -> [TimeReminder] {
         var timeReminderArray = [TimeReminder]()
-        if let count = self.reminderTimeHour?.count {
+        if var count = self.reminderTimeHour?.count {
+            count -= 1
             for index in 0...count {
                 let newTimeReminder = TimeReminder(hour: self.reminderTimeHour?[index] ?? "00", minute: self.reminderTimeMinute?[index] ?? "00")
                 timeReminderArray.append(newTimeReminder)

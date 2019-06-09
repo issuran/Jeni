@@ -45,9 +45,12 @@ class ReminderViewController: BaseViewController {
     var docRef: DocumentReference!
     var viewModel = ReminderViewModel()
     var hud = HUD()
+    var medicineItemArray: [MedicineModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.medicineItemArray = self.medicineItemArray
         
         self.hud.center = self.view.center
         self.view.addSubview(hud)
@@ -109,7 +112,7 @@ class ReminderViewController: BaseViewController {
     @IBAction func deleteReminderAction(_ sender: Any) {
         
         self.alert(message: "Medicine Reminder removed from your list!", title: "Delete") {
-            BaseViewController.medicineItemArray.remove(at: self.indexSelected!)
+            self.viewModel.medicineItemArray.remove(at: self.indexSelected!)
             _ = self.navigationController?.popToRootViewController(animated: true)
         }
     }
@@ -181,12 +184,12 @@ class ReminderViewController: BaseViewController {
                         
                         self.saveReminderToFirestore(medicine)
                         
-                        BaseViewController.medicineItemArray.append(medicine)
+                        self.viewModel.medicineItemArray.append(medicine)
                     }
                 
             case .edit:
                 
-                medicineModel = BaseViewController.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
+                medicineModel = viewModel.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
                 
                 let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
                 
@@ -203,7 +206,7 @@ class ReminderViewController: BaseViewController {
                     self.medicineModel?.image = self.viewModel.getMedicineTypeName(medicineType, .create)
                     self.medicineModel?.medicineDetail = medicineDetails
                     
-                    BaseViewController.medicineItemArray[self.indexSelected!] = self.medicineModel!
+                    self.viewModel.medicineItemArray[self.indexSelected!] = self.medicineModel!
                 }
             }
         } else {

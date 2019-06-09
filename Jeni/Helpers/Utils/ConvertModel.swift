@@ -30,6 +30,8 @@ class ConvertModel {
             medicineDetailModel.reminderTime = medicineFirebase.convertReminderTime()
             medicineDetailModel.typeName = medicineFirebase.typeName ?? ""
             
+            medicineModel.medicineDetail = medicineDetailModel
+            
             medicineModelArray.append(medicineModel)
         }
         

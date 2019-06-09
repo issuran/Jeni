@@ -125,11 +125,16 @@ class HomeViewController: BaseViewController {
                 case .empty:
                     break
                 case .loading:
-                    
+                    self.hud.loadingView(true)
                     break
-                case .load(let data):
+                case .load(let medicines):
+                    self.hud.loadingView(false)
+                    medicines.forEach({ print($0) })
+                    self.collectionView.reloadData()
                     break
                 case .error(let error):
+                    self.hud.loadingView(false)
+                    print("Error getting documents: \(error)")
                     break
                 }
             }
@@ -171,7 +176,7 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = BaseViewController.medicineItemArray.count
+        let count = viewModel.medicineItemArray.count
         
         if count == 0 {
             emptyState.isHidden = false
@@ -185,7 +190,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedicineCollectionViewCell
         
-        let item = BaseViewController.medicineItemArray[indexPath.row]
+        let item = viewModel.medicineItemArray[indexPath.row]
         let timesToTakeMedicine = item.medicineDetail?.reminderTime?.count ?? 0
         
         cell.medicineImageView.image = UIImage(named: item.image ?? "")
@@ -199,10 +204,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         reminder = ReminderViewController()
         reminder.actionCaller = .edit
-        let medicineModel = BaseViewController.medicineItemArray[indexPath.row]
+        let medicineModel = viewModel.medicineItemArray[indexPath.row]
         reminder.medicineModel = medicineModel
         reminder.indexSelected = indexPath.row
         reminder.eventStore = eventStore
+        reminder.medicineItemArray = viewModel.medicineItemArray
         navigationController?.pushViewController(reminder, animated: true)
     }
 }

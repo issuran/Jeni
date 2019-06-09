@@ -14,6 +14,7 @@ import FirebaseFirestore
 class HomeViewModel {
     
     var medicineFirebaseStatus: Observable<RequestStates<[MedicineFirebaseModel], Error>> = Observable(.empty)
+    var medicineItemArray : [MedicineModel] = []
     
     weak var delegate: HomeCoordinatorDelegate!
     
@@ -32,11 +33,10 @@ class HomeViewModel {
         db.collection("users/\(currentUserId)/medicines").getDocuments { (querySnapshot, error) in
             if let error = error {
                 self.medicineFirebaseStatus.value = .error(error)
-                print("Error getting documents: \(error)")
             } else {
                 let medicines: [MedicineFirebaseModel] = try! querySnapshot!.decoded()
+                self.medicineItemArray = ConvertModel.convertFirebaseModelToMedicine(medicines)
                 self.medicineFirebaseStatus.value = .load(medicines)
-                medicines.forEach({ print($0) })
             }
         }
     }

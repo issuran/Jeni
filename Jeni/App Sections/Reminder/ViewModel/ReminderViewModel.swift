@@ -91,6 +91,8 @@ class ReminderViewModel {
     var endMonth = String()
     var endYear = String()
     
+    var medicineItemArray: [MedicineModel] = []
+    
     // MARK: Add
     
     func addTimeReminder(_ time: String) -> Void {
