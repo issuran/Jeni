@@ -1,8 +1,7 @@
 language: objective-c
 osx_image: xcode10
-xcode_scheme: Jeni
-xcode_project: Jeni.xcworkspace
-xcode_destination: platform=iOS Simulator,OS=10,name=iPhone X
+script:
+    - xcodebuild clean test -project Jeni.xcodeproj -scheme Jeni -destination "platform=iOS Simulator,name=iPhone 7,OS=10" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
 
 branches:
  only:
