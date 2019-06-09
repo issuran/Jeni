@@ -206,6 +206,8 @@ class ReminderViewController: BaseViewController {
                     self.medicineModel?.image = self.viewModel.getMedicineTypeName(medicineType, .create)
                     self.medicineModel?.medicineDetail = medicineDetails
                     
+                    self.saveReminderToFirestore(self.medicineModel!)
+                    
                     self.viewModel.medicineItemArray[self.indexSelected!] = self.medicineModel!
                 }
             }
