@@ -4,6 +4,13 @@ branches:
  only:
  - master
 
+before_install:
+ - rvm use system
+ - sudo gem install cocoapods
+ - sudo rm -fr ~./cocoapods/repos/master
+ - pod setup
+ - pod install
+
 xcode_project: Jeni.xcworkspace
 xcode_scheme: Jeni
 osx_image: xcode10
