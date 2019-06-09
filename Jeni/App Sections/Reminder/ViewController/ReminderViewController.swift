@@ -189,8 +189,7 @@ class ReminderViewController: BaseViewController {
                         self.viewModel.medicineItemArray.append(medicine)
                     }
                 
-            case .edit:
-                
+            case .edit:                
                 medicineModel = viewModel.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
                 
                 let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
