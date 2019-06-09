@@ -1,10 +1,16 @@
+os: osx
+osx_image: xcode10
 language: swift
+xcode_scheme: Jeni
+xcode_project: Jeni.xcworkspace
 
 branches:
  only:
  - master
 
 before_install:
+ - brew update
+ - brew install xctool
  - rvm use system
  - sudo gem install cocoapods
  - pod install
