@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode10
 xcode_scheme: Jeni
 xcode_project: Jeni.xcworkspace
-xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
+xcode_destination: platform=iOS Simulator,OS=10,name=iPhone X
 
 branches:
  only:
