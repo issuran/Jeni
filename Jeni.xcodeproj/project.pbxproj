@@ -18,6 +18,7 @@
 		52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
 		52B4260E2282650300218D18 /* MedicineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */; };
 		52B42610228275D800218D18 /* JeniMedicineViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */; };
+		52B5193522AD920F00ABC312 /* JeniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B5193422AD920F00ABC312 /* JeniTests.swift */; };
 		52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB749F227A3E0E00CCA655 /* AppDelegate.swift */; };
 		52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A6227A3E0F00CCA655 /* Assets.xcassets */; };
 		52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */; };
@@ -46,6 +47,16 @@
 		B30511F06556ABA4A8B1C7D3 /* Pods_Jeni.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		52B5193722AD920F00ABC312 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52DB7494227A3E0E00CCA655 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52DB749B227A3E0E00CCA655;
+			remoteInfo = Jeni;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jeni.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5212C9A0229AEE04006AEC33 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
@@ -59,6 +70,9 @@
 		52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicineCollectionViewCell.xib; sourceTree = "<group>"; };
 		52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniMedicineViewButton.swift; sourceTree = "<group>"; };
+		52B5193222AD920F00ABC312 /* JeniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JeniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B5193422AD920F00ABC312 /* JeniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeniTests.swift; sourceTree = "<group>"; };
+		52B5193622AD920F00ABC312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52DB749C227A3E0E00CCA655 /* Jeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DB749F227A3E0E00CCA655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52DB74A6227A3E0F00CCA655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +105,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		52B5192F22AD920F00ABC312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52DB7499227A3E0E00CCA655 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,10 +160,20 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		52B5193322AD920F00ABC312 /* JeniTests */ = {
+			isa = PBXGroup;
+			children = (
+				52B5193422AD920F00ABC312 /* JeniTests.swift */,
+				52B5193622AD920F00ABC312 /* Info.plist */,
+			);
+			path = JeniTests;
+			sourceTree = "<group>";
+		};
 		52DB7493227A3E0E00CCA655 = {
 			isa = PBXGroup;
 			children = (
 				52DB749E227A3E0E00CCA655 /* Jeni */,
+				52B5193322AD920F00ABC312 /* JeniTests */,
 				52DB749D227A3E0E00CCA655 /* Products */,
 				CDA293EC7635A1F4A96F8EF0 /* Pods */,
 				5E68198140F3A5136A73CFE6 /* Frameworks */,
@@ -153,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				52DB749C227A3E0E00CCA655 /* Jeni.app */,
+				52B5193222AD920F00ABC312 /* JeniTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -344,6 +376,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		52B5193122AD920F00ABC312 /* JeniTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52B5193B22AD920F00ABC312 /* Build configuration list for PBXNativeTarget "JeniTests" */;
+			buildPhases = (
+				52B5192E22AD920F00ABC312 /* Sources */,
+				52B5192F22AD920F00ABC312 /* Frameworks */,
+				52B5193022AD920F00ABC312 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52B5193822AD920F00ABC312 /* PBXTargetDependency */,
+			);
+			name = JeniTests;
+			productName = JeniTests;
+			productReference = 52B5193222AD920F00ABC312 /* JeniTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		52DB749B227A3E0E00CCA655 /* Jeni */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52DB74AE227A3E0F00CCA655 /* Build configuration list for PBXNativeTarget "Jeni" */;
@@ -373,6 +423,10 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Tiago Oliveira";
 				TargetAttributes = {
+					52B5193122AD920F00ABC312 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 52DB749B227A3E0E00CCA655;
+					};
 					52DB749B227A3E0E00CCA655 = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -392,11 +446,19 @@
 			projectRoot = "";
 			targets = (
 				52DB749B227A3E0E00CCA655 /* Jeni */,
+				52B5193122AD920F00ABC312 /* JeniTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		52B5193022AD920F00ABC312 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52DB749A227A3E0E00CCA655 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -473,6 +535,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		52B5192E22AD920F00ABC312 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B5193522AD920F00ABC312 /* JeniTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52DB7498227A3E0E00CCA655 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -509,6 +579,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		52B5193822AD920F00ABC312 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52DB749B227A3E0E00CCA655 /* Jeni */;
+			targetProxy = 52B5193722AD920F00ABC312 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -521,6 +599,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		52B5193922AD920F00ABC312 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9469P8892;
+				INFOPLIST_FILE = JeniTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.oliveira.JeniTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jeni.app/Jeni";
+			};
+			name = Debug;
+		};
+		52B5193A22AD920F00ABC312 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9469P8892;
+				INFOPLIST_FILE = JeniTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.oliveira.JeniTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jeni.app/Jeni";
+			};
+			name = Release;
+		};
 		52DB74AC227A3E0F00CCA655 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -682,6 +800,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		52B5193B22AD920F00ABC312 /* Build configuration list for PBXNativeTarget "JeniTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52B5193922AD920F00ABC312 /* Debug */,
+				52B5193A22AD920F00ABC312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		52DB7497227A3E0E00CCA655 /* Build configuration list for PBXProject "Jeni" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
