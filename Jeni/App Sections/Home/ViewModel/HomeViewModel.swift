@@ -15,19 +15,39 @@ class HomeViewModel {
     
     var medicineFirebaseStatus: Observable<RequestStates<[MedicineFirebaseModel], Error>> = Observable(.empty)
     var medicineItemArray : [MedicineModel] = []
+    var username = String()
+    let db = Firestore.firestore()
     
     weak var delegate: HomeCoordinatorDelegate!
     
+    init() {
+        if Auth.auth().currentUser != nil {
+            username = Auth.auth().currentUser?.displayName ?? ""
+        }
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+    }
+    
+    func numberOfItems() -> Int {
+        return medicineItemArray.count
+    }
+    
+    func getMedicineItem(index: Int) -> MedicineModel {
+        return medicineItemArray[index]
+    }
+    
     func logout() {
-        delegate.callLogin(self)
+        do {
+            try Auth.auth().signOut()
+            delegate.callLogin(self)
+        } catch {
+            print("Damn it")
+        }
     }
     
     func loadMedicinesFromFirebase() {
         medicineFirebaseStatus.value = .loading
-        let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
         
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         db.collection("users/\(currentUserId)/medicines").getDocuments { (querySnapshot, error) in

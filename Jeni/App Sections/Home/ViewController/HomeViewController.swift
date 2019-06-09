@@ -45,6 +45,7 @@ class HomeViewController: BaseViewController {
         self.hud.center = self.view.center
         self.view.addSubview(hud)
         addButton.isEnabled = false
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -52,28 +53,44 @@ class HomeViewController: BaseViewController {
         
         collectionView.register(UINib(nibName: "MedicineCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
-        if Auth.auth().currentUser != nil {
-            usernameLabel.text = Auth.auth().currentUser?.displayName
-        }
+        usernameLabel.text = self.viewModel.username
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
+        loadReminders()
         
-        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        db.collection("users/\(currentUserId)/medicines").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                let medicines: [MedicineFirebaseModel] = try! querySnapshot!.decoded()
-                medicines.forEach({ print($0) })
+        setObserver()
+        viewModel.loadMedicinesFromFirebase()
+    }
+    
+    func setObserver() {
+        viewModel.medicineFirebaseStatus.didChange = { [weak self] state in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {                
+                switch state {
+                case .empty:
+                    break
+                case .loading:
+                    self.hud.loadingView(true)
+                    break
+                case .load(let medicines):
+                    self.hud.loadingView(false)
+                    medicines.forEach({ print($0) })
+                    self.collectionView.reloadData()
+                    break
+                case .error(let error):
+                    self.hud.loadingView(false)
+                    print("Error getting documents: \(error)")
+                    break
+                }
             }
         }
+    }
+    
+    func loadReminders() {
         
         eventStore = EKEventStore()
         reminders = [EKReminder]()
@@ -111,38 +128,10 @@ class HomeViewController: BaseViewController {
         UNUserNotificationCenter.current().getDeliveredNotifications { (notifications) in
             print("num of delivered notifications \(notifications.count)")
         }
-        
-        setObserver()
-        viewModel.loadMedicinesFromFirebase()
-    }
-    
-    func setObserver() {
-        viewModel.medicineFirebaseStatus.didChange = { [weak self] state in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {                
-                switch state {
-                case .empty:
-                    break
-                case .loading:
-                    self.hud.loadingView(true)
-                    break
-                case .load(let medicines):
-                    self.hud.loadingView(false)
-                    medicines.forEach({ print($0) })
-                    self.collectionView.reloadData()
-                    break
-                case .error(let error):
-                    self.hud.loadingView(false)
-                    print("Error getting documents: \(error)")
-                    break
-                }
-            }
-        }
     }
     
     // MARK: Private functions
-    fileprivate func setUpFlowLayout() {
+    private func setUpFlowLayout() {
         let spacing: CGFloat = 5
         let itemsPerRow: CGFloat = 2
         let screenRect = UIScreen.main.bounds
@@ -164,33 +153,25 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func logoutAction(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            self.viewModel.logout()
-        } catch {
-            print("Damn it")
-        }
+        self.viewModel.logout()
     }
-    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = viewModel.medicineItemArray.count
-        
-        if count == 0 {
+        if viewModel.numberOfItems() == 0 {
             emptyState.isHidden = false
             return 0
         }
-        
         emptyState.isHidden = true
-        return count
+        return viewModel.numberOfItems()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedicineCollectionViewCell
         
-        let item = viewModel.medicineItemArray[indexPath.row]
+        let item = viewModel.getMedicineItem(index: indexPath.row)
+        
         let timesToTakeMedicine = item.medicineDetail?.reminderTime?.count ?? 0
         
         cell.medicineImageView.image = UIImage(named: item.image ?? "")
