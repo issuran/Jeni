@@ -11,6 +11,8 @@
 		525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791B9227E6A8000107AE6 /* HomeCoordinator.swift */; };
 		525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
 		525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
+		525D267922AC5FF80036D30E /* ConvertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267822AC5FF80036D30E /* ConvertModel.swift */; };
+		525D267B22AC8FB50036D30E /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267A22AC8FB50036D30E /* RequestStatus.swift */; };
 		529A3E5A229362C400E084C2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529A3E59229362C400E084C2 /* Observable.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
 		52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
@@ -50,6 +52,8 @@
 		525791B9227E6A8000107AE6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		525791BC227E6AC400107AE6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
+		525D267822AC5FF80036D30E /* ConvertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertModel.swift; sourceTree = "<group>"; };
+		525D267A22AC8FB50036D30E /* RequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		529A3E59229362C400E084C2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 				52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */,
 				529A3E59229362C400E084C2 /* Observable.swift */,
 				52E9287C22A8AB76006776F4 /* SnapshotExtensions.swift */,
+				525D267822AC5FF80036D30E /* ConvertModel.swift */,
+				525D267A22AC8FB50036D30E /* RequestStatus.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -490,10 +496,12 @@
 				52E9287B22A8AB01006776F4 /* MedicineFirebaseModel.swift in Sources */,
 				52E9287D22A8AB76006776F4 /* SnapshotExtensions.swift in Sources */,
 				52F02F19227DD7B500BDEE80 /* BaseViewController.swift in Sources */,
+				525D267B22AC8FB50036D30E /* RequestStatus.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
 				52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */,
 				52E0395B2290B1AF005BF73F /* MedicineModel.swift in Sources */,
+				525D267922AC5FF80036D30E /* ConvertModel.swift in Sources */,
 				52E0395722909F12005BF73F /* PillCollectionViewCell.swift in Sources */,
 				52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */,
 			);

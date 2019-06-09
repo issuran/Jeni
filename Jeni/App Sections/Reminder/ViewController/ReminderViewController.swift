@@ -222,12 +222,13 @@ class ReminderViewController: BaseViewController {
             reminderTimeMinuteArray.append(time.minute)
         }
         let dataToSave: [String: Any] = [
-            "name": "\(medicineModel.name)",
-            "image": "\(medicineModel.image)",
+            "id": "\(medicineModel.id!)",
+            "name": "\(medicineModel.name!)",
+            "image": "\(medicineModel.image!)",
             "amount": "\(medicineModel.medicineDetail?.amount ?? "")",
             "period": "\(medicineModel.medicineDetail?.period ?? "")",
-            "periodTypeIdentifier": "\(medicineModel.medicineDetail?.periodType.periodTypeIdentifier() ?? "")",
-            "periodTypeTimes": medicineModel.medicineDetail?.periodType.periodTypeTimes() ?? 1,
+            "periodTypeIdentifier": "\(medicineModel.medicineDetail?.periodType?.periodTypeIdentifier() ?? "")",
+            "periodTypeTimes": medicineModel.medicineDetail?.periodType?.periodTypeTimes() ?? 1,
             "beginDate": "\(medicineModel.medicineDetail?.beginDate ?? "")",
             "endDate": "\(medicineModel.medicineDetail?.endDate ?? "")",
             "typeName": "\(medicineModel.medicineDetail?.typeName ?? "")",
@@ -242,7 +243,7 @@ class ReminderViewController: BaseViewController {
         
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         
-        docRef = db.document("users/\(currentUserId)/medicines/\(medicineModel.id)")
+        docRef = db.document("users/\(currentUserId)/medicines/\(medicineModel.id!)")
         
         docRef.setData(dataToSave) { (error) in
             if let error = error {

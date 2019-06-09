@@ -111,6 +111,29 @@ class HomeViewController: BaseViewController {
         UNUserNotificationCenter.current().getDeliveredNotifications { (notifications) in
             print("num of delivered notifications \(notifications.count)")
         }
+        
+        setObserver()
+        viewModel.loadMedicinesFromFirebase()
+    }
+    
+    func setObserver() {
+        viewModel.medicineFirebaseStatus.didChange = { [weak self] state in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {                
+                switch state {
+                case .empty:
+                    break
+                case .loading:
+                    
+                    break
+                case .load(let data):
+                    break
+                case .error(let error):
+                    break
+                }
+            }
+        }
     }
     
     // MARK: Private functions
@@ -163,9 +186,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MedicineCollectionViewCell
         
         let item = BaseViewController.medicineItemArray[indexPath.row]
-        let timesToTakeMedicine = item.medicineDetail?.reminderTime.count ?? 0
+        let timesToTakeMedicine = item.medicineDetail?.reminderTime?.count ?? 0
         
-        cell.medicineImageView.image = UIImage(named: item.image)
+        cell.medicineImageView.image = UIImage(named: item.image ?? "")
         cell.medicineNameLabel.text = item.name
         cell.medicineQtdPerDayLabel.text = timesToTakeMedicine > 1
             ? "\(timesToTakeMedicine) times today" : "\(timesToTakeMedicine) time today"

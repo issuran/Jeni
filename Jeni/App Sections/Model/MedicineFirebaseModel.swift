@@ -9,6 +9,7 @@
 import Foundation
 
 struct MedicineFirebaseModel: Codable {
+    let id: String?
     let name: String?
     let image: String?
     let amount: String?
@@ -21,4 +22,30 @@ struct MedicineFirebaseModel: Codable {
     let reminderTimeHour: [String]?
     let reminderTimeMinute: [String]?
     let reminderIdentifiers: [String]?
+    
+    func convertPeriodType() -> PeriodType {
+        switch self.periodTypeIdentifier! {
+        case "Day":
+            return .day
+        case "Week":
+            return .week
+        case "Month":
+            return .month
+        case "Year":
+            return .year
+        default:
+            return .day
+        }
+    }
+    
+    func convertReminderTime() -> [TimeReminder] {
+        var timeReminderArray = [TimeReminder]()
+        if let count = self.reminderTimeHour?.count {
+            for index in 0...count {
+                let newTimeReminder = TimeReminder(hour: self.reminderTimeHour?[index] ?? "00", minute: self.reminderTimeMinute?[index] ?? "00")
+                timeReminderArray.append(newTimeReminder)
+            }
+        }
+        return timeReminderArray
+    }
 }
