@@ -13,6 +13,7 @@
 		525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
 		525D267922AC5FF80036D30E /* ConvertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267822AC5FF80036D30E /* ConvertModel.swift */; };
 		525D267B22AC8FB50036D30E /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267A22AC8FB50036D30E /* RequestStatus.swift */; };
+		529834BE22ADB9AA0065100E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 529834BD22ADB9AA0065100E /* GoogleService-Info.plist */; };
 		529A3E5A229362C400E084C2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529A3E59229362C400E084C2 /* Observable.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
 		52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
@@ -43,7 +44,6 @@
 		52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */; };
 		52F02F21227DDE0F00BDEE80 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */; };
 		52F02F23227DDF2300BDEE80 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */; };
-		52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F24227E070200BDEE80 /* GoogleService-Info.plist */; };
 		B30511F06556ABA4A8B1C7D3 /* Pods_Jeni.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +65,7 @@
 		525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		525D267822AC5FF80036D30E /* ConvertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertModel.swift; sourceTree = "<group>"; };
 		525D267A22AC8FB50036D30E /* RequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
+		529834BD22ADB9AA0065100E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		529A3E59229362C400E084C2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		52F02F1D227DDDE000BDEE80 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		52F02F24227E070200BDEE80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		76ECD705B06D54BE51790E47 /* Pods-Jeni.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jeni.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jeni/Pods-Jeni.debug.xcconfig"; sourceTree = "<group>"; };
 		B1075ACCD9897A9CDE67D9BA /* Pods-Jeni.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jeni.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jeni/Pods-Jeni.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,13 +192,13 @@
 		52DB749E227A3E0E00CCA655 /* Jeni */ = {
 			isa = PBXGroup;
 			children = (
+				529834BD22ADB9AA0065100E /* GoogleService-Info.plist */,
 				52DB74BD227A6B3B00CCA655 /* Helpers */,
 				52DB74B8227A444200CCA655 /* Coordinator */,
 				52DB74B1227A404000CCA655 /* App Sections */,
 				52DB749F227A3E0E00CCA655 /* AppDelegate.swift */,
 				52DB74A6227A3E0F00CCA655 /* Assets.xcassets */,
 				52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */,
-				52F02F24227E070200BDEE80 /* GoogleService-Info.plist */,
 				52DB74AB227A3E0F00CCA655 /* Info.plist */,
 			);
 			path = Jeni;
@@ -465,9 +465,9 @@
 			files = (
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
 				52E0395822909F12005BF73F /* PillCollectionViewCell.xib in Resources */,
+				529834BE22ADB9AA0065100E /* GoogleService-Info.plist in Resources */,
 				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
 				52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */,
-				52F02F25227E070200BDEE80 /* GoogleService-Info.plist in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
 				52E0395422909979005BF73F /* TimeReminderTableViewCell.xib in Resources */,

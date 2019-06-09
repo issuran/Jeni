@@ -43,6 +43,7 @@ playground.xcworkspace
 # Package.pins
 # Package.resolved
 .build/
+Jeni/GoogleService-Info.plist
 
 # CocoaPods
 # We recommend against adding the Pods directory to your .gitignore. However
