@@ -49,9 +49,6 @@ class ReminderViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.medicineItemArray = self.medicineItemArray
-        
         self.hud.center = self.view.center
         self.view.addSubview(hud)
         
@@ -92,6 +89,8 @@ class ReminderViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        viewModel.medicineItemArray = self.medicineItemArray
+        
         switch actionCaller {
         case .add:
             reminderLabel.text = "Add Reminder"
@@ -100,6 +99,7 @@ class ReminderViewController: BaseViewController {
             reminderLabel.text = "Edit Reminder"
             trashButton.isHidden = false
             viewModel.reminderIdentifiers = medicineModel?.medicineDetail?.reminderIdentifiers ?? [String]()
+            viewModel.indexSelected = indexSelected
             fillFields(medicineModel ?? MedicineModel(id: "id", name: "Teste", image: "", medicineDetail: nil))
         }
     }
@@ -112,8 +112,10 @@ class ReminderViewController: BaseViewController {
     @IBAction func deleteReminderAction(_ sender: Any) {
         
         self.alert(message: "Medicine Reminder removed from your list!", title: "Delete") {
-            self.viewModel.medicineItemArray.remove(at: self.indexSelected!)
-            _ = self.navigationController?.popToRootViewController(animated: true)
+            
+            self.viewModel.deleteReminder() {
+                _ = self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     

@@ -7,7 +7,9 @@
 //
 
 import Foundation
-import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 enum ActionCaller {
     case add
@@ -91,7 +93,22 @@ class ReminderViewModel {
     var endMonth = String()
     var endYear = String()
     
+    let db = Firestore.firestore()
+    var docRef: DocumentReference!
     var medicineItemArray: [MedicineModel] = []
+    var indexSelected: Int?
+    var currentUserId: String?
+    
+    init() {
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
+        if Auth.auth().currentUser != nil {
+            currentUserId = Auth.auth().currentUser?.uid
+        }
+    }
     
     // MARK: Add
     
@@ -180,6 +197,24 @@ class ReminderViewModel {
         default:
             return .day
         }
+    }
+    
+    func deleteReminder(_ completion: @escaping (() -> Void)) {
+        deleteFromFirestore()
+        removeFromArray()
+        completion()
+    }
+    
+    func removeFromArray() {
+        medicineItemArray.remove(at: indexSelected!)
+    }
+    
+    func deleteFromFirestore() {
+        let medicine = medicineItemArray[indexSelected!]
+        
+        docRef = db.document("users/\(currentUserId!)/medicines/\(medicine.id!)")
+        
+        docRef.delete()
     }
 }
 
