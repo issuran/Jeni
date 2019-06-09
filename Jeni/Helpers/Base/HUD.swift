@@ -15,7 +15,7 @@ class HUD: UIActivityIndicatorView {
     }
     
     required init(coder: NSCoder) {
-        fatalError("use init()")
+        super.init(coder: coder)
     }
     
     func loadingView(_ isLoading: Bool) {

@@ -39,7 +39,7 @@ class LoginViewController: BaseViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class LoginViewController: BaseViewController {
         case .signUp?:
             signUpFlow()
         case .none:
-            fatalError()
+            break
         }
     }
     
@@ -135,7 +135,7 @@ class LoginViewController: BaseViewController {
                                     self.usernameStackView.isHidden = true
                                     self.viewModel.signOption = .signIn
                                 case .none:
-                                    fatalError()
+                                    break
                                 }
         }, completion: nil)]
     }
