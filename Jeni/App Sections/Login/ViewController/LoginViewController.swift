@@ -48,8 +48,6 @@ class LoginViewController: BaseViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-        self.hud.center = self.view.center
-        self.view.addSubview(hud)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,6 +136,11 @@ class LoginViewController: BaseViewController {
                                     break
                                 }
         }, completion: nil)]
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.hud.center = self.view.center
+        self.view.addSubview(hud)
     }
 }
 
