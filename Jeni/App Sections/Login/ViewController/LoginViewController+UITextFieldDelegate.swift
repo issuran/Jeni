@@ -9,30 +9,25 @@
 import UIKit
 
 extension LoginViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField)
-    {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.animateTextField(up: true)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField)
-    {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.animateTextField(up: false)
     }
     
-    func animateTextField(up: Bool)
-    {
-        let movementDistance:CGFloat = -130
+    func animateTextField(up: Bool) {
+        let movementDistance: CGFloat = -130
         let movementDuration: Double = 0.3
         
-        var movement:CGFloat = 0
-        if up
-        {
+        var movement: CGFloat = 0
+        if up {
             movement = movementDistance
-        }
-        else
-        {
+        } else {
             movement = -movementDistance
         }
+        
         UIView.beginAnimations("animateTextField", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(movementDuration)
