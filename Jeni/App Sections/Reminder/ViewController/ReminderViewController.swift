@@ -239,43 +239,115 @@ class ReminderViewController: BaseViewController {
         let notification = UNUserNotificationCenter.current()
         notification.getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
-                for time in self.viewModel.timesReminderArray {
-                    let content = UNMutableNotificationContent()
-                    content.title = "It is drug time!"
-                    content.body = "You should take your \(self.viewModel.medicineTypeArray[self.viewModel.selectedType!].lowercased()) of \(self.viewModel.medicineName)!"
-                    content.badge = 1
-                    content.categoryIdentifier = "alarm"
-                    content.sound = UNNotificationSound.default
-                    
-                    let calendar = Calendar.current
-                    
-                    let beginDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(self.viewModel.beginYear), month: Int(self.viewModel.beginMonth), day: Int(self.viewModel.beginDay), hour: Int(time.hour), minute: Int(time.minute))
-                    
-                    //                                let endDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(self.viewModel.endYear), month: Int(self.viewModel.endMonth), day: Int(self.viewModel.endDay), hour: Int(time.hour), minute: Int(time.minute))
-                    
-                    //                                let triggerDaily = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from:beginDate.date!, to: endDate.date!)
-                    
-                    let triggerDaily = calendar.dateComponents([.hour, .minute, .second], from: beginDate.date!)
-                    
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
-                    
-                    let identifier = UUID().uuidString
-                    self.viewModel.reminderIdentifiers.append(identifier)
-                    
-                    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-                    
-                    notification.add(request, withCompletionHandler: { (error) in
-                        if error != nil {
-                            print("Not good! \(error?.localizedDescription ?? "Error during create new Notification!")")
-                        } else {
-                            print("Success")
-                        }
-                    })
+                let total = self.viewModel.periodReminder.timesToRemind()
+                var timeToRemind = 0
+                while timeToRemind < total {
+                    for time in self.viewModel.timesReminderArray {
+                        let content = UNMutableNotificationContent()
+                        content.title = "It is drug time!"
+                        content.body = "You should take your \(self.viewModel.medicineTypeArray[self.viewModel.selectedType!].lowercased()) of \(self.viewModel.medicineName)!"
+                        content.badge = 1
+                        content.categoryIdentifier = "alarm"
+                        content.sound = UNNotificationSound.default
+                        
+                        let calendar = Calendar.current
+                        
+                        let nextTriggerDate = calendar.date(byAdding: .day, value: timeToRemind, to: Date())!
+
+                        let beginDay = nextTriggerDate.toString(dateFormat: "dd")
+                        let beginMonth = nextTriggerDate.toString(dateFormat: "MM")
+                        let beginYear = nextTriggerDate.toString(dateFormat: "yyyy")
+                        
+                        let beginDate = DateComponents(calendar: calendar,
+                                                       timeZone: .current,
+                                                       year: Int(beginYear),
+                                                       month: Int(beginMonth),
+                                                       day: Int(beginDay),
+                                                       hour: Int(time.hour),
+                                                       minute: Int(time.minute))
+                        
+                        let triggerDaily = calendar.dateComponents([.hour, .minute, .second], from: beginDate.date!)
+                        
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+                        
+                        let identifier = UUID().uuidString
+                        self.viewModel.reminderIdentifiers.append(identifier)
+                        
+                        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+                        
+                        notification.add(request, withCompletionHandler: { (error) in
+                            if error != nil {
+                                print("Not good! \(error?.localizedDescription ?? "Error during create new Notification!")")
+                            } else {
+                                print("Success")
+                            }
+                        })
+                    }
+                    timeToRemind += 1
                 }
                 completion()
             }
         }
     }
+    
+//    func scheduleNotification(_ medicineModel: MedicineModel?, completion: @escaping Handler) {
+//
+//        switch actionCaller {
+//        case .edit:
+//            UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (notifications) in
+//                print("num of pending notifications \(notifications.count)")
+//            })
+//            UNUserNotificationCenter.current().getDeliveredNotifications { (notifications) in
+//                print("num of delivered notifications \(notifications.count)")
+//            }
+//            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: viewModel.reminderIdentifiers)
+//            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: viewModel.reminderIdentifiers)
+//            self.viewModel.reminderIdentifiers.removeAll()
+//        default:
+//            print("Nothing to do then!")
+//        }
+//
+//        let notification = UNUserNotificationCenter.current()
+//        notification.getNotificationSettings { (settings) in
+//            if settings.authorizationStatus == .authorized {
+//                    for time in self.viewModel.timesReminderArray {
+//                        let content = UNMutableNotificationContent()
+//                        content.title = "It is drug time!"
+//                        content.body = "You should take your \(self.viewModel.medicineTypeArray[self.viewModel.selectedType!].lowercased()) of \(self.viewModel.medicineName)!"
+//                        content.badge = 1
+//                        content.categoryIdentifier = "alarm"
+//                        content.sound = UNNotificationSound.default
+//
+//                        let calendar = Calendar.current
+//
+//                        let beginDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(self.viewModel.beginYear), month: Int(self.viewModel.beginMonth), day: Int(self.viewModel.beginDay), hour: Int(time.hour), minute: Int(time.minute))
+//
+//                        //                                let endDate = DateComponents(calendar: calendar, timeZone: .current, year: Int(self.viewModel.endYear), month: Int(self.viewModel.endMonth), day: Int(self.viewModel.endDay), hour: Int(time.hour), minute: Int(time.minute))
+//
+//                        //                                let triggerDaily = calendar.dateComponents(Set<Calendar.Component>([.hour, .minute]), from:beginDate.date!, to: endDate.date!)
+//
+//                        let triggerDaily = calendar.dateComponents([.hour, .minute, .second], from: beginDate.date!)
+//
+//                        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+//
+//                        let identifier = UUID().uuidString
+//                        self.viewModel.reminderIdentifiers.append(identifier)
+//
+//                        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+//
+//                        notification.add(request, withCompletionHandler: { (error) in
+//                            if error != nil {
+//                                print("Not good! \(error?.localizedDescription ?? "Error during create new Notification!")")
+//                            } else {
+//                                print("Success")
+//                            }
+//                        })
+//                    }
+//                    time += 1
+//                }
+//                completion()
+//        }
+//    }
     
     func fillFields(_ medicineModel: MedicineModel) {
         medicineNameTextField.text = medicineModel.name

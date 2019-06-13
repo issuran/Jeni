@@ -38,6 +38,11 @@ struct PeriodReminder {
     func formattedPeriodReminder() -> String {
         return Int(days)! > 1 ? "\(days)/\(type.periodTypeIdentifier())s" : "\(days)/\(type.periodTypeIdentifier())"
     }
+    
+    func timesToRemind() -> Int {
+        let totalTimes = Int(days)! * type.periodTypeTimes()
+        return totalTimes
+    }
 }
 
 enum PeriodType {
