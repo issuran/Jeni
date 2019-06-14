@@ -146,10 +146,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addReminderAction(_ sender: Any) {
-        reminder = ReminderViewController()
-        reminder.actionCaller = .add
-        reminder.eventStore = eventStore
-        navigationController?.pushViewController(reminder, animated: true)
+        viewModel.callAddReminder(.add, event: eventStore)
     }
     
     @IBAction func logoutAction(_ sender: Any) {
@@ -183,13 +180,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        reminder = ReminderViewController()
-        reminder.actionCaller = .edit
         let medicineModel = viewModel.medicineItemArray[indexPath.row]
-        reminder.medicineModel = medicineModel
-        reminder.indexSelected = indexPath.row
-        reminder.eventStore = eventStore
-        reminder.medicineItemArray = viewModel.medicineItemArray
-        navigationController?.pushViewController(reminder, animated: true)
+        
+        viewModel.callEditReminder(.edit, event: eventStore, index: indexPath.row, medicineModel: medicineModel, medicineModelArray: viewModel.medicineItemArray)
     }
 }

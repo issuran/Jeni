@@ -24,7 +24,9 @@
 #include <utility>
 #include <vector>
 
-#include "Firestore/core/src/firebase/firestore/util/firebase_assert.h"
+#include "Firestore/core/src/firebase/firestore/util/comparison.h"
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
+#include "Firestore/core/src/firebase/firestore/util/hashing.h"
 
 namespace firebase {
 namespace firestore {
@@ -56,19 +58,18 @@ class BasePath {
 
   /** Returns i-th segment of the path. */
   const std::string& operator[](const size_t i) const {
-    FIREBASE_ASSERT_MESSAGE(i < segments_.size(), "index %u out of range", i);
+    HARD_ASSERT(i < segments_.size(), "index %s out of range", i);
     return segments_[i];
   }
 
   /** Returns the first segment of the path. */
   const std::string& first_segment() const {
-    FIREBASE_ASSERT_MESSAGE(!empty(),
-                            "Cannot call first_segment on empty path");
+    HARD_ASSERT(!empty(), "Cannot call first_segment on empty path");
     return segments_[0];
   }
   /** Returns the last segment of the path. */
   const std::string& last_segment() const {
-    FIREBASE_ASSERT_MESSAGE(!empty(), "Cannot call last_segment on empty path");
+    HARD_ASSERT(!empty(), "Cannot call last_segment on empty path");
     return segments_[size() - 1];
   }
 
@@ -116,9 +117,8 @@ class BasePath {
    * this path.
    */
   T PopFirst(const size_t n = 1) const {
-    FIREBASE_ASSERT_MESSAGE(n <= size(),
-                            "Cannot call PopFirst(%u) on path of length %u", n,
-                            size());
+    HARD_ASSERT(n <= size(), "Cannot call PopFirst(%s) on path of length %s", n,
+                size());
     return T{begin() + n, end()};
   }
 
@@ -127,7 +127,7 @@ class BasePath {
    * this path.
    */
   T PopLast() const {
-    FIREBASE_ASSERT_MESSAGE(!empty(), "Cannot call PopLast() on empty path");
+    HARD_ASSERT(!empty(), "Cannot call PopLast() on empty path");
     return T{begin(), end() - 1};
   }
 
@@ -140,37 +140,19 @@ class BasePath {
     return size() <= rhs.size() && std::equal(begin(), end(), rhs.begin());
   }
 
-  bool operator==(const BasePath& rhs) const {
-    return segments_ == rhs.segments_;
-  }
-  bool operator!=(const BasePath& rhs) const {
-    return segments_ != rhs.segments_;
-  }
-  bool operator<(const BasePath& rhs) const {
-    return segments_ < rhs.segments_;
-  }
-  bool operator>(const BasePath& rhs) const {
-    return segments_ > rhs.segments_;
-  }
-  bool operator<=(const BasePath& rhs) const {
-    return segments_ <= rhs.segments_;
-  }
-  bool operator>=(const BasePath& rhs) const {
-    return segments_ >= rhs.segments_;
+  /**
+   * Returns true if the given argument is a direct child of this path.
+   *
+   * Empty path is a parent of any path that consists of a single segment.
+   */
+  bool IsImmediateParentOf(const T& potential_child) const {
+    return size() + 1 == potential_child.size() &&
+           std::equal(begin(), end(), potential_child.begin());
   }
 
-#if defined(__OBJC__)
-  // For Objective-C++ hash; to be removed after migration.
-  // Do NOT use in C++ code.
-  NSUInteger Hash() const {
-    std::hash<std::string> hash_fn;
-    NSUInteger hash_result = 0;
-    for (const std::string& segment : segments_) {
-      hash_result = hash_result * 31u + hash_fn(segment);
-    }
-    return hash_result;
+  util::ComparisonResult CompareTo(const T& rhs) const {
+    return util::Compare(segments_, rhs.segments_);
   }
-#endif  // defined(__OBJC__)
 
  protected:
   BasePath() = default;

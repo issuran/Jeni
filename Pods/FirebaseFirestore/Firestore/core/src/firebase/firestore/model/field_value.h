@@ -17,47 +17,33 @@
 #ifndef FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_MODEL_FIELD_VALUE_H_
 #define FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_MODEL_FIELD_VALUE_H_
 
+#include <cmath>
 #include <cstdint>
-#include <map>
+#include <iosfwd>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "Firestore/core/include/firebase/firestore/geo_point.h"
 #include "Firestore/core/include/firebase/firestore/timestamp.h"
+#include "Firestore/core/src/firebase/firestore/immutable/sorted_map.h"
 #include "Firestore/core/src/firebase/firestore/model/database_id.h"
 #include "Firestore/core/src/firebase/firestore/model/document_key.h"
 #include "Firestore/core/src/firebase/firestore/model/field_path.h"
-#include "Firestore/core/src/firebase/firestore/util/firebase_assert.h"
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
+#include "absl/base/attributes.h"
 #include "absl/types/optional.h"
+
+#if __OBJC__
+@class FSTFieldValue;
+#endif  // __OBJC__
 
 namespace firebase {
 namespace firestore {
 namespace model {
 
-struct ServerTimestamp {
-  Timestamp local_write_time;
-  absl::optional<Timestamp> previous_value;
-};
-
-struct ReferenceValue {
-  DocumentKey reference;
-  // Does not own the DatabaseId instance.
-  const DatabaseId* database_id;
-};
-
-// TODO(rsgowman): Expand this to roughly match the java class
-// c.g.f.f.model.value.ObjectValue. Probably move it to a similar namespace as
-// well. (FieldValue itself is also in the value package in java.) Also do the
-// same with the other FooValue values that FieldValue can return.
-class FieldValue;
-struct ObjectValue {
-  // TODO(rsgowman): These will eventually be private. We do want the serializer
-  // to be able to directly access these (possibly implying 'friend' usage, or a
-  // getInternalValue() like java has.)
-  using Map = std::map<std::string, FieldValue>;
-  Map internal_value;
-};
+class ObjectValue;
 
 /**
  * tagged-union class representing an immutable data value as stored in
@@ -66,6 +52,9 @@ struct ObjectValue {
  */
 class FieldValue {
  public:
+  using Array = std::vector<FieldValue>;
+  using Map = immutable::SortedMap<std::string, FieldValue>;
+
   /**
    * All the different kinds of values that can be stored in fields in
    * a document. The types of the same comparison order should be defined
@@ -90,67 +79,157 @@ class FieldValue {
     // position instead, see the doc comment above.
   };
 
-  FieldValue() {
-  }
+  FieldValue();
 
-  // Do not inline these ctor/dtor below, which contain call to non-trivial
-  // operator=.
-  FieldValue(const FieldValue& value);
-  FieldValue(FieldValue&& value);
+  FieldValue(ObjectValue object);  // NOLINT(runtime/explicit)
 
-  ~FieldValue();
-
-  FieldValue& operator=(const FieldValue& value);
-  FieldValue& operator=(FieldValue&& value);
+#if __OBJC__
+  FSTFieldValue* Wrap() &&;
+#endif  // __OBJC__
 
   /** Returns the true type for this value. */
   Type type() const {
-    return tag_;
-  }
-
-  bool boolean_value() const {
-    FIREBASE_ASSERT(tag_ == Type::Boolean);
-    return boolean_value_;
-  }
-
-  int64_t integer_value() const {
-    FIREBASE_ASSERT(tag_ == Type::Integer);
-    return integer_value_;
-  }
-
-  Timestamp timestamp_value() const {
-    FIREBASE_ASSERT(tag_ == Type::Timestamp);
-    return timestamp_value_;
-  }
-
-  const std::string& string_value() const {
-    FIREBASE_ASSERT(tag_ == Type::String);
-    return string_value_;
-  }
-
-  ObjectValue object_value() const {
-    FIREBASE_ASSERT(tag_ == Type::Object);
-    return ObjectValue{object_value_};
+    return rep_->type();
   }
 
   /**
-   * Returns a FieldValue with the field at the named path set to value.
-   * Any absent parent of the field will also be created accordingly.
-   *
-   * @param field_path The field path to set. Cannot be empty.
-   * @param value The value to set.
-   * @return A new FieldValue with the field set.
+   * Checks if the given type is a numeric, such as Type::Integer or
+   * Type::Double.
    */
-  FieldValue Set(const FieldPath& field_path, FieldValue value) const;
+  static bool IsNumber(Type type) {
+    return type == Type::Integer || type == Type::Double;
+  }
 
   /**
-   * Returns a FieldValue with the field path deleted. If there is no field at
-   * the specified path, the returned value is an identical copy.
-   *
-   * @param field_path The field path to remove. Cannot be empty.
-   * @return A new FieldValue with the field path removed.
+   * PORTING NOTE: This deviates from the other platforms that define TypeOrder.
+   * Since we already define Type for union types, we use it together with this
+   * function to achieve the equivalent order of types i.e.
+   *     i) if two types are comparable, then they are of equal order;
+   *    ii) otherwise, their order is the same as the order of their Type.
    */
-  FieldValue Delete(const FieldPath& field_path) const;
+  static bool Comparable(Type lhs, Type rhs);
+
+  bool boolean_value() const;
+
+  int64_t integer_value() const;
+
+  double double_value() const;
+
+  Timestamp timestamp_value() const;
+
+  const std::string& string_value() const;
+
+  const std::vector<uint8_t>& blob_value() const;
+
+  const GeoPoint& geo_point_value() const;
+
+  const Array& array_value() const;
+
+  const Map& object_value() const;
+
+  bool is_nan() const {
+    if (type() != Type::Double) return false;
+    return std::isnan(double_value());
+  }
+
+  /** factory methods. */
+  static FieldValue Null();
+  static FieldValue True();
+  static FieldValue False();
+  static FieldValue Nan();
+  static FieldValue EmptyObject();
+  static FieldValue FromBoolean(bool value);
+  static FieldValue FromInteger(int64_t value);
+  static FieldValue FromDouble(double value);
+  static FieldValue FromTimestamp(const Timestamp& value);
+  static FieldValue FromServerTimestamp(const Timestamp& local_write_time,
+                                        const FieldValue& previous_value);
+  static FieldValue FromServerTimestamp(const Timestamp& local_write_time);
+  static FieldValue FromString(const char* value);
+  static FieldValue FromString(const std::string& value);
+  static FieldValue FromString(std::string&& value);
+  static FieldValue FromBlob(const uint8_t* source, size_t size);
+  static FieldValue FromReference(DatabaseId database_id, DocumentKey value);
+  static FieldValue FromGeoPoint(const GeoPoint& value);
+  static FieldValue FromArray(const Array& value);
+  static FieldValue FromArray(Array&& value);
+  static FieldValue FromMap(const Map& value);
+  static FieldValue FromMap(Map&& value);
+
+  size_t Hash() const {
+    return rep_->Hash();
+  }
+
+  util::ComparisonResult CompareTo(const FieldValue& rhs) const {
+    return rep_->CompareTo(*rhs.rep_);
+  }
+
+  /**
+   * Checks if the two values are equal, returning false if the value is
+   * perceptibly different in any regard.
+   *
+   * Comparison for FieldValues is defined by whether or not values should
+   * match for the purposes of querying. Comparison therefore makes the broadest
+   * possible allowance, looking only for logical equality. This means that e.g.
+   * -0.0, +0.0 and 0 (floating point and integer zeros) are all considered the
+   * same value for comparison purposes.
+   *
+   * Equality for FieldValues is defined by whether or not a user could
+   * perceive a change to the value. That is, a change from integer zero to
+   * a double zero can be perceived and so these values are unequal despite
+   * comparing same.
+   *
+   * This makes FieldValue one of the special cases where equality is
+   * inconsistent with comparison. There are cases where CompareTo will return
+   * Same but operator== will return false.
+   */
+  friend bool operator==(const FieldValue& lhs, const FieldValue& rhs);
+
+  std::string ToString() const {
+    return rep_->ToString();
+  }
+
+  friend std::ostream& operator<<(std::ostream& os, const FieldValue& value);
+
+  friend class ObjectValue;
+  class BaseValue {
+   public:
+    virtual ~BaseValue() = default;
+
+    virtual Type type() const = 0;
+
+    virtual std::string ToString() const = 0;
+
+    virtual bool Equals(const BaseValue& other) const = 0;
+
+    virtual util::ComparisonResult CompareTo(const BaseValue& other) const = 0;
+
+    virtual size_t Hash() const = 0;
+
+   protected:
+    util::ComparisonResult CompareTypes(const BaseValue& other) const;
+  };
+
+ private:
+  explicit FieldValue(std::shared_ptr<BaseValue> rep) : rep_(std::move(rep)) {
+  }
+
+  std::shared_ptr<BaseValue> rep_;
+};
+
+/** A structured object value stored in Firestore. */
+class ObjectValue : public util::Comparable<ObjectValue> {
+ public:
+  explicit ObjectValue(FieldValue fv) : fv_(std::move(fv)) {
+    HARD_ASSERT(fv_.type() == FieldValue::Type::Object);
+  }
+
+  static ObjectValue Empty() {
+    return ObjectValue(FieldValue::EmptyObject());
+  }
+
+  static ObjectValue FromMap(const FieldValue::Map& value);
+  static ObjectValue FromMap(FieldValue::Map&& value);
 
   /**
    * Returns the value at the given path or absl::nullopt. If the path is empty,
@@ -161,108 +240,79 @@ class FieldValue {
    */
   absl::optional<FieldValue> Get(const FieldPath& field_path) const;
 
-  /** factory methods. */
-  static const FieldValue& NullValue();
-  static const FieldValue& TrueValue();
-  static const FieldValue& FalseValue();
-  static const FieldValue& BooleanValue(bool value);
-  static const FieldValue& NanValue();
-  static FieldValue IntegerValue(int64_t value);
-  static FieldValue DoubleValue(double value);
-  static FieldValue TimestampValue(const Timestamp& value);
-  static FieldValue ServerTimestampValue(const Timestamp& local_write_time,
-                                         const Timestamp& previous_value);
-  static FieldValue ServerTimestampValue(const Timestamp& local_write_time);
-  static FieldValue StringValue(const char* value);
-  static FieldValue StringValue(const std::string& value);
-  static FieldValue StringValue(std::string&& value);
-  static FieldValue BlobValue(const uint8_t* source, size_t size);
-  static FieldValue ReferenceValue(const DocumentKey& value,
-                                   const DatabaseId* database_id);
-  static FieldValue ReferenceValue(DocumentKey&& value,
-                                   const DatabaseId* database_id);
-  static FieldValue GeoPointValue(const GeoPoint& value);
-  static FieldValue ArrayValue(const std::vector<FieldValue>& value);
-  static FieldValue ArrayValue(std::vector<FieldValue>&& value);
-  static FieldValue ObjectValueFromMap(const ObjectValue::Map& value);
-  static FieldValue ObjectValueFromMap(ObjectValue::Map&& value);
-
-  friend bool operator<(const FieldValue& lhs, const FieldValue& rhs);
-
- private:
-  explicit FieldValue(bool value) : tag_(Type::Boolean), boolean_value_(value) {
+  /**
+   * Returns a FieldValue with the field at the named path set to value.
+   * Any absent parent of the field will also be created accordingly.
+   *
+   * @param field_path The field path to set. Cannot be empty.
+   * @param value The value to set.
+   * @return A new FieldValue with the field set.
+   */
+  ObjectValue Set(const FieldPath& field_path, const FieldValue& value) const;
+  ObjectValue Set(const FieldPath& field_path, const ObjectValue& value) const {
+    return Set(field_path, value.fv_);
   }
 
   /**
-   * Switch to the specified type, if different from the current type.
+   * Returns a FieldValue with the field path deleted. If there is no field at
+   * the specified path, the returned value is an identical copy.
+   *
+   * @param field_path The field path to remove. Cannot be empty.
+   * @return A new FieldValue with the field path removed.
    */
-  void SwitchTo(Type type);
+  ObjectValue Delete(const FieldPath& field_path) const;
 
-  Type tag_ = Type::Null;
-  union {
-    // There is no null type as tag_ alone is enough for Null FieldValue.
-    bool boolean_value_;
-    int64_t integer_value_;
-    double double_value_;
-    Timestamp timestamp_value_;
-    ServerTimestamp server_timestamp_value_;
-    std::string string_value_;
-    std::vector<uint8_t> blob_value_;
-    // Qualified name to avoid conflict with the member function of same name.
-    firebase::firestore::model::ReferenceValue reference_value_;
-    GeoPoint geo_point_value_;
-    std::vector<FieldValue> array_value_;
-    ObjectValue object_value_;
-  };
+  // TODO(rsgowman): Add Value() method?
+  //
+  // Java has a value() method which returns a (non-immutable) java.util.Map,
+  // which is a copy of the immutable map, but with some fields (such as server
+  // timestamps) optionally resolved. Do we need the same here?
+
+  const FieldValue::Map& GetInternalValue() const;
+
+  const FieldValue& AsFieldValue() const {
+    return fv_;
+  }
+
+  util::ComparisonResult CompareTo(const ObjectValue& rhs) const;
+
+  std::string ToString() const;
+  friend std::ostream& operator<<(std::ostream& os, const ObjectValue& value);
+
+  size_t Hash() const;
+
+ private:
+  ObjectValue SetChild(const std::string& child_name,
+                       const FieldValue& value) const;
+
+  FieldValue fv_;
 };
 
-/** Compares against another FieldValue. */
-bool operator<(const FieldValue& lhs, const FieldValue& rhs);
-
-inline bool operator>(const FieldValue& lhs, const FieldValue& rhs) {
-  return rhs < lhs;
+// Pretend you can automatically upcast from ObjectValue to FieldValue.
+inline FieldValue::FieldValue(ObjectValue object)
+    : FieldValue(object.AsFieldValue()) {
 }
 
+inline bool operator!=(const FieldValue& lhs, const FieldValue& rhs) {
+  // See operator== for why this isn't using util::Same().
+  return !(lhs == rhs);
+}
+
+inline bool operator<(const FieldValue& lhs, const FieldValue& rhs) {
+  return util::Ascending(lhs.CompareTo(rhs));
+}
+inline bool operator>(const FieldValue& lhs, const FieldValue& rhs) {
+  return util::Descending(lhs.CompareTo(rhs));
+}
+inline bool operator<=(const FieldValue& lhs, const FieldValue& rhs) {
+  return !(rhs < lhs);
+}
 inline bool operator>=(const FieldValue& lhs, const FieldValue& rhs) {
   return !(lhs < rhs);
 }
 
-inline bool operator<=(const FieldValue& lhs, const FieldValue& rhs) {
-  return !(lhs > rhs);
-}
-
-inline bool operator!=(const FieldValue& lhs, const FieldValue& rhs) {
-  return lhs < rhs || lhs > rhs;
-}
-
-inline bool operator==(const FieldValue& lhs, const FieldValue& rhs) {
-  return !(lhs != rhs);
-}
-
-/** Compares against another ObjectValue. */
-inline bool operator<(const ObjectValue& lhs, const ObjectValue& rhs) {
-  return lhs.internal_value < rhs.internal_value;
-}
-
-inline bool operator>(const ObjectValue& lhs, const ObjectValue& rhs) {
-  return rhs < lhs;
-}
-
-inline bool operator>=(const ObjectValue& lhs, const ObjectValue& rhs) {
-  return !(lhs < rhs);
-}
-
-inline bool operator<=(const ObjectValue& lhs, const ObjectValue& rhs) {
-  return !(lhs > rhs);
-}
-
-inline bool operator!=(const ObjectValue& lhs, const ObjectValue& rhs) {
-  return lhs < rhs || lhs > rhs;
-}
-
-inline bool operator==(const ObjectValue& lhs, const ObjectValue& rhs) {
-  return !(lhs != rhs);
-}
+// A bit pattern for our canonical NaN value. Exposed here for testing.
+ABSL_CONST_INIT extern const uint64_t kCanonicalNanBits;
 
 }  // namespace model
 }  // namespace firestore

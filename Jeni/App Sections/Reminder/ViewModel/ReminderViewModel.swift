@@ -10,6 +10,8 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import UIKit
+import EventKit
 
 enum ActionCaller {
     case add
@@ -104,10 +106,16 @@ class ReminderViewModel {
     var indexSelected: Int?
     var currentUserId: String?
     
+    var actionCaller: ActionCaller = .add
+    var medicineModel: MedicineModel?
+    var eventStore: EKEventStore!
+    var reminder: EKReminder!
+    
+    weak var delegate: ReminderCoordinatorDelegate!
+    
     init() {
         let db = Firestore.firestore()
         let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
         
         if Auth.auth().currentUser != nil {
@@ -256,6 +264,10 @@ class ReminderViewModel {
         docRef = db.document("users/\(currentUserId!)/medicines/\(medicine.id!)")
         
         docRef.delete()
+    }
+    
+    func backToHome() {
+        delegate.backToHome(self)
     }
 }
 

@@ -16,9 +16,12 @@
 
 #include "Firestore/core/src/firebase/firestore/util/log.h"
 
+#if defined(__APPLE__)
+
 #import <FirebaseCore/FIRLogger.h>
 #import <Foundation/Foundation.h>
 
+#include <cstdarg>
 #include <string>
 
 #include "Firestore/core/src/firebase/firestore/util/string_apple.h"
@@ -29,14 +32,15 @@ namespace util {
 
 namespace {
 
+const FIRLoggerService kFIRLoggerFirestore = @"[Firebase/Firestore]";
+
 // Translates a C++ LogLevel to the equivalent Objective-C FIRLoggerLevel
 FIRLoggerLevel ToFIRLoggerLevel(LogLevel level) {
   switch (level) {
-    case kLogLevelVerbose:  // fall through
     case kLogLevelDebug:
       return FIRLoggerLevelDebug;
-    case kLogLevelInfo:
-      return FIRLoggerLevelInfo;
+    case kLogLevelNotice:
+      return FIRLoggerLevelNotice;
     case kLogLevelWarning:
       return FIRLoggerLevelWarning;
     case kLogLevelError:
@@ -47,77 +51,34 @@ FIRLoggerLevel ToFIRLoggerLevel(LogLevel level) {
   }
 }
 
+// Actually logs a message via FIRLogger. This must be a C varargs function
+// so that we can call FIRLogBasic which takes a `va_list`.
+void LogMessageV(LogLevel level, NSString* format, ...) {
+  va_list list;
+  va_start(list, format);
+
+  FIRLogBasic(ToFIRLoggerLevel(level), kFIRLoggerFirestore, @"I-FST000001",
+              format, list);
+
+  va_end(list);
+}
+
 }  // namespace
 
 void LogSetLevel(LogLevel level) {
   FIRSetLoggerLevel(ToFIRLoggerLevel(level));
 }
 
-LogLevel LogGetLevel() {
-  // We return the true log level. True log level is what the SDK used to
-  // determine whether to log instead of what parameter is used in the last call
-  // of LogSetLevel().
-  if (FIRIsLoggableLevel(FIRLoggerLevelInfo, NO)) {
-    if (FIRIsLoggableLevel(FIRLoggerLevelDebug, NO)) {
-      // FIRLoggerLevelMax is actually kLogLevelDebug right now. We do not check
-      // further.
-      return kLogLevelDebug;
-    } else {
-      return kLogLevelInfo;
-    }
-  } else {
-    if (FIRIsLoggableLevel(FIRLoggerLevelWarning, NO)) {
-      return kLogLevelWarning;
-    } else {
-      return kLogLevelError;
-    }
-  }
+bool LogIsLoggable(LogLevel level) {
+  return FIRIsLoggableLevel(ToFIRLoggerLevel(level), false);
 }
 
-void LogDebug(const char* format, ...) {
-  va_list list;
-  va_start(list, format);
-  FIRLogBasic(FIRLoggerLevelDebug, kFIRLoggerFirestore, @"I-FST000001",
-              WrapNSStringNoCopy(format), list);
-  va_end(list);
-}
-
-void LogInfo(const char* format, ...) {
-  va_list list;
-  va_start(list, format);
-  FIRLogBasic(FIRLoggerLevelInfo, kFIRLoggerFirestore, @"I-FST000001",
-              WrapNSStringNoCopy(format), list);
-  va_end(list);
-}
-
-void LogWarning(const char* format, ...) {
-  va_list list;
-  va_start(list, format);
-  FIRLogBasic(FIRLoggerLevelWarning, kFIRLoggerFirestore, @"I-FST000001",
-              WrapNSStringNoCopy(format), list);
-  va_end(list);
-}
-
-void LogError(const char* format, ...) {
-  va_list list;
-  va_start(list, format);
-  FIRLogBasic(FIRLoggerLevelError, kFIRLoggerFirestore, @"I-FST000001",
-              WrapNSStringNoCopy(format), list);
-  va_end(list);
-}
-
-void LogMessageV(LogLevel log_level, const char* format, va_list args) {
-  FIRLogBasic(ToFIRLoggerLevel(log_level), kFIRLoggerFirestore, @"I-FST000001",
-              WrapNSStringNoCopy(format), args);
-}
-
-void LogMessage(LogLevel log_level, const char* format, ...) {
-  va_list list;
-  va_start(list, format);
-  LogMessageV(log_level, format, list);
-  va_end(list);
+void LogMessage(LogLevel level, const std::string& message) {
+  LogMessageV(level, @"%s", message.c_str());
 }
 
 }  // namespace util
 }  // namespace firestore
 }  // namespace firebase
+
+#endif  // defined(__APPLE__)

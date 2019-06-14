@@ -23,7 +23,7 @@
 
 #include "Firestore/core/src/firebase/firestore/immutable/llrb_node.h"
 #include "Firestore/core/src/firebase/firestore/util/comparison.h"
-#include "Firestore/core/src/firebase/firestore/util/firebase_assert.h"
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 
 namespace firebase {
 namespace firestore {
@@ -117,7 +117,7 @@ class LlrbNodeIterator {
 
     const node_type* node = root;
     while (!node->empty()) {
-      util::ComparisonResult cmp = util::Compare(key, node->key(), comparator);
+      util::ComparisonResult cmp = comparator.Compare(key, node->key());
       if (cmp == util::ComparisonResult::Same) {
         // Found exactly what we're looking for so we're done.
         stack.push(node);
@@ -149,7 +149,7 @@ class LlrbNodeIterator {
    * This can only be called if `end()` is false.
    */
   pointer get() const {
-    FIREBASE_ASSERT(!is_end());
+    HARD_ASSERT(!is_end());
     return &(stack_.top()->entry());
   }
 
@@ -162,7 +162,7 @@ class LlrbNodeIterator {
   }
 
   LlrbNodeIterator& operator++() {
-    FIREBASE_ASSERT(!is_end());
+    HARD_ASSERT(!is_end());
 
     // Pop the stack, moving the currently pointed to node to the parent.
     const node_type* node = stack_.top();

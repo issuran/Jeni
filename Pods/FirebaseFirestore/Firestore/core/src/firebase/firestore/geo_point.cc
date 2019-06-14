@@ -17,10 +17,10 @@
 #include "Firestore/core/include/firebase/firestore/geo_point.h"
 
 #include <cmath>
+#include <iostream>
 
-#include "Firestore/core/src/firebase/firestore/util/firebase_assert.h"
-
-using std::isnan;
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
+#include "absl/strings/str_cat.h"
 
 namespace firebase {
 namespace firestore {
@@ -30,14 +30,19 @@ GeoPoint::GeoPoint() : GeoPoint(0, 0) {
 
 GeoPoint::GeoPoint(double latitude, double longitude)
     : latitude_(latitude), longitude_(longitude) {
-  FIREBASE_ASSERT_MESSAGE_WITH_EXPRESSION(
-      !isnan(latitude) && -90 <= latitude && latitude <= 90,
-      -90 <= latitude && latitude <= 90,
-      "Latitude must be in the range of [-90, 90]");
-  FIREBASE_ASSERT_MESSAGE_WITH_EXPRESSION(
-      !isnan(longitude) && -180 <= longitude && longitude <= 180,
-      -180 <= longitude && longitude <= 180,
-      "Latitude must be in the range of [-180, 180]");
+  HARD_ASSERT(!std::isnan(latitude) && -90 <= latitude && latitude <= 90,
+              "Latitude must be in the range of [-90, 90]");
+  HARD_ASSERT(!std::isnan(longitude) && -180 <= longitude && longitude <= 180,
+              "Latitude must be in the range of [-180, 180]");
+}
+
+std::string GeoPoint::ToString() const {
+  return absl::StrCat("GeoPoint(latitude=", latitude_,
+                      ", longitude=", longitude_, ")");
+}
+
+std::ostream& operator<<(std::ostream& out, const GeoPoint& geo_point) {
+  return out << geo_point.ToString();
 }
 
 bool operator<(const GeoPoint& lhs, const GeoPoint& rhs) {

@@ -17,15 +17,14 @@
 #ifndef FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_MODEL_DOCUMENT_KEY_H_
 #define FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_MODEL_DOCUMENT_KEY_H_
 
+#include <functional>
 #include <initializer_list>
 #include <memory>
 #include <string>
 
-#if defined(__OBJC__)
-#import "Firestore/Source/Model/FSTDocumentKey.h"
-#endif  // defined(__OBJC__)
-
 #include "Firestore/core/src/firebase/firestore/model/resource_path.h"
+#include "Firestore/core/src/firebase/firestore/util/comparison.h"
+#include "Firestore/core/src/firebase/firestore/util/hashing.h"
 #include "absl/strings/string_view.h"
 
 namespace firebase {
@@ -35,7 +34,7 @@ namespace model {
 /**
  * DocumentKey represents the location of a document in the Firestore database.
  */
-class DocumentKey {
+class DocumentKey : public util::Comparable<DocumentKey> {
  public:
   /** Creates a "blank" document key not associated with any document. */
   DocumentKey() : path_{std::make_shared<ResourcePath>()} {
@@ -47,29 +46,11 @@ class DocumentKey {
   /** Creates a new document key, taking ownership of the given path. */
   explicit DocumentKey(ResourcePath&& path);
 
-#if defined(__OBJC__)
-  DocumentKey(FSTDocumentKey* key)  // NOLINT(runtime/explicit)
-      : path_(std::make_shared<ResourcePath>(key.path)) {
-  }
-
-  operator FSTDocumentKey*() const {
-    return [FSTDocumentKey keyWithPath:path()];
-  }
-
-  std::string ToString() const {
-    return path().CanonicalString();
-  }
-
-  NSUInteger Hash() const {
-    return std::hash<std::string>{}(ToString());
-  }
-#endif
-
   /**
    * Creates and returns a new document key using '/' to split the string into
    * segments.
    */
-  static DocumentKey FromPathString(const absl::string_view path) {
+  static DocumentKey FromPathString(absl::string_view path) {
     return DocumentKey{ResourcePath::FromString(path)};
   }
 
@@ -86,9 +67,25 @@ class DocumentKey {
     return path.size() % 2 == 0;
   }
 
+  util::ComparisonResult CompareTo(const DocumentKey& other) const;
+
+  size_t Hash() const {
+    return util::Hash(ToString());
+  }
+
+  std::string ToString() const {
+    return path().CanonicalString();
+  }
+
   /** The path to the document. */
   const ResourcePath& path() const {
     return path_ ? *path_ : Empty().path();
+  }
+
+  /** Returns true if the document is in the specified collectionId. */
+  bool HasCollectionId(absl::string_view collection_id) const {
+    size_t size = path().size();
+    return size >= 2 && path()[size - 2] == collection_id;
   }
 
  private:
@@ -97,24 +94,11 @@ class DocumentKey {
   std::shared_ptr<const ResourcePath> path_;
 };
 
-inline bool operator==(const DocumentKey& lhs, const DocumentKey& rhs) {
-  return lhs.path() == rhs.path();
-}
-inline bool operator!=(const DocumentKey& lhs, const DocumentKey& rhs) {
-  return lhs.path() != rhs.path();
-}
-inline bool operator<(const DocumentKey& lhs, const DocumentKey& rhs) {
-  return lhs.path() < rhs.path();
-}
-inline bool operator<=(const DocumentKey& lhs, const DocumentKey& rhs) {
-  return lhs.path() <= rhs.path();
-}
-inline bool operator>(const DocumentKey& lhs, const DocumentKey& rhs) {
-  return lhs.path() > rhs.path();
-}
-inline bool operator>=(const DocumentKey& lhs, const DocumentKey& rhs) {
-  return lhs.path() >= rhs.path();
-}
+struct DocumentKeyHash {
+  size_t operator()(const DocumentKey& key) const {
+    return util::Hash(key.path());
+  }
+};
 
 }  // namespace model
 }  // namespace firestore

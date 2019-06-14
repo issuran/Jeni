@@ -22,6 +22,7 @@
 
 #include "Firestore/core/src/firebase/firestore/model/field_path.h"
 #include "Firestore/core/src/firebase/firestore/model/transform_operations.h"
+#include "Firestore/core/src/firebase/firestore/util/hashing.h"
 
 namespace firebase {
 namespace firestore {
@@ -43,6 +44,10 @@ class FieldTransform {
     return *transformation_.get();
   }
 
+  bool idempotent() const {
+    return transformation_->idempotent();
+  }
+
   bool operator==(const FieldTransform& other) const {
     return path_ == other.path_ && *transformation_ == *other.transformation_;
   }
@@ -51,9 +56,7 @@ class FieldTransform {
   // For Objective-C++ hash; to be removed after migration.
   // Do NOT use in C++ code.
   NSUInteger Hash() const {
-    NSUInteger hash = path_.Hash();
-    hash = hash * 31 + transformation_->Hash();
-    return hash;
+    return util::Hash(path_, transformation_->Hash());
   }
 #endif  // defined(__OBJC__)
 

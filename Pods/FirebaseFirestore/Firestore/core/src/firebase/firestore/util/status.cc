@@ -16,15 +16,19 @@
 
 #include "Firestore/core/src/firebase/firestore/util/status.h"
 
-#include "Firestore/core/src/firebase/firestore/util/string_printf.h"
+#include <ostream>
+#include <utility>
+
+#include "Firestore/core/src/firebase/firestore/util/string_format.h"
+#include "absl/memory/memory.h"
 
 namespace firebase {
 namespace firestore {
 namespace util {
 
 Status::Status(FirestoreErrorCode code, absl::string_view msg) {
-  FIREBASE_ASSERT(code != FirestoreErrorCode::Ok);
-  state_ = std::unique_ptr<State>(new State);
+  HARD_ASSERT(code != FirestoreErrorCode::Ok);
+  state_ = absl::make_unique<State>();
   state_->code = code;
   state_->msg = static_cast<std::string>(msg);
 }
@@ -35,11 +39,41 @@ void Status::Update(const Status& new_status) {
   }
 }
 
+Status& Status::CausedBy(const Status& cause) {
+  if (cause.ok() || this == &cause) {
+    return *this;
+  }
+
+  if (ok()) {
+    *this = cause;
+    return *this;
+  }
+
+  absl::StrAppend(&state_->msg, ": ", cause.error_message());
+
+  // If this Status has no accompanying PlatformError but the cause does, create
+  // an PlatformError for this Status ahead of time to preserve the causal chain
+  // that Status doesn't otherwise support.
+  if (state_->platform_error == nullptr &&
+      cause.state_->platform_error != nullptr) {
+    state_->platform_error =
+        cause.state_->platform_error->WrapWith(code(), error_message());
+  }
+
+  return *this;
+}
+
+Status& Status::WithPlatformError(std::unique_ptr<PlatformError> error) {
+  HARD_ASSERT(!ok(), "Platform errors should not be applied to Status::OK()");
+  state_->platform_error = std::move(error);
+  return *this;
+}
+
 void Status::SlowCopyFrom(const State* src) {
   if (src == nullptr) {
     state_ = nullptr;
   } else {
-    state_ = std::unique_ptr<State>(new State(*src));
+    state_ = absl::make_unique<State>(*src);
   }
 }
 
@@ -103,7 +137,7 @@ std::string Status::ToString() const {
         result = "Data loss";
         break;
       default:
-        result = StringPrintf("Unknown code(%d)", static_cast<int>(code()));
+        result = StringFormat("Unknown code(%s)", code());
         break;
     }
     result += ": ";
@@ -112,12 +146,17 @@ std::string Status::ToString() const {
   }
 }
 
+std::ostream& operator<<(std::ostream& out, const Status& status) {
+  out << status.ToString();
+  return out;
+}
+
 void Status::IgnoreError() const {
   // no-op
 }
 
 std::string StatusCheckOpHelperOutOfLine(const Status& v, const char* msg) {
-  FIREBASE_ASSERT(!v.ok());
+  HARD_ASSERT(!v.ok());
   std::string r("Non-OK-status: ");
   r += msg;
   r += " status: ";

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import EventKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
@@ -25,7 +27,6 @@ class HomeViewModel {
             username = Auth.auth().currentUser?.displayName ?? ""
         }
         let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
     }
     
@@ -40,10 +41,22 @@ class HomeViewModel {
     func logout() {
         do {
             try Auth.auth().signOut()
-            delegate.callLogin(self)
+            callLogin()
         } catch {
             print("Damn it")
         }
+    }
+    
+    func callLogin() {
+        delegate.callLogin(self)
+    }
+    
+    func callAddReminder(_ actionCaller: ActionCaller, event: EKEventStore) {
+        delegate.callAddReminder(actionCaller, event: event)
+    }
+    
+    func callEditReminder(_ actionCaller: ActionCaller, event: EKEventStore, index: Int, medicineModel: MedicineModel, medicineModelArray: [MedicineModel]) {
+        delegate.callEditReminder(actionCaller, event: event, index: index, medicineModel: medicineModel, medicineModelArray: medicineModelArray)
     }
     
     func loadMedicinesFromFirebase() {

@@ -16,27 +16,35 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Firestore/Source/Core/FSTTypes.h"
-#import "Firestore/Source/Model/FSTDocumentKeySet.h"
-#import "Firestore/Source/Model/FSTDocumentVersionDictionary.h"
+#include <unordered_map>
+#include <vector>
 
 #include "Firestore/core/src/firebase/firestore/model/document_key.h"
+#include "Firestore/core/src/firebase/firestore/model/document_key_set.h"
+#include "Firestore/core/src/firebase/firestore/model/document_map.h"
+#include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
+#include "Firestore/core/src/firebase/firestore/model/types.h"
 
-@class FSTMutation;
 @class FIRTimestamp;
+@class FSTMaybeDocument;
+@class FSTMutation;
 @class FSTMutationResult;
 @class FSTMutationBatchResult;
-@class FSTSnapshotVersion;
+
+namespace model = firebase::firestore::model;
+
+namespace firebase {
+namespace firestore {
+namespace model {
+
+// TODO(wilhuff): make this type a member of MutationBatchResult once that's a C++ class.
+using DocumentVersionMap = std::unordered_map<DocumentKey, SnapshotVersion, DocumentKeyHash>;
+
+}  // namespace model
+}  // namespace firestore
+}  // namespace firebase
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- * A BatchID that was searched for and not found or a batch ID value known to be before all known
- * batches.
- *
- * FSTBatchID values from the local store are non-negative so this value is before all batches.
- */
-extern const FSTBatchID kFSTBatchIDUnknown;
 
 /**
  * A batch of mutations that will be sent as one unit to the backend. Batches can be marked as a
@@ -45,15 +53,20 @@ extern const FSTBatchID kFSTBatchIDUnknown;
  */
 @interface FSTMutationBatch : NSObject
 
-/** Initializes a mutation batch with the given batchID, localWriteTime, and mutations. */
-- (instancetype)initWithBatchID:(FSTBatchID)batchID
+/**
+ * Initializes a mutation batch with the given batchID, localWriteTime, base mutations, and
+ * mutations.
+ */
+- (instancetype)initWithBatchID:(model::BatchId)batchID
                  localWriteTime:(FIRTimestamp *)localWriteTime
-                      mutations:(NSArray<FSTMutation *> *)mutations NS_DESIGNATED_INITIALIZER;
+                  baseMutations:(std::vector<FSTMutation *> &&)baseMutations
+                      mutations:(std::vector<FSTMutation *> &&)mutations NS_DESIGNATED_INITIALIZER;
 
 - (id)init NS_UNAVAILABLE;
 
 /**
- * Applies all the mutations in this FSTMutationBatch to the specified document.
+ * Applies all the mutations in this FSTMutationBatch to the specified document to create a new
+ * remote document.
  *
  * @param maybeDoc The document to apply mutations to.
  * @param documentKey The key of the document to apply mutations to.
@@ -61,35 +74,42 @@ extern const FSTBatchID kFSTBatchIDUnknown;
  *   it's assumed that this is a local (latency-compensated) application and documents will have
  *   their hasLocalMutations flag set.
  */
-- (FSTMaybeDocument *_Nullable)applyTo:(FSTMaybeDocument *_Nullable)maybeDoc
-                           documentKey:(const firebase::firestore::model::DocumentKey &)documentKey
-                   mutationBatchResult:(FSTMutationBatchResult *_Nullable)mutationBatchResult;
+- (FSTMaybeDocument *_Nullable)applyToRemoteDocument:(FSTMaybeDocument *_Nullable)maybeDoc
+                                         documentKey:(const model::DocumentKey &)documentKey
+                                 mutationBatchResult:
+                                     (FSTMutationBatchResult *_Nullable)mutationBatchResult;
 
 /**
  * A helper version of applyTo for applying mutations locally (without a mutation batch result from
  * the backend).
  */
-- (FSTMaybeDocument *_Nullable)applyTo:(FSTMaybeDocument *_Nullable)maybeDoc
-                           documentKey:(const firebase::firestore::model::DocumentKey &)documentKey;
+- (FSTMaybeDocument *_Nullable)applyToLocalDocument:(FSTMaybeDocument *_Nullable)maybeDoc
+                                        documentKey:(const model::DocumentKey &)documentKey;
 
-/**
- * Returns YES if this mutation batch has already been removed from the mutation queue.
- *
- * Note that not all implementations of the FSTMutationQueue necessarily use tombstones as a part
- * of their implementation and generally speaking no code outside the mutation queues should really
- * care about this.
- */
-- (BOOL)isTombstone;
-
-/** Converts this batch to a tombstone. */
-- (FSTMutationBatch *)toTombstone;
+/** Computes the local view for all provided documents given the mutations in this batch. */
+- (model::MaybeDocumentMap)applyToLocalDocumentSet:(const model::MaybeDocumentMap &)documentSet;
 
 /** Returns the set of unique keys referenced by all mutations in the batch. */
-- (FSTDocumentKeySet *)keys;
+- (model::DocumentKeySet)keys;
 
-@property(nonatomic, assign, readonly) FSTBatchID batchID;
+/** The unique ID of this mutation batch. */
+@property(nonatomic, assign, readonly) model::BatchId batchID;
+
+/** The original write time of this mutation. */
 @property(nonatomic, strong, readonly) FIRTimestamp *localWriteTime;
-@property(nonatomic, strong, readonly) NSArray<FSTMutation *> *mutations;
+
+/**
+ * Mutations that are used to populate the base values when this mutation is applied locally. This
+ * can be used to locally overwrite values that are persisted in the remote document cache. Base
+ * mutations are never sent to the backend.
+ */
+- (const std::vector<FSTMutation *> &)baseMutations;
+
+/**
+ * The user-provided mutations in this mutation batch. User-provided mutations are applied both
+ * locally and remotely on the backend.
+ */
+- (const std::vector<FSTMutation *> &)mutations;
 
 @end
 
@@ -106,15 +126,17 @@ extern const FSTBatchID kFSTBatchIDUnknown;
  * (as docVersions).
  */
 + (instancetype)resultWithBatch:(FSTMutationBatch *)batch
-                  commitVersion:(FSTSnapshotVersion *)commitVersion
-                mutationResults:(NSArray<FSTMutationResult *> *)mutationResults
+                  commitVersion:(model::SnapshotVersion)commitVersion
+                mutationResults:(std::vector<FSTMutationResult *>)mutationResults
                     streamToken:(nullable NSData *)streamToken;
 
+- (const model::SnapshotVersion &)commitVersion;
+- (const std::vector<FSTMutationResult *> &)mutationResults;
+
 @property(nonatomic, strong, readonly) FSTMutationBatch *batch;
-@property(nonatomic, strong, readonly) FSTSnapshotVersion *commitVersion;
-@property(nonatomic, strong, readonly) NSArray<FSTMutationResult *> *mutationResults;
 @property(nonatomic, strong, readonly, nullable) NSData *streamToken;
-@property(nonatomic, strong, readonly) FSTDocumentVersionDictionary *docVersions;
+
+- (const model::DocumentVersionMap &)docVersions;
 
 @end
 

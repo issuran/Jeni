@@ -26,8 +26,10 @@ namespace auth {
 /** `EmptyCredentialsProvider` always yields an empty token. */
 class EmptyCredentialsProvider : public CredentialsProvider {
  public:
-  void GetToken(bool force_refresh, TokenListener completion) override;
-  void SetUserChangeListener(UserChangeListener listener) override;
+  void GetToken(TokenListener completion) override;
+  void InvalidateToken() override;
+  void SetCredentialChangeListener(
+      CredentialChangeListener changeListener) override;
 };
 
 }  // namespace auth

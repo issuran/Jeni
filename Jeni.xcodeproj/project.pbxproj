@@ -15,6 +15,7 @@
 		525D267B22AC8FB50036D30E /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267A22AC8FB50036D30E /* RequestStatus.swift */; };
 		529834BE22ADB9AA0065100E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 529834BD22ADB9AA0065100E /* GoogleService-Info.plist */; };
 		529A3E5A229362C400E084C2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529A3E59229362C400E084C2 /* Observable.swift */; };
+		52A88BB122B2A40E00BD9CBF /* ReminderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A88BB022B2A40E00BD9CBF /* ReminderCoordinator.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
 		52B4260D2282650300218D18 /* MedicineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
 		52B4260E2282650300218D18 /* MedicineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */; };
@@ -67,6 +68,7 @@
 		525D267A22AC8FB50036D30E /* RequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		529834BD22ADB9AA0065100E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		529A3E59229362C400E084C2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		52A88BB022B2A40E00BD9CBF /* ReminderCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCoordinator.swift; sourceTree = "<group>"; };
 		52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B4260C2282650300218D18 /* MedicineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicineCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 				525791BC227E6AC400107AE6 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		52A88BAF22B2A3FA00BD9CBF /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				52A88BB022B2A40E00BD9CBF /* ReminderCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		52B228EF227BCB3A006EC2B5 /* Utils */ = {
@@ -295,6 +305,7 @@
 		52ED0D3E2283971000D7316A /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
+				52A88BAF22B2A3FA00BD9CBF /* Coordinator */,
 				52E039602290C7F2005BF73F /* ViewModel */,
 				52ED0D3F2283971A00D7316A /* ViewController */,
 			);
@@ -485,27 +496,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Jeni/Pods-Jeni-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -569,6 +576,7 @@
 				525D267B22AC8FB50036D30E /* RequestStatus.swift in Sources */,
 				52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */,
 				52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */,
+				52A88BB122B2A40E00BD9CBF /* ReminderCoordinator.swift in Sources */,
 				52E0395322909979005BF73F /* TimeReminderTableViewCell.swift in Sources */,
 				52E0395B2290B1AF005BF73F /* MedicineModel.swift in Sources */,
 				525D267922AC5FF80036D30E /* ConvertModel.swift in Sources */,
@@ -761,7 +769,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = X9469P8892;
 				INFOPLIST_FILE = Jeni/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -769,8 +778,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.oliveira.Jeni;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tiago.oliveira.Jeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "jeni-development";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -782,7 +792,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = X9469P8892;
 				INFOPLIST_FILE = Jeni/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -790,8 +801,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.oliveira.Jeni;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tiago.oliveira.Jeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "jeni-production";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

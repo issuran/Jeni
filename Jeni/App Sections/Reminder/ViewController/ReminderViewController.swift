@@ -29,23 +29,23 @@ class ReminderViewController: BaseViewController {
     @IBOutlet weak var addTimeReminderButton: JeniButton!
     @IBOutlet weak var doneButton: JeniButton!
     
-    var actionCaller: ActionCaller = .add
-    var medicineModel: MedicineModel?
-    var indexSelected: Int?
-    
     let tableReuseIdentifier = "timeReminderCell"
     let collectionReuseIdentifier = "medicineImage"
     
     let datePicker = UIPickerView()
     let timePicker = UIDatePicker()
     
-    var eventStore: EKEventStore!
-    var reminder: EKReminder!
-    
-    var docRef: DocumentReference!
-    var viewModel = ReminderViewModel()
+    var viewModel: ReminderViewModel!
     var hud = HUD()
-    var medicineItemArray: [MedicineModel] = []
+    
+    init(viewModel: ReminderViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,26 +87,21 @@ class ReminderViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.medicineItemArray = self.medicineItemArray
-        
-        switch actionCaller {
+        super.viewWillAppear(animated)        
+        switch viewModel.actionCaller {
         case .add:
             reminderLabel.text = "Add Reminder"
             trashButton.isHidden = true
         case .edit:
             reminderLabel.text = "Edit Reminder"
             trashButton.isHidden = false
-            viewModel.reminderIdentifiers = medicineModel?.medicineDetail?.reminderIdentifiers ?? [String]()
-            viewModel.indexSelected = indexSelected
-            fillFields(medicineModel ?? MedicineModel(id: "id", name: "Teste", image: "", medicineDetail: nil))
+            fillFields(viewModel.medicineModel ?? MedicineModel(id: "id", name: "Teste", image: "", medicineDetail: nil))
         }
     }
     
     @IBAction func backAction(_ sender: Any) {
-        medicineModel = nil
-        _ = navigationController?.popToRootViewController(animated: true)
+        viewModel.medicineModel = nil
+        viewModel.backToHome()
     }
     
     @IBAction func deleteReminderAction(_ sender: Any) {
@@ -165,12 +160,12 @@ class ReminderViewController: BaseViewController {
         
         if filledSuccessfully {
             viewModel.medicineName = medicineName!
-            switch actionCaller {
+            switch viewModel.actionCaller {
             case .add:
                     let uuid = UUID().uuidString
                     let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
                     
-                    scheduleNotification(medicineModel) {
+                    scheduleNotification(viewModel.medicineModel) {
                         let medicineDetails = MedicineDetail(amount: medicineAmount!,
                                                              period: self.viewModel.periodReminder.days,
                                                              periodType: self.viewModel.periodReminder.type,
@@ -190,11 +185,11 @@ class ReminderViewController: BaseViewController {
                     }
                 
             case .edit:                
-                medicineModel = viewModel.medicineItemArray.first(where: { $0.id == self.medicineModel?.id })
+                viewModel.medicineModel = viewModel.medicineItemArray.first(where: { $0.id == self.viewModel.medicineModel?.id })
                 
                 let medicineType = viewModel.getMedicineType(viewModel.selectedType!)
                 
-                scheduleNotification(medicineModel) {
+                scheduleNotification(viewModel.medicineModel) {
                     let medicineDetails = MedicineDetail(amount: medicineAmount!,
                                                          period: self.viewModel.periodReminder.days,
                                                          periodType: self.viewModel.periodReminder.type,
@@ -203,25 +198,25 @@ class ReminderViewController: BaseViewController {
                                                          typeName: medicineType,
                                                          reminderTime: self.viewModel.timesReminderArray,
                                                          reminderIdentifiers: self.viewModel.reminderIdentifiers)
-                    self.medicineModel?.name = medicineName!
-                    self.medicineModel?.image = self.viewModel.getMedicineTypeName(medicineType, .create)
-                    self.medicineModel?.medicineDetail = medicineDetails
+                    self.viewModel.medicineModel?.name = medicineName!
+                    self.viewModel.medicineModel?.image = self.viewModel.getMedicineTypeName(medicineType, .create)
+                    self.viewModel.medicineModel?.medicineDetail = medicineDetails
                     
-                    self.viewModel.saveReminderToFirestore(self.medicineModel!)
+                    self.viewModel.saveReminderToFirestore(self.viewModel.medicineModel!)
                     
-                    self.viewModel.medicineItemArray[self.indexSelected!] = self.medicineModel!
+                    self.viewModel.medicineItemArray[self.viewModel.indexSelected!] = self.viewModel.medicineModel!
                 }
             }
         } else {
             alert(message: message)
         }
         
-        _ = navigationController?.popToRootViewController(animated: true)
+        viewModel.backToHome()
     }
     
     func scheduleNotification(_ medicineModel: MedicineModel?, completion: @escaping Handler) {
         
-        switch actionCaller {
+        switch viewModel.actionCaller {
         case .edit:
             UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (notifications) in
                 print("num of pending notifications \(notifications.count)")

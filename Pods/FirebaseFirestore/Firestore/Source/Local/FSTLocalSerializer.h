@@ -16,11 +16,12 @@
 
 #import <Foundation/Foundation.h>
 
+#include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
+
 @class FSTMaybeDocument;
 @class FSTMutationBatch;
 @class FSTQueryData;
 @class FSTSerializerBeta;
-@class FSTSnapshotVersion;
 
 @class FSTPBMaybeDocument;
 @class FSTPBTarget;
@@ -28,12 +29,14 @@
 
 @class GPBTimestamp;
 
+namespace model = firebase::firestore::model;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Serializer for values stored in the LocalStore.
  *
- * Note that FSTLocalSerializer currently delegates to the serializer for the Firestore v1beta1 RPC
+ * Note that FSTLocalSerializer currently delegates to the serializer for the Firestore v1 RPC
  * protocol to save implementation time and code duplication. We'll need to revisit this when the
  * RPC protocol we use diverges from local storage.
  */
@@ -61,11 +64,11 @@ NS_ASSUME_NONNULL_BEGIN
 /** Decodes an FSTPBTarget proto from local storage into an FSTQueryData model. */
 - (FSTQueryData *)decodedQueryData:(FSTPBTarget *)target;
 
-/** Encodes an FSTSnapshotVersion model into a GPBTimestamp proto. */
-- (GPBTimestamp *)encodedVersion:(FSTSnapshotVersion *)version;
+/** Encodes a SnapshotVersion model into a GPBTimestamp proto. */
+- (GPBTimestamp *)encodedVersion:(const model::SnapshotVersion &)version;
 
-/** Decodes a GPBTimestamp proto into a FSTSnapshotVersion model. */
-- (FSTSnapshotVersion *)decodedVersion:(GPBTimestamp *)version;
+/** Decodes a GPBTimestamp proto into a SnapshotVersion model. */
+- (model::SnapshotVersion)decodedVersion:(GPBTimestamp *)version;
 
 @end
 

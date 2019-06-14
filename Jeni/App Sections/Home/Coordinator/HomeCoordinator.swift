@@ -8,9 +8,12 @@
 
 import Foundation
 import UIKit
+import EventKit
 
 protocol HomeCoordinatorDelegate: AnyObject {
     func callLogin(_ viewModel: HomeViewModel)
+    func callAddReminder(_ actionCaller: ActionCaller, event: EKEventStore)
+    func callEditReminder(_ actionCaller: ActionCaller, event: EKEventStore, index: Int, medicineModel: MedicineModel, medicineModelArray: [MedicineModel])
 }
 
 class HomeCoordinator: BaseCoordinator {

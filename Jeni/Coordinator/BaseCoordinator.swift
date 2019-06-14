@@ -15,3 +15,7 @@ protocol BaseCoordinator {
     
     func start()
 }
+
+extension BaseCoordinator {
+    func start() {}
+}

@@ -20,15 +20,13 @@
 #include <utility>
 
 #if defined(__OBJC__)
-#import "FIRTimestamp.h"
-#import "Firestore/Source/Core/FSTSnapshotVersion.h"
 #import "Firestore/Source/Model/FSTDocument.h"
 #include "Firestore/core/include/firebase/firestore/timestamp.h"
 #endif  // defined(__OBJC__)
 
 #include "Firestore/core/src/firebase/firestore/model/maybe_document.h"
 #include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
-#include "Firestore/core/src/firebase/firestore/util/firebase_assert.h"
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 
 namespace firebase {
 namespace firestore {
@@ -60,7 +58,7 @@ class Precondition {
    * Returns true if the precondition is valid for the given document (and the
    * document is available).
    */
-  bool IsValidFor(const MaybeDocument& maybe_doc) const;
+  bool IsValidFor(const MaybeDocument* maybe_doc) const;
 
   /** Returns whether this Precondition represents no precondition. */
   bool IsNone() const {
@@ -73,6 +71,10 @@ class Precondition {
 
   const SnapshotVersion& update_time() const {
     return update_time_;
+  }
+
+  bool exists() const {
+    return exists_;
   }
 
   bool operator==(const Precondition& other) const {
@@ -105,7 +107,7 @@ class Precondition {
       case Type::None:
         return true;
     }
-    FIREBASE_UNREACHABLE();
+    UNREACHABLE();
   }
 
   // For Objective-C++ hash; to be removed after migration.
@@ -132,10 +134,7 @@ class Precondition {
             stringWithFormat:@"<Precondition update_time=%s>",
                              update_time_.timestamp().ToString().c_str()];
     }
-    // We only raise dev assertion here. This function is mainly used in
-    // logging.
-    FIREBASE_DEV_ASSERT_MESSAGE(false, "precondition invalid");
-    return @"<Precondition invalid>";
+    UNREACHABLE();
   }
 #endif  // defined(__OBJC__)
 

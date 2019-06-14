@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import "FIROptions.h"
+#import <FirebaseCore/FIROptions.h>
 
 /**
  * Keys for the strings in the plist file.
@@ -60,6 +60,12 @@ extern NSString *const kServiceInfoFileType;
 + (FIROptions *)defaultOptions;
 
 + (NSDictionary *)defaultOptionsDictionary;
+
+/**
+ * Indicates whether or not Analytics collection was explicitly enabled via a plist flag or at
+ * runtime.
+ */
+@property(nonatomic, readonly) BOOL isAnalyticsCollectionExpicitlySet;
 
 /**
  * Whether or not Analytics Collection was enabled. Analytics Collection is enabled unless
