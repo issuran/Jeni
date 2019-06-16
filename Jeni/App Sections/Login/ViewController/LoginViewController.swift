@@ -89,12 +89,15 @@ class LoginViewController: BaseViewController {
                 changeRequest?.displayName = self.usernameTextField!.text ?? ""
                 changeRequest?.commitChanges(completion: { (error) in
                     if error == nil {
+                        self.hud.loadingView(false)
                         self.viewModel.callHome()
                     } else {
+                        self.hud.loadingView(false)
                         self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
                     }
                 })
             } else {
+                self.hud.loadingView(false)
                 self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
             }
         }
@@ -108,6 +111,7 @@ class LoginViewController: BaseViewController {
         case true:
             firebaseSignUp()
         case false:
+            self.hud.loadingView(false)
             print("Error")
         }
     }
