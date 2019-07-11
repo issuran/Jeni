@@ -77,7 +77,11 @@ class LoginViewController: BaseViewController {
                 self.viewModel.callHome()
             } else {
                 self.hud.loadingView(false)
-                self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
+                guard let error = error else {
+                    self.alert(message: "Sorry! An Unknown Network Error Has Occurred.")
+                    return
+                }
+                self.alert(message: "Erro: \(error.localizedDescription)")
             }
         }
     }
@@ -93,12 +97,20 @@ class LoginViewController: BaseViewController {
                         self.viewModel.callHome()
                     } else {
                         self.hud.loadingView(false)
-                        self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
+                        guard let error = error else {
+                            self.alert(message: "Sorry! An Unknown Network Error Has Occurred.")
+                            return
+                        }
+                        self.alert(message: "Erro: \(error.localizedDescription)")
                     }
                 })
             } else {
                 self.hud.loadingView(false)
-                self.alert(message: "Erro: \(String(describing: error?.localizedDescription))")
+                guard let error = error else {
+                    self.alert(message: "Sorry! An Unknown Network Error Has Occurred.")
+                    return
+                }
+                self.alert(message: "Erro: \(error.localizedDescription)")
             }
         }
     }
@@ -112,7 +124,7 @@ class LoginViewController: BaseViewController {
             firebaseSignUp()
         case false:
             self.hud.loadingView(false)
-            print("Error")
+            self.alert(message: "Sorry! An Unknown Network Error Has Occurred.")
         }
     }
     

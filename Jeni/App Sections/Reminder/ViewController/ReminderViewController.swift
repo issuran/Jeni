@@ -271,11 +271,10 @@ class ReminderViewController: BaseViewController {
                         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
                         
                         notification.add(request, withCompletionHandler: { (error) in
-                            if error != nil {
-                                print("Not good! \(error?.localizedDescription ?? "Error during create new Notification!")")
-                            } else {
-                                print("Success")
-                            }
+                            
+                            guard let error = error else { print("Notification has been created!")
+                                return }
+                            self.alert(message: "Not good! \(error.localizedDescription)")
                         })
                     }
                     timeToRemind += 1
