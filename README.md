@@ -19,6 +19,7 @@ Jeni is a medicine reminder. Patients can create schedules and set timers to rem
 - Report to me using my [e-mail](tiago_fernandes89@hotmail.com)
 
 - There has been reported a few features to fix, I will be fixing then soon!
+- Remove alarm, not working properly
 
 ## Author
 Tiago Oliveira
