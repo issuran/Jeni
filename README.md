@@ -1,13 +1,13 @@
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg) ![CocoaPods](https://img.shields.io/badge/pod-1.5.3-blue.svg) [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) 
 ![XCode](https://img.shields.io/badge/XCode-10.0-inactive.svg) ![Language](https://img.shields.io/badge/Language-Swift4.2-inactive.svg) ![Platform](https://img.shields.io/badge/Platform-iOS-inactive.svg) 
 
-## Jeni
+## Jeni :pill:
 It is an app to help people remember when to take their medicines.
 
-## What is it?
+## What is it? :squirrel:
 Jeni is a medicine reminder. Patients can create schedules and set timers to remind them about when to take their medicines.
 
-## Preview
+## Preview :movie_camera:
 Login          | Sign Up
 :-------------------------:|:-------------------------:
 ![image](https://user-images.githubusercontent.com/8193383/61099087-92872e00-a437-11e9-8c7a-d474f19fc096.png)  |   ![image](https://user-images.githubusercontent.com/8193383/61099088-92872e00-a437-11e9-9b9e-faa375f9ff3f.png)
@@ -20,10 +20,10 @@ Reminder (Add)         |  Reminder (Edit)
 :-------------------------:|:-------------------------:
 ![image](https://user-images.githubusercontent.com/8193383/61100208-ab91de00-a43b-11e9-9df6-80dbd9ab87f2.png) |    ![image](https://user-images.githubusercontent.com/8193383/61100207-ab91de00-a43b-11e9-85e5-708acdc21225.png)
 
-**Short preview:**<br />
+**Short preview:** 
 ![](http://g.recordit.co/4CdXRnBlZv.gif)
 
-## Setup
+## Setup :hammer:
 - First of all, you need to have [CocoaPods](https://cocoapods.org), enter the command inside the project to install its dependencies:
 `pod install`
 
@@ -32,18 +32,18 @@ Reminder (Add)         |  Reminder (Edit)
 - And you should be ready to go!
 
 ## Bugs :bug:
-- Report to me using my [e-mail](tiago_fernandes89@hotmail.com)
+- Report to me using my [e-mail](tiago_fernandes89@hotmail.com) :mailbox_with_mail:
 
-## Author
+## Author :black_nib:
 Tiago Oliveira
 
-#### Images
+## Images :file_folder:
 - Pill Icon base
 Icon made by [Sean McCormick](https://www.flaticon.com/authors/sean-mccormick) from www.flaticon.com
 
 - All others images
 Icon pack by [Icons8](https://icons8.com)
 
-## License
+## License :bookmark:
 
 Jeni is released under the MIT license. See [LICENSE](https://github.com/issuran/Jeni/blob/master/LICENSE) for more information.
