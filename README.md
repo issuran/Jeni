@@ -7,6 +7,22 @@ It is an app to help people remember when to take their medicines.
 ## What is it?
 Jeni is a medicine reminder. Patients can create schedules and set timers to remind them about when to take their medicines.
 
+## Preview
+Login          | Sign Up
+:-------------------------:|:-------------------------:
+![image](https://user-images.githubusercontent.com/8193383/61099087-92872e00-a437-11e9-8c7a-d474f19fc096.png)  |   ![image](https://user-images.githubusercontent.com/8193383/61099088-92872e00-a437-11e9-9b9e-faa375f9ff3f.png)
+
+Home (without reminders)         |  Home (with reminders)
+:-------------------------:|:-------------------------:
+![image](https://user-images.githubusercontent.com/8193383/61099089-931fc480-a437-11e9-8337-23c9bd42c036.png) |    ![image](https://user-images.githubusercontent.com/8193383/61099091-931fc480-a437-11e9-98af-4cb5ad628a02.png)
+
+Reminder (Add)         |  Reminder (Edit)
+:-------------------------:|:-------------------------:
+![image](https://user-images.githubusercontent.com/8193383/61100208-ab91de00-a43b-11e9-9df6-80dbd9ab87f2.png) |    ![image](https://user-images.githubusercontent.com/8193383/61100207-ab91de00-a43b-11e9-85e5-708acdc21225.png)
+
+**Short preview:**<br />
+![](http://g.recordit.co/4CdXRnBlZv.gif)
+
 ## Setup
 - First of all, you need to have [CocoaPods](https://cocoapods.org), enter the command inside the project to install its dependencies:
 `pod install`
@@ -17,9 +33,6 @@ Jeni is a medicine reminder. Patients can create schedules and set timers to rem
 
 ## Bugs :bug:
 - Report to me using my [e-mail](tiago_fernandes89@hotmail.com)
-
-- There has been reported a few features to fix, I will be fixing then soon!
-- Remove alarm, not working properly
 
 ## Author
 Tiago Oliveira
