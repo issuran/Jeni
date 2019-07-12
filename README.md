@@ -7,7 +7,7 @@ It is an app to help people remember when to take their medicines.
 ## What is it? :squirrel:
 Jeni is a medicine reminder. Patients can create schedules and set timers to remind them about when to take their medicines.
 
-## Preview :movie_camera:
+## Screenshots :iphone:
 Login          | Sign Up
 :-------------------------:|:-------------------------:
 ![image](https://user-images.githubusercontent.com/8193383/61099087-92872e00-a437-11e9-8c7a-d474f19fc096.png)  |   ![image](https://user-images.githubusercontent.com/8193383/61099088-92872e00-a437-11e9-9b9e-faa375f9ff3f.png)
@@ -20,7 +20,7 @@ Reminder (Add)         |  Reminder (Edit)
 :-------------------------:|:-------------------------:
 ![image](https://user-images.githubusercontent.com/8193383/61100208-ab91de00-a43b-11e9-9df6-80dbd9ab87f2.png) |    ![image](https://user-images.githubusercontent.com/8193383/61100207-ab91de00-a43b-11e9-85e5-708acdc21225.png)
 
-**Short preview:** 
+## Short Preview :movie_camera:
 ![](http://g.recordit.co/4CdXRnBlZv.gif)
 
 ## Setup :hammer:
