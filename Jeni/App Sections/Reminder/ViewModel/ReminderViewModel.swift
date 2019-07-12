@@ -128,7 +128,21 @@ class ReminderViewModel {
     func addTimeReminder(_ time: String) -> Void {
         let timeArray = time.components(separatedBy: ":")
         let timeReminder = TimeReminder(hour: timeArray.first!, minute: timeArray.last!)
-        timesReminderArray.append(timeReminder)
+        
+        if isTimeReminderUnique(timeReminder) {
+            timesReminderArray.append(timeReminder)
+        }
+    }
+    
+    func isTimeReminderUnique(_ timeReminder: TimeReminder) -> Bool {
+        var result: Bool = false
+        for reminder in timesReminderArray {
+            result = reminder.hour == timeReminder.hour && reminder.minute == timeReminder.minute
+            if result {
+                break
+            }
+        }
+        return !result
     }
     
     // MARK: Getters
