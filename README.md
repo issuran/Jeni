@@ -37,6 +37,13 @@ Reminder (Add)         |  Reminder (Edit)
 ## Author
 Tiago Oliveira
 
+#### Images
+- Pill Icon base
+Icon made by [Sean McCormick](https://www.flaticon.com/authors/sean-mccormick) from www.flaticon.com
+
+- All others images
+Icon pack by [Icons8](https://icons8.com)
+
 ## License
 
 Jeni is released under the MIT license. See [LICENSE](https://github.com/issuran/Jeni/blob/master/LICENSE) for more information.
