@@ -61,6 +61,9 @@ class ReminderViewController: BaseViewController {
         
         timeReminderTableView.delegate = self
         timeReminderTableView.dataSource = self
+        timeReminderTableView.tableFooterView = UIView()
+        timeReminderTableView.separatorStyle = .none
+        timeReminderTableView.allowsSelection = false
         timeReminderTableView.register(UINib(nibName: "TimeReminderTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: tableReuseIdentifier)
         
