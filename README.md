@@ -1,5 +1,5 @@
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg) ![CocoaPods](https://img.shields.io/badge/pod-1.5.3-blue.svg) [![MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) 
-![XCode](https://img.shields.io/badge/XCode-10.0-inactive.svg) ![Language](https://img.shields.io/badge/Language-Swift4.2-inactive.svg) ![Platform](https://img.shields.io/badge/Platform-iOS-inactive.svg) 
+![XCode](https://img.shields.io/badge/XCode-10.3-inactive.svg) ![Language](https://img.shields.io/badge/Language-Swift4.2-inactive.svg) ![Platform](https://img.shields.io/badge/Platform-iOS-inactive.svg) 
 
 ## Jeni :pill:
 It is an app to help people remember when to take their medicines.
