@@ -1,29 +1,29 @@
-/*
- *
- * Copyright 2015 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+//
+//
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//
 
-#ifndef GRPC_CORE_LIB_IOMGR_EXECUTOR_H
-#define GRPC_CORE_LIB_IOMGR_EXECUTOR_H
+#ifndef GRPC_SRC_CORE_LIB_IOMGR_EXECUTOR_H
+#define GRPC_SRC_CORE_LIB_IOMGR_EXECUTOR_H
 
 #include <grpc/support/port_platform.h>
 
-#include "src/core/lib/gpr/spinlock.h"
 #include "src/core/lib/gprpp/thd.h"
 #include "src/core/lib/iomgr/closure.h"
+#include "src/core/util/spinlock.h"
 
 namespace grpc_core {
 
@@ -36,7 +36,7 @@ struct ThreadState {
   size_t depth;  // Number of closures in the closure list
   bool shutdown;
   bool queued_long_job;
-  grpc_core::Thread thd;
+  Thread thd;
 };
 
 enum class ExecutorType {
@@ -54,23 +54,23 @@ enum class ExecutorJobType {
 
 class Executor {
  public:
-  Executor(const char* executor_name);
+  explicit Executor(const char* executor_name);
 
   void Init();
 
-  /** Is the executor multi-threaded? */
+  /// Is the executor multi-threaded?
   bool IsThreaded() const;
 
-  /* Enable/disable threading - must be called after Init and Shutdown(). Never
-   * call SetThreading(false) in the middle of an application */
+  // Enable/disable threading - must be called after Init and Shutdown(). Never
+  // call SetThreading(false) in the middle of an application
   void SetThreading(bool threading);
 
-  /** Shutdown the executor, running all pending work as part of the call */
+  /// Shutdown the executor, running all pending work as part of the call
   void Shutdown();
 
-  /** Enqueue the closure onto the executor. is_short is true if the closure is
-   * a short job (i.e expected to not block and complete quickly) */
-  void Enqueue(grpc_closure* closure, grpc_error* error, bool is_short);
+  /// Enqueue the closure onto the executor. is_short is true if the closure is
+  /// a short job (i.e expected to not block and complete quickly)
+  void Enqueue(grpc_closure* closure, grpc_error_handle error, bool is_short);
 
   // TODO(sreek): Currently we have two executors (available globally): The
   // default executor and the resolver executor.
@@ -83,6 +83,10 @@ class Executor {
   // Initialize ALL the executors
   static void InitAll();
 
+  static void Run(grpc_closure* closure, grpc_error_handle error,
+                  ExecutorType executor_type = ExecutorType::DEFAULT,
+                  ExecutorJobType job_type = ExecutorJobType::SHORT);
+
   // Shutdown ALL the executors
   static void ShutdownAll();
 
@@ -91,13 +95,6 @@ class Executor {
 
   // Set the threading mode for ALL the executors
   static void SetThreadingDefault(bool enable);
-
-  // Get the DEFAULT executor scheduler for the given job_type
-  static grpc_closure_scheduler* Scheduler(ExecutorJobType job_type);
-
-  // Get the executor scheduler for a given executor_type and a job_type
-  static grpc_closure_scheduler* Scheduler(ExecutorType executor_type,
-                                           ExecutorJobType job_type);
 
   // Return if a given executor is running in threaded mode (i.e if
   // SetThreading(true) was called previously on that executor)
@@ -119,4 +116,4 @@ class Executor {
 
 }  // namespace grpc_core
 
-#endif /* GRPC_CORE_LIB_IOMGR_EXECUTOR_H */
+#endif  // GRPC_SRC_CORE_LIB_IOMGR_EXECUTOR_H
