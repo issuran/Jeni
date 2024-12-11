@@ -19,9 +19,8 @@
 #ifndef GRPC_SLICE_H
 #define GRPC_SLICE_H
 
+#include <grpc/impl/slice_type.h>  // IWYU pragma: export
 #include <grpc/support/port_platform.h>
-
-#include <grpc/impl/codegen/slice.h>
 #include <grpc/support/sync.h>
 
 #ifdef __cplusplus
@@ -69,12 +68,6 @@ GPRAPI grpc_slice grpc_slice_malloc_large(size_t length);
 
 #define GRPC_SLICE_MALLOC(len) grpc_slice_malloc(len)
 
-/** Intern a slice:
-
-   The return value for two invocations of this function with  the same sequence
-   of bytes is a slice which points to the same memory. */
-GPRAPI grpc_slice grpc_slice_intern(grpc_slice slice);
-
 /** Create a slice by copying a string.
    Does not preserve null terminators.
    Equivalent to:
@@ -107,7 +100,7 @@ GPRAPI grpc_slice grpc_slice_sub_no_ref(grpc_slice s, size_t begin, size_t end);
 
 /** Splits s into two: modifies s to be s[0:split], and returns a new slice,
    sharing a refcount with s, that contains s[split:s.length].
-   Requires s intialized, split <= s.length */
+   Requires s initialized, split <= s.length */
 GPRAPI grpc_slice grpc_slice_split_tail(grpc_slice* s, size_t split);
 
 typedef enum {
@@ -124,13 +117,10 @@ GPRAPI grpc_slice grpc_slice_split_tail_maybe_ref(grpc_slice* s, size_t split,
 
 /** Splits s into two: modifies s to be s[split:s.length], and returns a new
    slice, sharing a refcount with s, that contains s[0:split].
-   Requires s intialized, split <= s.length */
+   Requires s initialized, split <= s.length */
 GPRAPI grpc_slice grpc_slice_split_head(grpc_slice* s, size_t split);
 
 GPRAPI grpc_slice grpc_empty_slice(void);
-
-GPRAPI uint32_t grpc_slice_default_hash_impl(grpc_slice s);
-GPRAPI int grpc_slice_default_eq_impl(grpc_slice a, grpc_slice b);
 
 GPRAPI int grpc_slice_eq(grpc_slice a, grpc_slice b);
 
@@ -150,8 +140,6 @@ GPRAPI int grpc_slice_chr(grpc_slice s, char c);
 /** return the index of the first occurrence of \a needle in \a haystack, or -1
    if it's not found */
 GPRAPI int grpc_slice_slice(grpc_slice haystack, grpc_slice needle);
-
-GPRAPI uint32_t grpc_slice_hash(grpc_slice s);
 
 /** Do two slices point at the same memory, with the same length
    If a or b is inlined, actually compares data */

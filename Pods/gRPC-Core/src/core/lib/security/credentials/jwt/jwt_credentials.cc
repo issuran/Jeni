@@ -1,117 +1,120 @@
-/*
- *
- * Copyright 2016 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-#include <grpc/support/port_platform.h>
+//
+// Copyright 2016 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//
 
 #include "src/core/lib/security/credentials/jwt/jwt_credentials.h"
 
 #include <inttypes.h>
-#include <string.h>
+#include <stdlib.h>
 
-#include "src/core/lib/gprpp/ref_counted.h"
-#include "src/core/lib/gprpp/ref_counted_ptr.h"
-#include "src/core/lib/surface/api_trace.h"
+#include <memory>
+#include <string>
+#include <utility>
 
+#include "absl/log/check.h"
+#include "absl/log/log.h"
+#include "absl/status/status.h"
+#include "absl/strings/str_cat.h"
+
+#include <grpc/credentials.h>
 #include <grpc/support/alloc.h>
+#include <grpc/support/json.h>
 #include <grpc/support/log.h>
+#include <grpc/support/port_platform.h>
 #include <grpc/support/string_util.h>
 #include <grpc/support/sync.h>
 
-void grpc_service_account_jwt_access_credentials::reset_cache() {
-  GRPC_MDELEM_UNREF(cached_.jwt_md);
-  cached_.jwt_md = GRPC_MDNULL;
-  if (cached_.service_url != nullptr) {
-    gpr_free(cached_.service_url);
-    cached_.service_url = nullptr;
-  }
-  cached_.jwt_expiration = gpr_inf_past(GPR_CLOCK_REALTIME);
-}
+#include "src/core/lib/debug/trace.h"
+#include "src/core/lib/gprpp/ref_counted_ptr.h"
+#include "src/core/lib/iomgr/exec_ctx.h"
+#include "src/core/lib/promise/promise.h"
+#include "src/core/lib/security/credentials/call_creds_util.h"
+#include "src/core/lib/surface/api_trace.h"
+#include "src/core/lib/transport/metadata_batch.h"
+#include "src/core/lib/uri/uri_parser.h"
+#include "src/core/util/json/json.h"
+#include "src/core/util/json/json_reader.h"
+#include "src/core/util/json/json_writer.h"
+
+using grpc_core::Json;
 
 grpc_service_account_jwt_access_credentials::
     ~grpc_service_account_jwt_access_credentials() {
   grpc_auth_json_key_destruct(&key_);
-  reset_cache();
   gpr_mu_destroy(&cache_mu_);
 }
 
-bool grpc_service_account_jwt_access_credentials::get_request_metadata(
-    grpc_polling_entity* pollent, grpc_auth_metadata_context context,
-    grpc_credentials_mdelem_array* md_array, grpc_closure* on_request_metadata,
-    grpc_error** error) {
+grpc_core::ArenaPromise<absl::StatusOr<grpc_core::ClientMetadataHandle>>
+grpc_service_account_jwt_access_credentials::GetRequestMetadata(
+    grpc_core::ClientMetadataHandle initial_metadata,
+    const grpc_call_credentials::GetRequestMetadataArgs* args) {
   gpr_timespec refresh_threshold = gpr_time_from_seconds(
       GRPC_SECURE_TOKEN_REFRESH_THRESHOLD_SECS, GPR_TIMESPAN);
 
-  /* See if we can return a cached jwt. */
-  grpc_mdelem jwt_md = GRPC_MDNULL;
+  // Remove service name from service_url to follow the audience format
+  // dictated in https://google.aip.dev/auth/4111.
+  absl::StatusOr<std::string> uri = grpc_core::RemoveServiceNameFromJwtUri(
+      grpc_core::MakeJwtServiceUrl(initial_metadata, args));
+  if (!uri.ok()) {
+    return grpc_core::Immediate(uri.status());
+  }
+  // See if we can return a cached jwt.
+  absl::optional<grpc_core::Slice> jwt_value;
   {
     gpr_mu_lock(&cache_mu_);
-    if (cached_.service_url != nullptr &&
-        strcmp(cached_.service_url, context.service_url) == 0 &&
-        !GRPC_MDISNULL(cached_.jwt_md) &&
+    if (cached_.has_value() && cached_->service_url == *uri &&
         (gpr_time_cmp(
-             gpr_time_sub(cached_.jwt_expiration, gpr_now(GPR_CLOCK_REALTIME)),
+             gpr_time_sub(cached_->jwt_expiration, gpr_now(GPR_CLOCK_REALTIME)),
              refresh_threshold) > 0)) {
-      jwt_md = GRPC_MDELEM_REF(cached_.jwt_md);
+      jwt_value = cached_->jwt_value.Ref();
     }
     gpr_mu_unlock(&cache_mu_);
   }
 
-  if (GRPC_MDISNULL(jwt_md)) {
+  if (!jwt_value.has_value()) {
     char* jwt = nullptr;
-    /* Generate a new jwt. */
+    // Generate a new jwt.
     gpr_mu_lock(&cache_mu_);
-    reset_cache();
-    jwt = grpc_jwt_encode_and_sign(&key_, context.service_url, jwt_lifetime_,
-                                   nullptr);
+    cached_.reset();
+    jwt = grpc_jwt_encode_and_sign(&key_, uri->c_str(), jwt_lifetime_, nullptr);
     if (jwt != nullptr) {
-      char* md_value;
-      gpr_asprintf(&md_value, "Bearer %s", jwt);
+      std::string md_value = absl::StrCat("Bearer ", jwt);
       gpr_free(jwt);
-      cached_.jwt_expiration =
-          gpr_time_add(gpr_now(GPR_CLOCK_REALTIME), jwt_lifetime_);
-      cached_.service_url = gpr_strdup(context.service_url);
-      cached_.jwt_md = grpc_mdelem_from_slices(
-          grpc_slice_from_static_string(GRPC_AUTHORIZATION_METADATA_KEY),
-          grpc_slice_from_copied_string(md_value));
-      gpr_free(md_value);
-      jwt_md = GRPC_MDELEM_REF(cached_.jwt_md);
+      jwt_value = grpc_core::Slice::FromCopiedString(md_value);
+      cached_ = {jwt_value->Ref(), std::move(*uri),
+                 gpr_time_add(gpr_now(GPR_CLOCK_REALTIME), jwt_lifetime_)};
     }
     gpr_mu_unlock(&cache_mu_);
   }
 
-  if (!GRPC_MDISNULL(jwt_md)) {
-    grpc_credentials_mdelem_array_add(md_array, jwt_md);
-    GRPC_MDELEM_UNREF(jwt_md);
-  } else {
-    *error = GRPC_ERROR_CREATE_FROM_STATIC_STRING("Could not generate JWT.");
+  if (!jwt_value.has_value()) {
+    return grpc_core::Immediate(
+        absl::UnauthenticatedError("Could not generate JWT."));
   }
-  return true;
-}
 
-void grpc_service_account_jwt_access_credentials::cancel_get_request_metadata(
-    grpc_credentials_mdelem_array* md_array, grpc_error* error) {
-  GRPC_ERROR_UNREF(error);
+  initial_metadata->Append(
+      GRPC_AUTHORIZATION_METADATA_KEY, std::move(*jwt_value),
+      [](absl::string_view, const grpc_core::Slice&) { abort(); });
+  return grpc_core::Immediate(std::move(initial_metadata));
 }
 
 grpc_service_account_jwt_access_credentials::
     grpc_service_account_jwt_access_credentials(grpc_auth_json_key key,
                                                 gpr_timespec token_lifetime)
-    : grpc_call_credentials(GRPC_CALL_CREDENTIALS_TYPE_JWT), key_(key) {
+    : key_(key) {
   gpr_timespec max_token_lifetime = grpc_max_auth_token_lifetime();
   if (gpr_time_cmp(token_lifetime, max_token_lifetime) > 0) {
     gpr_log(GPR_INFO,
@@ -121,14 +124,18 @@ grpc_service_account_jwt_access_credentials::
   }
   jwt_lifetime_ = token_lifetime;
   gpr_mu_init(&cache_mu_);
-  reset_cache();
+}
+
+grpc_core::UniqueTypeName grpc_service_account_jwt_access_credentials::Type() {
+  static grpc_core::UniqueTypeName::Factory kFactory("Jwt");
+  return kFactory.Create();
 }
 
 grpc_core::RefCountedPtr<grpc_call_credentials>
 grpc_service_account_jwt_access_credentials_create_from_auth_json_key(
     grpc_auth_json_key key, gpr_timespec token_lifetime) {
   if (!grpc_auth_json_key_is_valid(&key)) {
-    gpr_log(GPR_ERROR, "Invalid input for jwt credentials creation");
+    LOG(ERROR) << "Invalid input for jwt credentials creation";
     return nullptr;
   }
   return grpc_core::MakeRefCounted<grpc_service_account_jwt_access_credentials>(
@@ -136,31 +143,20 @@ grpc_service_account_jwt_access_credentials_create_from_auth_json_key(
 }
 
 static char* redact_private_key(const char* json_key) {
-  char* json_copy = gpr_strdup(json_key);
-  grpc_json* json = grpc_json_parse_string(json_copy);
-  if (!json) {
-    gpr_free(json_copy);
+  auto json = grpc_core::JsonParse(json_key);
+  if (!json.ok() || json->type() != Json::Type::kObject) {
     return gpr_strdup("<Json failed to parse.>");
   }
-  const char* redacted = "<redacted>";
-  grpc_json* current = json->child;
-  while (current) {
-    if (current->type == GRPC_JSON_STRING &&
-        strcmp(current->key, "private_key") == 0) {
-      current->value = const_cast<char*>(redacted);
-      break;
-    }
-    current = current->next;
-  }
-  char* clean_json = grpc_json_dump_to_string(json, 2);
-  gpr_free(json_copy);
-  grpc_json_destroy(json);
-  return clean_json;
+  Json::Object object = json->object();
+  object["private_key"] = Json::FromString("<redacted>");
+  return gpr_strdup(
+      grpc_core::JsonDump(Json::FromObject(std::move(object)), /*indent=*/2)
+          .c_str());
 }
 
 grpc_call_credentials* grpc_service_account_jwt_access_credentials_create(
     const char* json_key, gpr_timespec token_lifetime, void* reserved) {
-  if (GRPC_TRACE_FLAG_ENABLED(grpc_api_trace)) {
+  if (GRPC_TRACE_FLAG_ENABLED(api)) {
     char* clean_json = redact_private_key(json_key);
     gpr_log(GPR_INFO,
             "grpc_service_account_jwt_access_credentials_create("
@@ -173,10 +169,22 @@ grpc_call_credentials* grpc_service_account_jwt_access_credentials_create(
             static_cast<int>(token_lifetime.clock_type), reserved);
     gpr_free(clean_json);
   }
-  GPR_ASSERT(reserved == nullptr);
+  CHECK_EQ(reserved, nullptr);
   grpc_core::ApplicationCallbackExecCtx callback_exec_ctx;
   grpc_core::ExecCtx exec_ctx;
   return grpc_service_account_jwt_access_credentials_create_from_auth_json_key(
              grpc_auth_json_key_create_from_string(json_key), token_lifetime)
       .release();
 }
+
+namespace grpc_core {
+
+absl::StatusOr<std::string> RemoveServiceNameFromJwtUri(absl::string_view uri) {
+  auto parsed = URI::Parse(uri);
+  if (!parsed.ok()) {
+    return parsed.status();
+  }
+  return absl::StrFormat("%s://%s/", parsed->scheme(), parsed->authority());
+}
+
+}  // namespace grpc_core

@@ -1,33 +1,34 @@
-/*
- *
- * Copyright 2018 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+//
+//
+// Copyright 2018 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//
 
-#ifndef GRPC_CORE_TSI_SSL_SESSION_CACHE_SSL_SESSION_H
-#define GRPC_CORE_TSI_SSL_SESSION_CACHE_SSL_SESSION_H
+#ifndef GRPC_SRC_CORE_TSI_SSL_SESSION_CACHE_SSL_SESSION_H
+#define GRPC_SRC_CORE_TSI_SSL_SESSION_CACHE_SSL_SESSION_H
 
-#include <grpc/support/port_platform.h>
+#include <memory>
 
-#include "src/core/tsi/grpc_shadow_boringssl.h"
+#if COCOAPODS==1
+  #include <openssl_grpc/ssl.h>
+#else
+  #include <openssl/ssl.h>
+#endif
 
 #include <grpc/slice.h>
-
-extern "C" {
-#include <openssl_grpc/ssl.h>
-}
+#include <grpc/support/port_platform.h>
 
 #include "src/core/lib/gprpp/ref_counted.h"
 
@@ -57,14 +58,12 @@ class SslCachedSession {
   SslCachedSession& operator=(const SslCachedSession&) = delete;
 
   /// Create single cached instance of \a session.
-  static grpc_core::UniquePtr<SslCachedSession> Create(SslSessionPtr session);
+  static std::unique_ptr<SslCachedSession> Create(SslSessionPtr session);
 
   virtual ~SslCachedSession() = default;
 
   /// Returns a copy of previously cached session.
-  virtual SslSessionPtr CopySession() const GRPC_ABSTRACT;
-
-  GRPC_ABSTRACT_BASE_CLASS
+  virtual SslSessionPtr CopySession() const = 0;
 
  protected:
   SslCachedSession() = default;
@@ -72,4 +71,4 @@ class SslCachedSession {
 
 }  // namespace tsi
 
-#endif /* GRPC_CORE_TSI_SSL_SESSION_CACHE_SSL_SESSION_H */
+#endif  // GRPC_SRC_CORE_TSI_SSL_SESSION_CACHE_SSL_SESSION_H
