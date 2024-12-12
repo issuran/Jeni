@@ -129,6 +129,9 @@ strip_invalid_archs() {
   # Get architectures for current target binary
   binary_archs="$(lipo -info "$binary" | rev | cut -d ':' -f1 | awk '{$1=$1;print}' | rev)"
   # Intersect them with the architectures we are building for
+  if [ -z "${ARCHS+x}" ]; then
+    ARCHS=("arm64" "x86_64") # Default architectures
+  fi
   intersected_archs="$(echo ${ARCHS[@]} ${binary_archs[@]} | tr ' ' '\n' | sort | uniq -d)"
   # If there are no archs supported by this binary then warn the user
   if [[ -z "$intersected_archs" ]]; then

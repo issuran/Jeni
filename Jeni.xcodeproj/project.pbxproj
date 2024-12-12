@@ -8,12 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		5212C9A1229AEE04006AEC33 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212C9A0229AEE04006AEC33 /* HUD.swift */; };
+		5249AC142D0A4FFF00B5B631 /* BaseViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F18227DD7B500BDEE80 /* BaseViewController.swift */; };
+		5249AC152D0A4FFF00B5B631 /* HUD.swift in Resources */ = {isa = PBXBuildFile; fileRef = 5212C9A0229AEE04006AEC33 /* HUD.swift */; };
+		5249AC162D0A4FFF00B5B631 /* UIColor+Utils.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
+		5249AC172D0A4FFF00B5B631 /* Observable.swift in Resources */ = {isa = PBXBuildFile; fileRef = 529A3E59229362C400E084C2 /* Observable.swift */; };
+		5249AC182D0A4FFF00B5B631 /* SnapshotExtensions.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52E9287C22A8AB76006776F4 /* SnapshotExtensions.swift */; };
+		5249AC192D0A4FFF00B5B631 /* ConvertModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 525D267822AC5FF80036D30E /* ConvertModel.swift */; };
+		5249AC1A2D0A4FFF00B5B631 /* RequestStatus.swift in Resources */ = {isa = PBXBuildFile; fileRef = 525D267A22AC8FB50036D30E /* RequestStatus.swift */; };
+		5249AC1B2D0A4FFF00B5B631 /* JeniButton.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74BF227A6B8F00CCA655 /* JeniButton.swift */; };
+		5249AC1C2D0A4FFF00B5B631 /* JeniMedicineViewButton.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */; };
+		5249AC1D2D0A4FFF00B5B631 /* Coordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74BB227A4CC900CCA655 /* Coordinator.swift */; };
+		5249AC1E2D0A4FFF00B5B631 /* AppCoordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74B9227A4CAE00CCA655 /* AppCoordinator.swift */; };
+		5249AC1F2D0A4FFF00B5B631 /* BaseCoordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F22227DDF2300BDEE80 /* BaseCoordinator.swift */; };
+		5249AC202D0A4FFF00B5B631 /* MedicineModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395A2290B1AF005BF73F /* MedicineModel.swift */; };
+		5249AC212D0A4FFF00B5B631 /* MedicineFirebaseModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52E9287A22A8AB01006776F4 /* MedicineFirebaseModel.swift */; };
+		5249AC222D0A4FFF00B5B631 /* ReminderCoordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52A88BB022B2A40E00BD9CBF /* ReminderCoordinator.swift */; };
+		5249AC232D0A4FFF00B5B631 /* ReminderViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52E039612290C804005BF73F /* ReminderViewModel.swift */; };
+		5249AC242D0A4FFF00B5B631 /* TimeReminderTableViewCell.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395122909979005BF73F /* TimeReminderTableViewCell.swift */; };
+		5249AC252D0A4FFF00B5B631 /* PillCollectionViewCell.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52E0395522909F12005BF73F /* PillCollectionViewCell.swift */; };
+		5249AC262D0A4FFF00B5B631 /* ReminderViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52ED0D402283974500D7316A /* ReminderViewController.swift */; };
+		5249AC272D0A4FFF00B5B631 /* HomeViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
+		5249AC282D0A4FFF00B5B631 /* HomeCoordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 525791B9227E6A8000107AE6 /* HomeCoordinator.swift */; };
+		5249AC292D0A4FFF00B5B631 /* MedicineCollectionViewCell.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52B4260B2282650300218D18 /* MedicineCollectionViewCell.swift */; };
+		5249AC2A2D0A4FFF00B5B631 /* HomeViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F1C227DDDE000BDEE80 /* HomeViewController.swift */; };
+		5249AC2B2D0A4FFF00B5B631 /* LoginCoordinator.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F20227DDE0F00BDEE80 /* LoginCoordinator.swift */; };
+		5249AC2C2D0A4FFF00B5B631 /* LoginViewModel.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52F02F15227DD78500BDEE80 /* LoginViewModel.swift */; };
+		5249AC2D2D0A4FFF00B5B631 /* LoginViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74B4227A408100CCA655 /* LoginViewController.swift */; };
+		5249AC2E2D0A4FFF00B5B631 /* LoginViewController+UITextFieldDelegate.swift in Resources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
+		5249AC2F2D0A4FFF00B5B631 /* AppDelegate.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52DB749F227A3E0E00CCA655 /* AppDelegate.swift */; };
+		5249AC312D0A4FFF00B5B631 /* JeniTests.swift in Resources */ = {isa = PBXBuildFile; fileRef = 52B5193422AD920F00ABC312 /* JeniTests.swift */; };
+		5249AC382D0A5DCB00B5B631 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 529834BD22ADB9AA0065100E /* GoogleService-Info.plist */; };
+		5249AC3F2D0A5E5000B5B631 /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74A6227A3E0F00CCA655 /* Assets.xcassets */; };
+		5249AC422D0A5E5000B5B631 /* Pods-Jeni.debug.xcconfig in Sources */ = {isa = PBXBuildFile; fileRef = 76ECD705B06D54BE51790E47 /* Pods-Jeni.debug.xcconfig */; };
+		5249AC432D0A5E5000B5B631 /* Pods-Jeni.release.xcconfig in Sources */ = {isa = PBXBuildFile; fileRef = B1075ACCD9897A9CDE67D9BA /* Pods-Jeni.release.xcconfig */; };
+		5249AC442D0A5E5000B5B631 /* Pods_Jeni.framework in Sources */ = {isa = PBXBuildFile; fileRef = 05F7595FACB2244BEBAD7686 /* Pods_Jeni.framework */; };
 		525791BA227E6A8000107AE6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791B9227E6A8000107AE6 /* HomeCoordinator.swift */; };
 		525791BD227E6AC400107AE6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BC227E6AC400107AE6 /* HomeViewModel.swift */; };
 		525791BF227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525791BE227E87EA00107AE6 /* LoginViewController+UITextFieldDelegate.swift */; };
 		525D267922AC5FF80036D30E /* ConvertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267822AC5FF80036D30E /* ConvertModel.swift */; };
 		525D267B22AC8FB50036D30E /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D267A22AC8FB50036D30E /* RequestStatus.swift */; };
-		529834BE22ADB9AA0065100E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 529834BD22ADB9AA0065100E /* GoogleService-Info.plist */; };
 		529A3E5A229362C400E084C2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529A3E59229362C400E084C2 /* Observable.swift */; };
 		52A88BB122B2A40E00BD9CBF /* ReminderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A88BB022B2A40E00BD9CBF /* ReminderCoordinator.swift */; };
 		52B228F1227BCB53006EC2B5 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B228F0227BCB53006EC2B5 /* UIColor+Utils.swift */; };
@@ -22,7 +55,6 @@
 		52B42610228275D800218D18 /* JeniMedicineViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4260F228275D800218D18 /* JeniMedicineViewButton.swift */; };
 		52B5193522AD920F00ABC312 /* JeniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B5193422AD920F00ABC312 /* JeniTests.swift */; };
 		52DB74A0227A3E0E00CCA655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB749F227A3E0E00CCA655 /* AppDelegate.swift */; };
-		52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A6227A3E0F00CCA655 /* Assets.xcassets */; };
 		52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74A8227A3E0F00CCA655 /* LaunchScreen.storyboard */; };
 		52DB74B6227A408100CCA655 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DB74B4227A408100CCA655 /* LoginViewController.swift */; };
 		52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52DB74B5227A408100CCA655 /* LoginViewController.xib */; };
@@ -474,10 +506,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5249AC142D0A4FFF00B5B631 /* BaseViewController.swift in Resources */,
+				5249AC152D0A4FFF00B5B631 /* HUD.swift in Resources */,
+				5249AC162D0A4FFF00B5B631 /* UIColor+Utils.swift in Resources */,
+				5249AC172D0A4FFF00B5B631 /* Observable.swift in Resources */,
+				5249AC182D0A4FFF00B5B631 /* SnapshotExtensions.swift in Resources */,
+				5249AC192D0A4FFF00B5B631 /* ConvertModel.swift in Resources */,
+				5249AC1A2D0A4FFF00B5B631 /* RequestStatus.swift in Resources */,
+				5249AC1B2D0A4FFF00B5B631 /* JeniButton.swift in Resources */,
+				5249AC1C2D0A4FFF00B5B631 /* JeniMedicineViewButton.swift in Resources */,
+				5249AC1D2D0A4FFF00B5B631 /* Coordinator.swift in Resources */,
+				5249AC1E2D0A4FFF00B5B631 /* AppCoordinator.swift in Resources */,
+				5249AC1F2D0A4FFF00B5B631 /* BaseCoordinator.swift in Resources */,
+				5249AC202D0A4FFF00B5B631 /* MedicineModel.swift in Resources */,
+				5249AC212D0A4FFF00B5B631 /* MedicineFirebaseModel.swift in Resources */,
+				5249AC222D0A4FFF00B5B631 /* ReminderCoordinator.swift in Resources */,
+				5249AC232D0A4FFF00B5B631 /* ReminderViewModel.swift in Resources */,
+				5249AC242D0A4FFF00B5B631 /* TimeReminderTableViewCell.swift in Resources */,
+				5249AC252D0A4FFF00B5B631 /* PillCollectionViewCell.swift in Resources */,
+				5249AC262D0A4FFF00B5B631 /* ReminderViewController.swift in Resources */,
+				5249AC272D0A4FFF00B5B631 /* HomeViewModel.swift in Resources */,
+				5249AC282D0A4FFF00B5B631 /* HomeCoordinator.swift in Resources */,
+				5249AC292D0A4FFF00B5B631 /* MedicineCollectionViewCell.swift in Resources */,
+				5249AC2A2D0A4FFF00B5B631 /* HomeViewController.swift in Resources */,
+				5249AC2B2D0A4FFF00B5B631 /* LoginCoordinator.swift in Resources */,
+				5249AC2C2D0A4FFF00B5B631 /* LoginViewModel.swift in Resources */,
+				5249AC2D2D0A4FFF00B5B631 /* LoginViewController.swift in Resources */,
+				5249AC2E2D0A4FFF00B5B631 /* LoginViewController+UITextFieldDelegate.swift in Resources */,
+				5249AC2F2D0A4FFF00B5B631 /* AppDelegate.swift in Resources */,
+				5249AC312D0A4FFF00B5B631 /* JeniTests.swift in Resources */,
 				52DB74AA227A3E0F00CCA655 /* LaunchScreen.storyboard in Resources */,
 				52E0395822909F12005BF73F /* PillCollectionViewCell.xib in Resources */,
-				529834BE22ADB9AA0065100E /* GoogleService-Info.plist in Resources */,
-				52DB74A7227A3E0F00CCA655 /* Assets.xcassets in Resources */,
 				52ED0D432283974500D7316A /* ReminderViewController.xib in Resources */,
 				52DB74B7227A408100CCA655 /* LoginViewController.xib in Resources */,
 				52F02F1F227DDDE000BDEE80 /* HomeViewController.xib in Resources */,
@@ -539,6 +598,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5249AC3F2D0A5E5000B5B631 /* Assets.xcassets in Sources */,
+				5249AC422D0A5E5000B5B631 /* Pods-Jeni.debug.xcconfig in Sources */,
+				5249AC432D0A5E5000B5B631 /* Pods-Jeni.release.xcconfig in Sources */,
+				5249AC442D0A5E5000B5B631 /* Pods_Jeni.framework in Sources */,
+				5249AC382D0A5DCB00B5B631 /* GoogleService-Info.plist in Sources */,
 				529A3E5A229362C400E084C2 /* Observable.swift in Sources */,
 				52DB74C0227A6B8F00CCA655 /* JeniButton.swift in Sources */,
 				52DB74BC227A4CC900CCA655 /* Coordinator.swift in Sources */,
@@ -782,11 +846,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X9469P8892;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = Jeni/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Jeni;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
@@ -798,8 +862,9 @@
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tiago.oliveira.Jeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "jeni-production";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
+				SYMROOT = "$(BUILD_DIR)/Release-iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

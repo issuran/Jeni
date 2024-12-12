@@ -14,6 +14,8 @@ target 'Jeni' do
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
         config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+        # Set default architectures to prevent unbound ARCHS variable errors
+        config.build_settings['ARCHS'] ||= '$(ARCHS_STANDARD)'
       end
     end
   end
